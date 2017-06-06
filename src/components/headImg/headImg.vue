@@ -2,10 +2,7 @@
   <img :src="src" alt="">
 </template>
 <style scoped rel="stylesheet/scss" lang="scss">
-  div{
-    width: inherit;
-    height: inherit;
-  }
+  @import "./headImg";
 </style>
 <script>
   export default{

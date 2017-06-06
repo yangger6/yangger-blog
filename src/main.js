@@ -10,6 +10,7 @@ index.install(Vue)
 new Vue({
   el: '#app',
   router,
-  template: '<App/>',
-  components: { App }
+  // template: '<App/>',
+  // components: { App }
+  ...App
 })

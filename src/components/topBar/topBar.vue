@@ -4,17 +4,7 @@
 </nav>
 </template>
 <style scoped rel="stylesheet/scss" lang="scss">
-  nav {
-  }
-  .dense {
-    height: 30px;
-  }
-  .medium {
-    height:50px;
-  }
-  .large {
-    height: 70px;
-  }
+  @import "topBar";
 </style>
 <script>
   export default{
