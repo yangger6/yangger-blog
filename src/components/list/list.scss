@@ -1,0 +1,13 @@
+ul{
+  li{
+    color: red;
+  }
+}
+.head-list{
+  height: inherit;
+  float: left;
+  li{
+    display: inline-block;
+    margin: 0 10px;
+  }
+}
