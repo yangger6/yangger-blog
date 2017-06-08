@@ -4,11 +4,12 @@
 import topBar from './topBar'
 import headImg from './headImg'
 import list from './list'
-
+import art from './art'
 const options = {
   topBar,
   headImg,
-  list
+  list,
+  art
 }
 options.install = (Vue) => {
   for (let component in options) {
