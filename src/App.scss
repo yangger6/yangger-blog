@@ -1,0 +1,51 @@
+#app{
+  min-height: 100%;
+}
+header{
+  border-bottom: 1px solid #eee;
+  padding: 5px 10px;
+  position: relative;
+  background: rgba(0,0,0,.1);
+  img{
+    float: right;
+  }
+  .nav-left{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 5;
+    width: 240px;
+    opacity: 0;
+    background: #111;
+    margin-bottom: 0;
+    text-align: left;
+    overflow-y: auto;
+    -webkit-transition: -webkit-transform 0.5s ease, opacity 0.3s ease 0.7s;
+    transition: transform 0.5s ease, opacity 0.3s ease 0.7s;
+  }
+  .nav-opened{
+    opacity: 1;
+    -webkit-transition: -webkit-transform 0.3s ease, opacity 0s ease 0s;
+    transition: transform 0.3s ease, opacity 0s ease 0s;
+    -webkit-transform: translate3D(0, 0, 0);
+    -ms-transform: translate3D(0, 0, 0);
+    transform: translate3D(0, 0, 0);
+  }
+  .nav-close {
+    -webkit-transform: translate3D(-97px, 0, 0);
+    -ms-transform: translate3D(-97px, 0, 0);
+    transform: translate3D(-97px, 0, 0);
+  }
+  .openCover{
+    position: fixed;
+    top: 0;
+    left: 240px;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+  }
+}
+main{
+  margin-top: calc(100vh - 50px);
+}

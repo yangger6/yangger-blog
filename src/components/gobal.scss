@@ -14,4 +14,12 @@ sup{vertical-align:text-top}
 sub{vertical-align:text-bottom}
 input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}
 input,textarea,select{*font-size:100%}
+/* scrollbar */
+::-webkit-scrollbar{width:3px;height:10px}
+::-webkit-scrollbar-button{display:none}
+::-webkit-scrollbar-track{background-color:black}
+::-webkit-scrollbar-track-piece{background:#FFF}
+::-webkit-scrollbar-thumb{background-color:#8E8E8E;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background-color:#3B3B3B}
+::-webkit-scrollbar-corner{background-color:#535353}
 .container {  padding: 0 15px;  }

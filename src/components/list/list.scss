@@ -3,11 +3,15 @@ ul{
     color: red;
   }
 }
-.head-list{
+.head-list {  // 头部的目录
   height: inherit;
   float: left;
-  li{
+  //  推荐
+  li {
     display: inline-block;
     margin: 0 10px;
+    span {
+      color: red;
+    }
   }
 }

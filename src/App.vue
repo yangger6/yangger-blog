@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <header>
       <top-bar :size="size">
         <head-img :src="imgSrc" class="head"></head-img>
@@ -10,8 +10,12 @@
           <li><a href="">关于我</a></li>
         </list>
       </top-bar>
+      <nav class="nav-left"  :class="openNav ? 'nav-opened' : 'nav-close'">
+      </nav>
+      <span class="nav-cover" :class="{openCover: openNav}" @clcik="openNav = !openNav"></span>
     </header>
     <main class="content">
+      <button style="z-index: 999;position: absolute" @click="openNav = !openNav">cnm</button>
       <router-view></router-view>
     </main>
     <footer>
@@ -23,7 +27,9 @@ export default {
   data () {
     return {
       size: 'medium',
-      imgSrc: '/static/head.png'
+      imgSrc: '/static/head.png',
+      openNav: false,
+      counter: 1
     }
   }
 }
@@ -32,18 +38,5 @@ export default {
   @import "/components/gobal";
 </style>
 <style scoped rel="stylesheet/scss" lang="scss">
-  #app{
-    min-height: 100%;
-  }
-  header{
-    border-bottom: 1px solid #eee;
-    padding: 5px 10px;
-    position: relative;
-    background: rgba(0,0,0,.1);
-    img{
-      float: right;
-    }
-  }
-  main{
-  }
+  @import "App";
 </style>
