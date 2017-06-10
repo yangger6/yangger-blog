@@ -1,7 +1,7 @@
 <template>
   <div class='Home'>
-    <art v-for = "data in datas" :data = data :tags= data.tags size = 'art-item'></art>
     <v-canvas></v-canvas>
+    <art v-for = "data in datas" :data = data :tags= data.tags size = 'art-item'></art>
   </div>
 </template>
 <script>
@@ -83,9 +83,6 @@
           }
         ]
       }
-    },
-    mounted () {
-//      this.$el.style.marginTop = this.$el.children[this.$el.children.length - 1].scrollHeight - 70 + 'px'
     },
     components: {
       'v-canvas': canvas
