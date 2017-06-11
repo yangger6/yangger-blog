@@ -13,8 +13,8 @@
       <a href="">{{data.author}}</a>
       on
       <a v-for="tag in tags" class="tags" href="">{{tag}}</a>
-      <a href="" class="meta">{{data.meta.votes}}☝</a>
-      <a href="" class="meta">{{data.meta.fav}}❤</a>
+      <a href="" class="meta">{{data.meta.votes}} <icon name="thumbs-o-up"></icon> </a>
+      <a href="" class="meta">{{data.meta.fav}}<icon name="heart-o"></icon></a>
       <time>{{data.date}}</time>
     </footer>
   </div>

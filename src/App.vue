@@ -17,7 +17,7 @@
       <header>
         <top-bar :size="size" class="head-list">
           <head-img :src="imgSrc" class="head"></head-img>
-          <a  v-show="showNav" class="menu-button" @click="changeNav">Menu</a>
+          <a href="#" v-show="showNav" class="menu-button" @click="changeNav">Menu<icon name="reorder"></icon></a>
           <list v-show="!showNav">
             <li><a href="">首页</a></li>
             <li><a href="">文章</a></li>
@@ -31,6 +31,7 @@
         <router-view></router-view>
       </main>
       <footer>
+        @2017 power by yangger
       </footer>
     </div>
   </div>
@@ -43,7 +44,8 @@ export default {
       imgSrc: '/static/head.png',
       openNav: false,
       counter: 1,
-      showNav: false
+      showNav: false,
+      scrollWidth: 0
     }
   },
   methods: {
@@ -53,6 +55,18 @@ export default {
   },
   mounted () {
     this.showNav = this.$el.scrollWidth < 500
+    const that = this
+    window.onresize = () => {
+      return (() => {
+        window.scrollWidth = document.body.scrollWidth
+        that.scrollWidth = window.scrollWidth
+      })()
+    }
+  },
+  watch: {
+    scrollWidth () {
+      this.showNav = this.$el.scrollWidth < 500
+    }
   }
 }
 </script>
