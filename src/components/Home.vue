@@ -10,82 +10,15 @@
     name: 'Home',
     data () {
       return {
-        datas: [
-          {
-            title: '我是大标题',
-            author: 'yangger',
-            body: 'You re live! Nice. Weve put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by ',
-            markdown: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
-            date: '2017-6-9',
-            hidden: false,
-            tags: ['Javascript', 'CSS3', 'HTML5'],
-            meta: {
-              votes: '333',
-              fav: '10'
-
-            }
-          },
-          {
-            title: '我是大标题',
-            author: 'yangger',
-            body: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
-            markdown: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
-            date: '2017-6-9',
-            hidden: false,
-            tags: ['Javascript', 'CSS3', 'HTML5'],
-            meta: {
-              votes: '333',
-              fav: '10'
-
-            }
-          },
-          {
-            title: '我是大标题',
-            author: 'yangger',
-            body: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
-            markdown: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
-            date: '2017-6-9',
-            hidden: false,
-            tags: ['Javascript', 'CSS3', 'HTML5'],
-            meta: {
-              votes: '333',
-              fav: '10'
-
-            }
-          },
-          {
-            title: '我是大标题',
-            author: 'yangger',
-            body: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
-            markdown: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
-            date: '2017-6-9',
-            hidden: false,
-            tags: ['Javascript', 'CSS3', 'HTML5'],
-            meta: {
-              votes: '333',
-              fav: '10'
-
-            }
-          },
-          {
-            title: '我是大标题',
-            author: 'yangger',
-            body: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
-            markdown: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
-            date: '2017-6-9',
-            hidden: false,
-            tags: ['Javascript', 'CSS3', 'HTML5'],
-            meta: {
-              votes: '333',
-              fav: '10'
-
-            }
-          }
-        ]
       }
     },
     components: {
       'v-canvas': canvas
+    },
+    computed: {
+      datas () {
+        return this.$store.state.blog
+      }
     }
   }
 </script>
