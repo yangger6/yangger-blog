@@ -6,9 +6,9 @@
         <span style="display: none">close</span>
       </a>
       <list>
-          <li><a href="">首页</a></li>
-          <li><a href="">文章</a></li>
-          <li><a href="">Github</a></li>
+          <li><router-link to="/">首页</router-link></li>
+          <li><router-link to="/posts">文章</router-link></li>
+          <li><a href="https://github.com/yangger6">Github</a></li>
           <li><a href="">关于我</a></li>
       </list>
     </nav>
@@ -19,9 +19,9 @@
           <head-img :src="imgSrc" class="head"></head-img>
           <a href="#" v-show="showNav" class="menu-button" @click="changeNav">Menu<icon name="reorder"></icon></a>
           <list v-show="!showNav">
-            <li><a href="">首页</a></li>
-            <li><a href="">文章</a></li>
-            <li><a href="">Github</a></li>
+            <li><router-link to="/">首页</router-link></li>
+            <li><router-link to="/posts">文章</router-link></li>
+            <li><a href="https://github.com/yangger6">Github</a></li>
             <li><a href="">关于我</a></li>
           </list>
         </top-bar>

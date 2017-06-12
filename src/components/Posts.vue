@@ -1,19 +1,15 @@
 <template>
   <div class='Home'>
-    <v-canvas></v-canvas>
+    http://www.cnblogs.com/axes/p/3500655.html
     <art v-for = "data in datas" :data = data :tags= data.tags size = 'art-item'></art>
   </div>
 </template>
 <script>
-  import canvas from './canvas/canvas.vue'
   export default {
-    name: 'Home',
+    name: 'Blogs',
     data () {
       return {
       }
-    },
-    components: {
-      'v-canvas': canvas
     },
     computed: {
       datas () {
@@ -22,9 +18,5 @@
     }
   }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .Home{
-    margin-top: calc(100vh - 70px);
-  }
 </style>
