@@ -15,10 +15,6 @@
       }
     },
     mounted () {
-      const canvas = document.getElementById('cas')
-      const ctx = canvas.getContext('2d')
-      ctx.fillStyle = '#00ff85'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
       !(function () {
         var dr
         const canvas = document.getElementById('cas')

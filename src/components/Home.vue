@@ -1,7 +1,7 @@
 <template>
   <div class='Home'>
     <v-canvas></v-canvas>
-    <art v-for = "data in datas" :data = data :tags= data.tags size = 'art-item'></art>
+    <art v-for = "(data, index) in datas" :data = data :tags= data.tags size = 'art-item' :key='data._id' :id='data._id' :index="index"></art>
   </div>
 </template>
 <script>

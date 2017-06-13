@@ -32,8 +32,8 @@ const store = new Vuex.Store({
     selectIndex: serverData.selectIndex
   },
   mutations: {
-    changSessionIndex (state, index) {
-      state.sessionIndex = index
+    changBlogIndex (state, index) {
+      state.selectIndex = index
     },
     search (state, value) {
       state.userList = state.userList.filter(item => item.name.indexOf(value) > -1)

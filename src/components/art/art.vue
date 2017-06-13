@@ -1,7 +1,7 @@
 <template>
   <div class="art-item" v-if="size === 'art-item'">
     <header>
-      <h2>{{data.title}}</h2>
+      <h2 @click="route">{{data.title}}</h2>
     </header>
     <section>
       <p>
@@ -18,17 +18,39 @@
       <time>{{data.date}}</time>
     </footer>
   </div>
+  <div class="art-context" v-else>
+    {{html}}
+    {{data.body}}
+  </div>
 </template>
 <script>
+  import {markdown} from 'markdown'
   export default {
     name: 'article',
     props: {
       size: String, // 区别渲染 item 还是 文章
       data: Object,
-      tags: Array // 文章的类型
+      tags: Array,  // 文章的类型
+      index: Number,  //  文章的序号
+      id: String    // 文章的id
     },
     data () {
       return {
+      }
+    },
+    computed: {
+      html () {
+        const text = 'Hello.\n\n* This is markdown.\n* It is fun\n* Love it or leave it.'
+        return markdown.toHTML(text)
+      }
+    },
+    methods: {
+      /**
+       * 设置选中的文章序号 再路由
+       */
+      route () {
+        this.$store.commit('changBlogIndex', this.index)
+        this.$router.push({name: 'Blog', params: {index: this.index}})
       }
     }
   }

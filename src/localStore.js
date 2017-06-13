@@ -15,6 +15,7 @@ if (!localStorage.getItem(key)) {
     selectIndex: 0,
     blog: [
       {
+        _id: '1',
         title: '我是大标题',
         author: 'yangger',
         body: 'You re live! Nice. Weve put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by ',
@@ -29,6 +30,7 @@ if (!localStorage.getItem(key)) {
         }
       },
       {
+        _id: '2',
         title: '我是大标题',
         author: 'yangger',
         body: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
@@ -43,6 +45,7 @@ if (!localStorage.getItem(key)) {
         }
       },
       {
+        _id: '3',
         title: '我是大标题',
         author: 'yangger',
         body: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
@@ -57,6 +60,7 @@ if (!localStorage.getItem(key)) {
         }
       },
       {
+        _id: '4',
         title: '我是大标题',
         author: 'yangger',
         body: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',
@@ -71,6 +75,7 @@ if (!localStorage.getItem(key)) {
         }
       },
       {
+        _id: '5',
         title: '我是大标题',
         author: 'yangger',
         body: '今天我呀呀呀呀呀呀哎呀呀呀呀呀呀呀呀呀哎呀',

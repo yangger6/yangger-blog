@@ -1,19 +1,21 @@
 <template>
   <div class='Home'>
-    <art v-for = "data in datas" :data = data :tags= data.tags size = 'art-item' :key='data._id'></art>
+    <art :data="data" size = 'art-context'></art>
   </div>
 </template>
 <script>
   export default {
-    name: 'Blogs',
+    name: 'Blog',
     data () {
       return {
       }
     },
     computed: {
-      datas () {
-        return this.$store.state.blog
+      data () {
+        return this.$store.state.blog[this.$store.state.selectIndex]
       }
+    },
+    mounted () {
     }
   }
 </script>
