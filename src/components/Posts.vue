@@ -1,6 +1,5 @@
 <template>
   <div class='Home'>
-    http://www.cnblogs.com/axes/p/3500655.html
     <art v-for = "data in datas" :data = data :tags= data.tags size = 'art-item'></art>
   </div>
 </template>
