@@ -23,7 +23,7 @@
   }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped rel="stylesheet/scss" lang="scss">
   .Home{
     margin-top: calc(100vh - 70px);
   }

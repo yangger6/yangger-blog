@@ -37,6 +37,9 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex' // vuex 工具
+import localStroe from './localStore' // 本地储存
+import posts from './post/post' // 数据库取数据
 export default {
   data () {
     return {
@@ -51,6 +54,11 @@ export default {
   methods: {
     changeNav () {
       this.openNav = !this.openNav
+    },
+    async fetchData () {  // 从数据库取数据
+      let that = this
+      let result = await posts.getBlogs(that)
+      this.$store.commit('pushBlogs', result)
     }
   },
   mounted () {
@@ -63,9 +71,29 @@ export default {
       })()
     }
   },
+  computed: mapState({
+    user: 'user',
+    blog: 'blog',
+    selectIndex: 'selectIndex'
+  }),
+  created () {
+    // 组件创建完后获取数据，
+    // 此时 data 已经被 observed 了
+    this.fetchData()
+  },
   watch: {
     scrollWidth () {
       this.showNav = this.$el.scrollWidth < 500
+    },
+    selectIndex: {
+      deep: true,
+      handler () {
+        localStroe.save({
+          user: this.user,
+          blog: this.blog,
+          selectIndex: this.selectIndex
+        })
+      }
     }
   }
 }

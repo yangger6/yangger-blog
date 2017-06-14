@@ -14,17 +14,14 @@
       on
       <a v-for="tag in tags" class="tags" href="">{{tag}} <icon name="tag"></icon> </a>
       <a href="" class="meta">{{data.meta.votes}} <icon name="thumbs-o-up"></icon> </a>
-      <a href="" class="meta">{{data.meta.fav}} <icon name="heart-o"></icon></a>
+      <a href="" class="meta">{{data.meta.favs}} <icon name="heart-o"></icon></a>
       <time>{{data.date}}</time>
     </footer>
   </div>
-  <div class="art-context" v-else>
-    {{html}}
-    {{data.body}}
+  <div class="art-context" v-else v-html="html">
   </div>
 </template>
 <script>
-  import {markdown} from 'markdown'
   export default {
     name: 'article',
     props: {
@@ -40,8 +37,7 @@
     },
     computed: {
       html () {
-        const text = 'Hello.\n\n* This is markdown.\n* It is fun\n* Love it or leave it.'
-        return markdown.toHTML(text)
+        return this.data.markdown
       }
     },
     methods: {
@@ -57,5 +53,5 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped rel="stylesheet/scss" lang="scss">
-  @import "./art";
+  @import "./art.scss";
 </style>

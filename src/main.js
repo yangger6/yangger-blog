@@ -38,9 +38,15 @@ const store = new Vuex.Store({
     search (state, value) {
       state.userList = state.userList.filter(item => item.name.indexOf(value) > -1)
     },
-    pushMsg (state, payload) {
-      state.sessionList[state.sessionIndex].messages.push(payload)
-      state.userList[state.sessionIndex].lastMsg = payload.text
+    pushBlogs (state, payload) {  // 将所有blog填入本地储存
+      state.blog = payload
+    },
+    updateBlog (state, payload) { // 点击进入文章的时候更新博客内容
+      state.blog[state.selectIndex] = payload
+    },
+    pushBlog (state, payload) {
+      state.blog.push(payload)  // 新增博客
+      state.selectIndex = state.blog.length - 1 // -1 是因为数组的下标是从0开始的
     }
   }
 })

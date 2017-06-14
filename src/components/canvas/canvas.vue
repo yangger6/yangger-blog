@@ -199,5 +199,5 @@
   }
 </script>
 <style scoped>
-  @import 'canvas.scss'
+  @import 'canvas.scss';
 </style>

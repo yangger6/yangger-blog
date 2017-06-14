@@ -1,5 +1,5 @@
 <template>
-  <div class='Home'>
+  <div class='Blogs'>
     <art v-for = "data in datas" :data = data :tags= data.tags size = 'art-item' :key='data._id'></art>
   </div>
 </template>
@@ -17,5 +17,8 @@
     }
   }
 </script>
-<style scoped>
+<style scoped rel="stylesheet/scss" lang="scss">
+  .Blogs{
+    min-height: calc(100vh - 325px);
+  }
 </style>
