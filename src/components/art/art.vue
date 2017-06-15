@@ -6,7 +6,7 @@
     <section>
       <p>
         {{data.body}}
-        <a href="">»</a>
+        <a @click="route">»</a>
       </p>
     </section>
     <footer>
@@ -15,7 +15,7 @@
       <a v-for="tag in tags" class="tags" href="">{{tag}} <icon name="tag"></icon> </a>
       <a href="" class="meta">{{data.meta.votes}} <icon name="thumbs-o-up"></icon> </a>
       <a href="" class="meta">{{data.meta.favs}} <icon name="heart-o"></icon></a>
-      <time>{{data.date}}</time>
+      <time>{{data.date.match(/[0-9]+[-][0-9]+[-][0-9]+/)[0]}}</time>
     </footer>
   </div>
   <div class="art-context" v-else v-html="html">

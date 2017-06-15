@@ -2,7 +2,7 @@
   <div>
     <canvas id='cas' style='background-color:#fff'>浏览器不支持canvas</canvas>
     <div style='display:none'>
-      <div class='ele'>{{text}}</div>
+      <div v-for="text in texts" class='ele'>{{text}}</div>
     </div>
   </div>
 </template>
@@ -11,7 +11,7 @@
     name: 'canvas',
     data () {
       return {
-        text: 'Yangger'
+        texts: ['Welcome', 'Yangger']
       }
     },
     mounted () {

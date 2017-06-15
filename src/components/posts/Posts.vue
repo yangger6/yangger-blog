@@ -1,6 +1,6 @@
 <template>
   <div class='Blogs'>
-    <art v-for = "data in datas" :data = data :tags= data.tags size = 'art-item' :key='data._id'></art>
+    <art v-for = "(data, index) in datas" :data = data :tags= data.tags size = 'art-item' :key='data._id' :id='data._id' :index="index"></art>
   </div>
 </template>
 <script>

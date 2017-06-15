@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-  import canvas from './canvas/canvas.vue'
+  import canvas from './../canvas/canvas.vue'
   export default {
     name: 'Home',
     data () {

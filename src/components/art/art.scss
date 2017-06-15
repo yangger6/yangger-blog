@@ -11,6 +11,7 @@
     h2{
       font-size: 2rem;
       margin: 0.4em 0;
+      cursor: pointer;
     }
   }
   section {
@@ -23,6 +24,7 @@
         transition: color 0.3s ease;
         background-color: transparent;
         text-decoration: none;
+        cursor: pointer;
         &:hover {
           text-decoration: underline;
         }

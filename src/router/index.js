@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import Posts from '@/components/Posts'
-import Blog from '@/components/Blog'
+import Home from '@/components/home/Home'
+import Posts from '@/components/posts/Posts'
+import Blog from '@/components/blog/Blog'
 Vue.use(Router)
 export default new Router({
   routes: [

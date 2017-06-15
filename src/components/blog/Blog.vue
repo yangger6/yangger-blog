@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-  import posts from '../post/post'
+  import posts from '../../post/post'
   export default {
     name: 'Blog',
     data () {
