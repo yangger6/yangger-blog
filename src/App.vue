@@ -9,7 +9,7 @@
           <li><router-link to="/">首页</router-link></li>
           <li><router-link to="/posts">文章</router-link></li>
           <li><a href="https://github.com/yangger6">Github</a></li>
-          <li><a href="">关于我</a></li>
+          <li><router-link to='/about'>关于我</router-link></li>
       </list>
     </nav>
     <span class="nav-cover" :class="{'openCover': openNav}" @click="changeNav"></span>
@@ -22,7 +22,7 @@
             <li><router-link to="/">首页</router-link></li>
             <li><router-link to="/posts">文章</router-link></li>
             <li><a href="https://github.com/yangger6">Github</a></li>
-            <li><a href="">关于我</a></li>
+            <li><router-link to='/about'>关于我</router-link></li>
           </list>
         </top-bar>
         <!--<div class="nav-cover" :class="{openCover: openNav}" @clcik="changNav" onclick="aaa()"></div>-->
@@ -31,6 +31,7 @@
         <router-view></router-view>
       </main>
       <footer>
+        <v-canvas></v-canvas>
         @2017 power by yangger
       </footer>
     </div>
@@ -40,6 +41,7 @@
 import { mapState } from 'vuex' // vuex 工具
 import localStroe from './localStore' // 本地储存
 import posts from './post/post' // 数据库取数据
+import canvas from './components/canvas/canvas.vue'
 export default {
   data () {
     return {
@@ -95,6 +97,9 @@ export default {
         })
       }
     }
+  },
+  components: {
+    'v-canvas': canvas
   }
 }
 </script>
