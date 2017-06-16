@@ -19,6 +19,7 @@
 </script>
 <style scoped rel="stylesheet/scss" lang="scss">
   .Blogs{
-    min-height: calc(100vh - 325px);
+    min-height: calc(100vh - 130px);
+    padding-top: 10px;
   }
 </style>

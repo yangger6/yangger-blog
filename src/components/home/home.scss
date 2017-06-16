@@ -1,0 +1,110 @@
+.Home{
+  font-size: 62.5%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  .Home-con{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: table;
+    z-index: 1;
+    background-color: rgba(26,22,31,0.7)
+  }
+  .title{
+    display: table-cell;
+    vertical-align: middle;
+    padding-top: 5%;
+    text-align: center;
+    h1{
+      div{
+        vertical-align: top;
+        width: 50px;
+        height: 50px;
+        display: inline-block;
+        border: 1px solid #fff;
+      }
+      div:first-child{
+        border-bottom: none;
+        border-left: none;
+        transform: rotate(-90deg) translate3d(-0.8em, 11.2em, 0);
+      }
+      div:last-child{
+        border-top: none;
+        border-left: none;
+        transform: rotate(-90deg) translate3d(-0.8em, -11.2em, 0);
+      }
+    }
+    span{
+      display: inline-block;
+      font-size: 11.8rem;
+      line-height: 1;
+      color: #fff;
+      letter-spacing: .42em;
+      text-indent: .42em;
+    }
+    .btn{
+      width: 300px;
+      margin: 70px auto 0;
+      a{
+        font-size: 1.1rem;
+        line-height: 47px;
+        letter-spacing: .4em;
+        text-indent: .4em;
+        height: 45px;
+        border: 1px solid #fff;
+        display: block;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        span{
+          transition: color .4s ease;
+          position: relative;
+          z-index: 1;
+          color: #fff;
+          font-size: 1.1rem;
+          line-height: 47px;
+          letter-spacing: .4em;
+          text-indent: .4em;
+        }
+        &:hover:after{
+          background-color: rgba(255,255,255,0.8);
+          transform: scale(1);
+          opacity: 1;
+        }
+        &:hover{
+          span{
+            color: #2b2b2b;
+          }
+        }
+        &:after{
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #2b2b2b;
+          transform: scale(0.95);
+          opacity: 0;
+          transition: all .5s ease;
+        }
+      }
+    }
+  }
+  video{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-size: cover;
+    overflow: hidden;
+    transform: translate3d(-50%, -50%, 0);
+    height: 103%;
+  }
+}

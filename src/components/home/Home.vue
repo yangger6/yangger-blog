@@ -1,6 +1,18 @@
 <template>
   <div class='Home'>
-    <art v-for = "(data, index) in datas" :data = data :tags= data.tags size = 'art-item' :key='data._id' :id='data._id' :index="index"></art>
+    <div class="Home-con">
+      <div class="title">
+        <h1>
+          <div></div>
+          <span>Yangger</span>
+          <div></div>
+        </h1>
+        <div class="btn">
+          <router-link to="/posts"><span>VIEW THIS BLOG</span></router-link>
+        </div>
+      </div>
+    </div>
+    <video src="/static/home.mp4" autoplay="autoplay"></video>
   </div>
 </template>
 <script>
@@ -11,15 +23,10 @@
       }
     },
     computed: {
-      datas () {
-        return this.$store.state.blog
-      }
     }
   }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped rel="stylesheet/scss" lang="scss">
-  .Home{
-    margin-top: calc(100vh - 70px);
-  }
+  @import "home.scss";
 </style>
