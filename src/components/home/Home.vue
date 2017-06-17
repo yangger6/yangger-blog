@@ -4,7 +4,7 @@
       <div class="title">
         <h1>
           <div></div>
-          <span>Yangger</span>
+          <span>YANGGER</span>
           <div></div>
         </h1>
         <div class="btn">
@@ -29,4 +29,5 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped rel="stylesheet/scss" lang="scss">
   @import "home.scss";
+  @import "media.scss";
 </style>

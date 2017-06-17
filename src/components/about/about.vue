@@ -4,7 +4,20 @@
       <header>
         <a><img src="/static/head.png" alt="" @click="open"></a>
       </header>
-      <main></main>
+      <main>
+        <div class="line"></div>
+        <div class="box">
+          <span>Yangger</span>
+        </div>
+        <div class="line"></div>
+        <div class="box">
+          <span>当前文章数:3</span>
+        </div>
+        <div class="line"></div>
+        <div class="box">
+          <span>当前日志数: 30</span>
+        </div>
+      </main>
       <footer></footer>
     </div>
     <div class="log">

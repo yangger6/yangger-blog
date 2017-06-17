@@ -29,11 +29,16 @@ const store = new Vuex.Store({
     // 博客列表
     blog: serverData.blog,
     // 当前选中的博客
-    selectIndex: serverData.selectIndex
+    selectIndex: serverData.selectIndex,
+    // 导航是否隐藏
+    headerShow: false
   },
   mutations: {
     changBlogIndex (state, index) {
       state.selectIndex = index
+    },
+    changHeaderShow (state, boolean) {
+      state.headerShow = boolean
     },
     search (state, value) {
       state.userList = state.userList.filter(item => item.name.indexOf(value) > -1)

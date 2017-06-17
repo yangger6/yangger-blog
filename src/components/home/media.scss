@@ -1,0 +1,113 @@
+@media only screen and (max-width: 1600px) {
+  .Home .title h1 span {
+    font-size: 10rem
+  }
+}
+
+@media only screen and (max-width: 1340px) {
+  .Home .title h1 span {
+    font-size: 8.5rem
+  }
+}
+
+@media only screen and (max-width: 1155px) {
+  .Home .title h1 span {
+    font-size: 6.5rem
+  }
+}
+
+@media only screen and (max-width: 948px) {
+  .Home .title h1 span {
+    font-size: 6rem
+  }
+}
+
+@media only screen and (max-width: 830px) {
+  .Home .title h1 span {
+    font-size: 5.3rem
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .Home .title h1 span {
+    font-size: 4.5rem
+  }
+}
+
+@media only screen and (max-width: 615px) {
+  .Home .title h1 span {
+    font-size: 3.8rem
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .Home .title h1 span {
+    font-size: 3.2rem
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .Home .title h1 span {
+    font-size: 2.5rem
+  }
+}
+@media only screen and (max-width: 470px) {
+  .Home .title h1 span {
+    font-size: 2.2rem
+  }
+}
+@media only screen and (max-width: 1600px) {
+  .Home .title h1 div {
+    width:40px;
+    height: 40px
+  }
+  .Home .title h1 div{
+    width:40px;
+    height: 40px;
+    &:first-child{
+      transform: rotate(-90deg) translate3d(-0.8em, 8.2em, 0);
+    }
+    &:last-child{
+      transform: rotate(-90deg) translate3d(-0.8em, -8.2em, 0);
+    }
+  }
+}
+
+@media only screen and (max-width: 1155px) {
+  .Home .title h1 div {
+    width:30px;
+    height: 30px;
+    &:first-child{
+      transform: rotate(-90deg) translate3d(0, 5em, 0);
+    }
+    &:last-child{
+      transform: rotate(-90deg) translate3d(0, -5em, 0);
+    }
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  .Home .title h1 div {
+    width:25px;
+    height: 25px;
+    &:first-child{
+      transform: rotate(-90deg) translate3d(0, 4em, 0);
+    }
+    &:last-child{
+      transform: rotate(-90deg) translate3d(0, -4em, 0);
+    }
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .Home .title h1 div {
+    width:20px;
+    height: 20px;
+    &:first-child{
+      transform: rotate(-90deg) translate3d(0, 3em, 0);
+    }
+    &:last-child{
+      transform: rotate(-90deg) translate3d(0, -3em, 0);
+    }
+  }
+}

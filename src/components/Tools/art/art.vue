@@ -46,12 +46,12 @@
        */
       route () {
         this.$store.commit('changBlogIndex', this.index)
-        this.$router.push({name: 'Blog', params: {index: this.index}})
+        this.$router.push({name: 'blog', params: {index: this.index}})
       }
     }
   }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped rel="stylesheet/scss" lang="scss">
-  @import "./art.scss";
+  @import "art";
 </style>

@@ -1,18 +1,6 @@
 <template>
   <div id="app">
-    <header :class="{open: openNav}">
-      <top-bar :size="size" class="head-list">
-        <list>
-          <li><router-link to="/">首页</router-link></li>
-          <li><router-link to="/posts">文章</router-link></li>
-          <li><a href="https://github.com/yangger6">Github</a></li>
-          <li><router-link to='/about'>关于我</router-link></li>
-        </list>
-      </top-bar>
-      <div class="header-toggle" @click="changeNav">
-        <icon name="reorder"></icon>
-      </div>
-    </header>
+    <v-header></v-header>
     <main>
       <router-view></router-view>
     </main>
@@ -25,21 +13,17 @@
   import { mapState } from 'vuex' // vuex 工具
   import localStroe from './localStore' // 本地储存
   import posts from './post/post' // 数据库取数据
-  import canvas from './components/canvas/canvas.vue'
+  import canvas from './components/Tools/canvas/canvas.vue' // 引用canvas
+  import header from './components/Tools/header/header.vue'
   export default {
     data () {
       return {
-        size: 'medium',
         imgSrc: '/static/head.png',
-        openNav: true,
         counter: 1,
         scrollWidth: 0
       }
     },
     methods: {
-      changeNav () {
-        this.openNav = !this.openNav
-      },
       async fetchData () {  // 从数据库取数据
         let that = this
         let result = await posts.getBlogs(that)
@@ -74,7 +58,8 @@
       }
     },
     components: {
-      'v-canvas': canvas
+      'v-canvas': canvas,
+      'v-header': header
     }
   }
 </script>

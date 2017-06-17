@@ -4,6 +4,9 @@ import Home from '@/components/home/Home'
 import Posts from '@/components/posts/Posts'
 import Blog from '@/components/blog/Blog'
 import About from '@/components/about/About'
+import Admin from '@/components/admin/Admin'
+import Login from '@/components/admin/login/Login'
+import Reg from '@/components/admin/reg/Reg'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -13,19 +16,36 @@ export default new Router({
       component: Home
     },
     {
-      path: '/posts',
+      path: '/posts/',
       name: 'Blogs',
       component: Posts
     },
     {
-      path: '/Blog/:index',
+      path: '/blog/:index',
       name: 'Blog',
       component: Blog
     },
     {
-      path: '/about',
-      name: 'Me',
+      path: '/about/',
+      name: 'About',
       component: About
+    },
+    {
+      path: '/admin/',
+      name: 'Admin',
+      component: Admin,
+      children: [
+        {
+          path: 'login',
+          name: 'Login',
+          component: Login
+        },
+        {
+          path: 'reg',
+          name: 'Register',
+          component: Reg
+        }
+      ]
     }
   ]
 })
