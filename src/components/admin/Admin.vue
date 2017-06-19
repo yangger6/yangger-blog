@@ -22,7 +22,7 @@
         </footer>
       </nav>
       <main class="editor">
-        <editor></editor>
+        <editor :type="type" @childChangeIndex="changeItem"></editor>
       </main>
     </div>
     <div v-else>
@@ -38,10 +38,10 @@
   export default{
     data () {
       return {
-        selectIndex: -1,
+        selectIndex: 0,
         items: [
-          {i: 'pencil', v: 'New Post'},
-          {i: 'file-text', v: 'Context'}
+          {i: 'pencil', v: 'New Post', type: 'Editor'},
+          {i: 'file-text', v: 'Context', type: 'Context'}
         ]
       }
     },
@@ -53,6 +53,9 @@
     computed: {
       isLogin () {
         return this.$store.state.user.name !== ''
+      },
+      type () {
+        return this.items[this.selectIndex].type
       }
     },
     created () {

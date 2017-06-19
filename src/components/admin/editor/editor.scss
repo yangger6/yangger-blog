@@ -1,4 +1,4 @@
-.new-Post{
+.editor{
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -37,28 +37,78 @@
       }
     }
   }
-  >section{
+  .editor-box{
     position: relative;
+    flex-grow: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
-    flex-direction: column;
-    width: 50%;
-    height: 100%;
-    textarea{
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      overflow: auto;
-      -webkit-overflow-scrolling: touch;
-      padding: 21px 20px 36px;
-      max-width: 100%;
-      height: 100%;
-      border: 0;
-      color: #3d4043;
-      font-size: 1.6rem;
-      line-height: 2.5rem;
-      resize: none;
+    >section{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      &:first-child{
+        border-right: 1px solid #dfe1e3;
+      }
+      textarea{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow: auto;
+        padding: 21px 20px 36px;
+        max-width: 100%;
+        height: 100%;
+        border: 0;
+        color: #3d4043;
+        font-size: 1.6rem;
+        line-height: 2.5rem;
+        resize: none;
+        min-width: 250px;
+        min-height: 10rem;
+        width: 100%;
+        user-select: text;
+        box-sizing: border-box;
+        outline: none;
+      }
+    }
+  }
+  .Context{
+    >section{
+      ul{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li{
+          position: relative;
+          margin: 0;
+          padding: 0;
+          border-bottom: #dfe1e3 1px solid;
+          box-sizing: border-box;
+          a{
+            text-decoration: none;
+            display: block;
+            padding: 19px 20px 22px 24px;
+            color: rgba(0,0,0,.5);
+            &.selected{
+              border-left: #5ba4e5 3px solid;
+            }
+            h3{
+              font-size: 1.6rem;
+              line-height: 1.4em;
+              font-weight: 400;
+            }
+          }
+        }
+      }
+      &:first-child{
+        width: 30%;
+      }
+      &:last-child{
+        width: 70%;
+      }
     }
   }
 }
@@ -96,6 +146,7 @@
   .dropdown{
     position: relative;
     ul{
+     z-index: 999;
      top: 20px;
      right: 0;
      left: auto;

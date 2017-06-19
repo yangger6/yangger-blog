@@ -1,8 +1,7 @@
 <template>
-  <section class="new-Post">
-    <header>
+  <section class="editor">
+    <header v-if="type === 'Editor'">
       <h2>
-        <button></button>
         <input type="text" placeholder="Your Post Name">
       </h2>
       <section class="btn">
@@ -17,10 +16,31 @@
         </div>
       </section>
     </header>
-    <section>
-      <textarea name="" id="" cols="30" rows="10"></textarea>
+    <header v-else-if="type === 'Context'">
+      <h2>
+        Context
+      </h2>
+      <section class="btn">
+        <button style="border-radius: 3px;" @click="childChangeIndex(0)">New Post</button>
+      </section>
+    </header>
+    <section class="editor-box" :class="{Context: type === 'Context'}">
+      <section v-if="type === 'Editor'">
+        <textarea name=""cols="30" rows="10"></textarea>
+      </section>
+      <section v-else-if="type === 'Context'">
+        <ul>
+          <li v-for="(item, index) in items">
+            <a :class="{selected: itemIndex === index}" @click="changeItemIndex(index)">
+              <h3>{{item.title}}</h3>
+              <p>{{item.date}}</p>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section>
+      </section>
     </section>
-    <section></section>
   </section>
 </template>
 <style scoped rel="stylesheet/scss" lang="scss">
@@ -30,10 +50,11 @@
   export default{
     data () {
       return {
-        msg: 'Hello',
         controlShow: false,
         controlIndex: 0,
-        controlItems: ['Publish Now', 'Save Draft']
+        controlItems: ['Publish Now', 'Save Draft'],
+        itemIndex: 0,
+        items: [{title: '123', date: '2017-6-19'}, {title: '1asd23', date: '2017-6-19'}]
       }
     },
     computed: {
@@ -45,7 +66,20 @@
       changeControl (index) {
         this.controlIndex = index
         this.controlShow = false
+      },
+      /**
+       *
+       * @param index 修改父组件的Selectindex
+       */
+      childChangeIndex (index) {
+        this.$emit('childChangeIndex', index)
+      },
+      changeItemIndex (index) {
+        this.itemIndex = index
       }
+    },
+    props: {
+      type: String  //  通过传入type切换
     }
   }
 </script>
