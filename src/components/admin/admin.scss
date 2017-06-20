@@ -54,7 +54,7 @@
           font-size: 80%;
           a{
             &.selected{
-              background: royalblue;
+              background: royalblue!important;
             }
             cursor: pointer;
             display: flex;

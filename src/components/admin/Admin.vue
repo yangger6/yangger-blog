@@ -41,7 +41,7 @@
         selectIndex: 0,
         items: [
           {i: 'pencil', v: 'New Post', type: 'Editor'},
-          {i: 'file-text', v: 'Context', type: 'Context'}
+          {i: 'file-text', v: 'Content', type: 'Content'}
         ]
       }
     },

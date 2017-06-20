@@ -51,6 +51,9 @@
       &:first-child{
         border-right: 1px solid #dfe1e3;
       }
+      >div{
+        padding: 5%;
+      }
       textarea{
         position: absolute;
         top: 0;
@@ -75,7 +78,7 @@
       }
     }
   }
-  .Context{
+  .Content{
     >section{
       ul{
         margin: 0;
@@ -102,6 +105,16 @@
             }
           }
         }
+      }
+      >div{
+        padding: 5%
+      }
+      >a{
+        position: absolute;
+        right: 3%;
+        top: 3%;
+        z-index: 999;
+        cursor: pointer;
       }
       &:first-child{
         width: 30%;
