@@ -31,11 +31,22 @@ const store = new Vuex.Store({
     // 当前选中的博客
     selectIndex: serverData.selectIndex,
     // 导航是否隐藏
-    headerShow: false
+    headerShow: false,
+    // 管理中心
+    admin: serverData.admin
   },
   mutations: {
     changBlogIndex (state, index) {
       state.selectIndex = index
+    },
+    changAdminIndex (state, index) {
+      state.admin.selectIndex = index
+    },
+    changAdminType (state, type) {
+      state.admin.type = type
+    },
+    changAdminBlog (state, payload) {
+      state.admin.blog = payload
     },
     changHeaderShow (state, boolean) {
       state.headerShow = boolean

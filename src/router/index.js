@@ -7,6 +7,7 @@ import About from '@/components/about/About'
 import Admin from '@/components/admin/Admin'
 import Login from '@/components/admin/login/Login'
 import Reg from '@/components/admin/reg/Reg'
+import Editor from '@/components/admin/editor/editor'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -31,21 +32,26 @@ export default new Router({
       component: About
     },
     {
-      path: '/admin',
+      path: '/admin/',
       name: 'Admin',
       component: Admin,
       children: [
         {
-          path: 'login',
-          name: 'Login',
-          component: Login
-        },
-        {
-          path: 'reg',
-          name: 'Register',
-          component: Reg
+          path: '/admin/editor/',
+          name: 'Editor',
+          component: Editor
         }
       ]
+    },
+    {
+      path: '/login/',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/reg/',
+      name: 'Register',
+      component: Reg
     }
   ]
 })

@@ -35,7 +35,8 @@
     computed: mapState({
       user: 'user',
       blog: 'blog',
-      selectIndex: 'selectIndex'
+      selectIndex: 'selectIndex',
+      admin: 'admin'
     }),
     created () {
       // 组件创建完后获取数据，
@@ -52,7 +53,8 @@
           localStroe.save({
             user: this.user,
             blog: this.blog,
-            selectIndex: this.selectIndex
+            selectIndex: this.selectIndex,
+            admin: this.admin
           })
         }
       }

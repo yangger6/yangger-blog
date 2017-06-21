@@ -13,6 +13,18 @@ if (!localStorage.getItem(key)) {
       headImg: 'https://avatars1.githubusercontent.com/u/23329645?v=3&s=40'
     },
     selectIndex: 0,
+    admin: {
+      selectIndex: 0,
+      items: [
+        {i: 'pencil', v: 'New Post', type: 'Editor'},
+        {i: 'file-text', v: 'Content', type: 'Content'}
+      ],
+      blog: {
+        title: '',
+        body: '',
+        markdown: ''
+      }
+    },
     blog: []
   }
   localStorage.setItem(key, JSON.stringify(data))

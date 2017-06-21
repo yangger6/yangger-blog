@@ -103,6 +103,11 @@
               line-height: 1.4em;
               font-weight: 400;
             }
+            p {
+              span{
+                padding-right: 20px;
+              }
+            }
           }
         }
       }
@@ -212,4 +217,7 @@
       }
     }
   }
+}
+.markdown{
+
 }

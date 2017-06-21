@@ -28,4 +28,16 @@ export default class posts {
       return null
     }
   }
+  static async addBlog (Vue, payload) {
+    try {
+      const res = await Vue.$http.post(`${url}/blog/add`, payload)
+      if (res.body && res.status === 200) {
+        return res.body
+      }
+      return null
+    } catch (e) {
+      console.log(e)
+      return null
+    }
+  }
 }

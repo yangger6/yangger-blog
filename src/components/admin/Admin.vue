@@ -13,7 +13,7 @@
         </header>
         <main>
           <ul v-for="(item, index) in items">
-            <li><a @click="changeItem(index)" :class="{selected: index === selectIndex}"><icon :name="item.i"></icon>{{item.v}}</a></li>
+            <li><a @click="changeItem(index)" :class="{selected: index === itemIndex}"><icon :name="item.i"></icon>{{item.v}}</a></li>
           </ul>
         </main>
         <footer>
@@ -22,11 +22,8 @@
         </footer>
       </nav>
       <main class="editor">
-        <editor :type="type" @childChangeIndex="changeItem"></editor>
+        <router-view></router-view>
       </main>
-    </div>
-    <div v-else>
-      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -38,24 +35,31 @@
   export default{
     data () {
       return {
-        selectIndex: 0,
-        items: [
-          {i: 'pencil', v: 'New Post', type: 'Editor'},
-          {i: 'file-text', v: 'Content', type: 'Content'}
-        ]
+        items: this.$store.state.admin.items,
+        itemIndex: 0
       }
     },
     methods: {
       changeItem (index) {
-        this.selectIndex = index
+        this.itemIndex = index
+        this.$store.commit('changAdminIndex', index)
+        this.$store.commit('changAdminBlog', {
+          title: '',
+          body: '',
+          markdown: ''
+        })
+        this.$router.push({name: 'Editor', query: {type: this.type}})
       }
     },
     computed: {
+      selectIndex () {
+        return this.$store.state.admin.selectIndex
+      },
       isLogin () {
         return this.$store.state.user.name !== ''
       },
       type () {
-        return this.items[this.selectIndex].type
+        return this.$store.state.admin.items[this.$store.state.admin.selectIndex].type
       }
     },
     created () {
