@@ -8,9 +8,9 @@ if (!localStorage.getItem(key)) {
   let data = {
     // 登录用户
     user: {
-      id: 1,
-      name: 'yangger',
-      headImg: 'https://avatars1.githubusercontent.com/u/23329645?v=3&s=40'
+      id: '',
+      name: '',
+      headImg: ''
     },
     selectIndex: 0,
     admin: {

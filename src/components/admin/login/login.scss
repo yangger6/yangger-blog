@@ -1,0 +1,35 @@
+.login{
+  width: 400px;
+  height: 500px;
+  top:50%;
+  left:50%;
+  position: absolute;
+  transform:translate(-50%,-50%);
+  input{
+    position: absolute;
+    z-index: 999;
+    border: none;
+    top: 200px;
+    height: 30px;
+    left: 16px;
+    width: 370px;
+    outline: none;
+    &.password {
+      top: 288px;
+    }
+    &.error{
+      border-bottom: 3px solid red;
+    }
+  }
+  button{
+    left: 300px;
+    top: 372px;
+    border: 0;
+    outline: none;
+    background: none;
+    width: 87px;
+    height: 36px;
+    position: absolute;
+    z-index: 999;
+  }
+}

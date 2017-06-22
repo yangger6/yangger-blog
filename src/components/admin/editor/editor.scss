@@ -2,6 +2,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  font-size: 80%;
   header{
     flex-shrink: 0;
     display: flex;
@@ -24,7 +25,7 @@
         width: 100%;
         border: 0;
         background: 0 0;
-        font-size: 2.6rem;
+        font-size: 1.8rem;
         display: block;
         border-radius: 4px;
         color: #666;
@@ -66,8 +67,8 @@
         height: 100%;
         border: 0;
         color: #3d4043;
-        font-size: 1.6rem;
-        line-height: 2.5rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
         resize: none;
         min-width: 250px;
         min-height: 10rem;
@@ -219,5 +220,48 @@
   }
 }
 .markdown{
-
+  position: relative;
+  color: #242628;
+  text-decoration: none;
+  h1,h2,h3,h4,h5,h6 {
+    margin: 0 0 .3em;
+    color: #242628;
+    line-height: 1.15em;
+    text-rendering: optimizeLegibility
+  }
+  h1 {
+    font-size: 5rem
+  }
+  h2 {
+    font-size: 4.2rem
+  }
+  h3 {
+    font-size: 3.8rem
+  }
+  h4 {
+    font-size: 3.1rem
+  }
+  h5 {
+    font-size: 2.8rem
+  }
+  h6 {
+    font-size: 2.2rem
+  }
+  p{
+    word-break: break-all;
+  }
+  a {
+    color: #5ba4e5;
+    text-decoration: underline
+  }
+  code{
+    padding: .2rem .3rem .1rem;
+    border: 1px solid #d8e0e4;
+    border-radius: 2px;
+    color: #c25;
+    vertical-align: middle;
+    white-space: pre-wrap;
+    font-size: .8em;
+    line-height: 1em;
+  }
 }

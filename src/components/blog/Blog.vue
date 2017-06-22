@@ -33,6 +33,7 @@
 </script>
 <style scoped rel="stylesheet/scss" lang="scss">
   .Blog {
+    padding-top: 50px;
   }
   article{
     position: relative;

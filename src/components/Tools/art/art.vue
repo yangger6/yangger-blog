@@ -18,7 +18,12 @@
       <time>{{data.date.match(/[0-9]+[-][0-9]+[-][0-9]+/)[0]}}</time>
     </footer>
   </div>
-  <div class="art-context" v-else v-html="html">
+  <div class="art-context" v-else>
+    <header>
+      <h2>{{data.title}}</h2>
+    </header>
+    <div v-html="html"></div>
+
   </div>
 </template>
 <script>
@@ -46,7 +51,7 @@
        */
       route () {
         this.$store.commit('changBlogIndex', this.index)
-        this.$router.push({name: 'blog', params: {index: this.index}})
+        this.$router.push({name: 'Blog', params: {index: this.index}})
       }
     }
   }

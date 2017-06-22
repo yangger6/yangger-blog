@@ -40,4 +40,40 @@ export default class posts {
       return null
     }
   }
+  static async updateBlog (Vue, payload) {
+    try {
+      const res = await Vue.$http.post(`${url}/blog/update`, payload)
+      if (res.body && res.status === 200) {
+        return res.body
+      }
+      return null
+    } catch (e) {
+      console.log(e)
+      return null
+    }
+  }
+  static async removeBlog (Vue, payload) {
+    try {
+      const res = await Vue.$http.post(`${url}/blog/remove`, payload)
+      if (res.body && res.status === 200) {
+        return res.body
+      }
+      return null
+    } catch (e) {
+      console.log(e)
+      return null
+    }
+  }
+  static async userLogin (Vue, payload) {
+    try {
+      const res = await Vue.$http.post(`${url}/user/login`, payload)
+      if (res.body && res.status === 200) {
+        return res.body
+      }
+      return null
+    } catch (e) {
+      console.log(e)
+      return null
+    }
+  }
 }

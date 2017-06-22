@@ -31,7 +31,7 @@ const store = new Vuex.Store({
     // 当前选中的博客
     selectIndex: serverData.selectIndex,
     // 导航是否隐藏
-    headerShow: false,
+    headerShow: true,
     // 管理中心
     admin: serverData.admin
   },
@@ -63,6 +63,13 @@ const store = new Vuex.Store({
     pushBlog (state, payload) {
       state.blog.push(payload)  // 新增博客
       state.selectIndex = state.blog.length - 1 // -1 是因为数组的下标是从0开始的
+    },
+    removeBlog (state, index) {
+      state.blog.splice(index, 1)
+      state.selectIndex = 0
+    },
+    updateUser (state, payload) {
+      state.user = payload
     }
   }
 })
