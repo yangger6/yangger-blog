@@ -25,21 +25,26 @@
     },
     methods: {
       async fetchData () {  // 从数据库取数据
-        let that = this
-        let result = await posts.getBlogs(that)
-        this.$store.commit('pushBlogs', result)
+        let resultBlog = await posts.getBlogs(this)
+        this.$store.commit('pushBlogs', resultBlog)
+        let resultLog = await posts.getLogs(this)
+        this.$store.commit('pushLogs', resultLog)
       }
     },
     computed: mapState({
       user: 'user',
       blog: 'blog',
       selectIndex: 'selectIndex',
-      admin: 'admin'
+      admin: 'admin',
+      headerShow: 'headerShow',
+      log: 'log'
     }),
     created () {
+      if (this.$route.path === '/') {
+        this.$store.commit('changHeaderShow', false)
+      }
       // 组件创建完后获取数据，
       // 此时 data 已经被 observed 了
-      this.$store.commit('changHeaderShow', false)
       this.fetchData()
     },
     watch: {
@@ -53,7 +58,9 @@
             user: this.user,
             blog: this.blog,
             selectIndex: this.selectIndex,
-            admin: this.admin
+            admin: this.admin,
+            headerShow: this.headerShow,
+            log: this.log
           })
         }
       }

@@ -44,6 +44,7 @@
           store.commit('changHeaderShow', true)
         } else if (route.path === '/') {
           this.toggleShow = true
+          store.commit('changHeaderShow', false)
         }
       }
     },

@@ -5,11 +5,13 @@ import topBar from './Tools/header/topBar'
 import headImg from './Tools/headImg'
 import list from './Tools/list'
 import art from './Tools/art'
+import metaIcon from './Tools/metaIcon'
 const options = {
   topBar,
   headImg,
   list,
-  art
+  art,
+  metaIcon
 }
 options.install = (Vue) => {
   for (let component in options) {

@@ -77,9 +77,65 @@
   }
 }
 .art-context{
-  h2{
-    font-size: 2rem;
+  position: relative;
+  color: #242628;
+  text-decoration: none;
+  font-size: 80%;
+  h1,h2,h3,h4,h5,h6 {
+    margin: 0 0 .3em;
+    color: #242628;
+    line-height: 1.15em;
+    text-rendering: optimizeLegibility;
     text-align: center;
-    margin: 0 0 20px 0 ;
+  }
+  h1 {
+    font-size: 5rem
+  }
+  h2 {
+    font-size: 3.2rem
+  }
+  h3 {
+    font-size: 3.8rem
+  }
+  h4 {
+    font-size: 3.1rem
+  }
+  h5 {
+    font-size: 2.8rem
+  }
+  h6 {
+    font-size: 2.2rem
+  }
+  p{
+    word-break: break-all;
+  }
+  a {
+    color: #5ba4e5;
+    text-decoration: underline
+  }
+  code{
+    padding: .2rem .3rem .1rem;
+    border: 1px solid #d8e0e4;
+    border-radius: 2px;
+    color: #c25;
+    vertical-align: middle;
+    white-space: pre-wrap;
+    font-size: .8em;
+    line-height: 1em;
+  }
+  p{
+    margin: 0 0 1.7em;
+  }
+  ul{
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+    ul{
+      list-style-type: circle;
+    }
   }
 }

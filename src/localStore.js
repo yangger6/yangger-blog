@@ -25,7 +25,8 @@ if (!localStorage.getItem(key)) {
         markdown: ''
       }
     },
-    blog: []
+    blog: [],
+    log: []
   }
   localStorage.setItem(key, JSON.stringify(data))
 }

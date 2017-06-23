@@ -33,7 +33,9 @@ const store = new Vuex.Store({
     // 导航是否隐藏
     headerShow: true,
     // 管理中心
-    admin: serverData.admin
+    admin: serverData.admin,
+    // 日志
+    log: serverData.log
   },
   mutations: {
     changBlogIndex (state, index) {
@@ -70,6 +72,9 @@ const store = new Vuex.Store({
     },
     updateUser (state, payload) {
       state.user = payload
+    },
+    pushLogs (state, payload) {
+      state.log = payload
     }
   }
 })

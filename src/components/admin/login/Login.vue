@@ -11,6 +11,7 @@
 </style>
 <script>
   import posts from '../../../post/post'
+  import localStroe from '../../../localStore' // 本地储存
   export default{
     data () {
       return {
@@ -34,6 +35,7 @@
         })
         if (result.msg === 'success') {
           this.$store.commit('updateUser', result.data)
+          localStroe.save(this.$store.state)
           console.log(`Login is ${result.msg}`)
           this.$router.push({name: 'Editor'})
         } else {

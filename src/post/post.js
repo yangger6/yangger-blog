@@ -76,4 +76,16 @@ export default class posts {
       return null
     }
   }
+  static async getLogs (Vue) {
+    try {
+      const res = await Vue.$http.post(`${url}/log/select`)
+      if (res.body && res.status === 200) {
+        return res.body
+      }
+      return null
+    } catch (e) {
+      console.log(e)
+      return null
+    }
+  }
 }
