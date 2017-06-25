@@ -46,7 +46,8 @@
         this.$store.commit('changAdminBlog', {
           title: '',
           body: '',
-          markdown: ''
+          markdown: '',
+          tags: []
         })
         this.$router.push({name: 'Editor', query: {type: this.type}})
       }

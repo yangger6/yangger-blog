@@ -22,10 +22,10 @@
     </div>
     <div class="log">
       <h2>日日日日日志==</h2>
-      <div class="log-item" v-for="(log, index) in info.logs">
-        <a @click="showLog(index)">{{log.date}}</a>
+      <div class="log-item" v-for="log in logs">
+        <a @click="showLog(log)">{{log.date}}</a>
         <ul v-if="log.show">
-          <li v-for="text in log.data">{{text.value}}{{log.show}}</li>
+          <li v-for="text in log.data">{{text.value}}</li>
         </ul>
       </div>
     </div>
@@ -38,16 +38,13 @@
   export default{
     data () {
       return {
-        openHead: false
+        openHead: false,
+        logs: []
       }
     },
     methods: {
-      showLog (index) {
-        console.log(this.info.logs[index])
-        this.info.logs[index] = {
-          ...this.info.logs[index],
-          show: !this.info.logs[index].show
-        }
+      showLog (log) {
+        log.show = !log.show
       },
       open () {
         this.openHead = !this.openHead
@@ -75,7 +72,7 @@
           }
         }
         Info.logCount = Log.Count || 0
-        Info.logs = Log.data
+        this.logs = Log.data
         return Info
       }
     }

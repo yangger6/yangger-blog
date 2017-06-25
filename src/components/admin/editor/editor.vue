@@ -26,9 +26,7 @@
     </header>
     <section class="editor-box" :class="{Content: type === 'Content'}">
       <section v-if="type === 'Editor'">
-        <div>
-          123
-        </div>
+        <tags :tags="editBlog.tags"></tags>
         <textarea name=""cols="30" rows="10" :value="this.$store.state.admin.blog.body" @keyup="toHTML"></textarea>
       </section>
       <section v-else-if="type === 'Content'">
@@ -42,7 +40,7 @@
         </ul>
       </section>
       <section class="markdown">
-        <div v-if="type === 'Editor'" v-html="this.$store.state.admin.blog.markdown">
+        <div v-if="type === 'Editor'" v-html="this.$store.state.admin.blog.markdown" class="markdown" style="padding-top: 50px;box-sizing: border-box;">
         </div>
         <div v-else v-html="this.$store.state.blog[this.$store.state.selectIndex].markdown">
         </div>
@@ -57,6 +55,7 @@
 <script>
   import {markdown} from 'markdown'
   import posts from '../../../post/post' // 数据库取数据
+  import tags from '../../Tools/tags/tags.vue'
   export default{
     data () {
       return {
@@ -65,6 +64,9 @@
         itemIndex: 0,
         editMarkdown: ''
       }
+    },
+    components: {
+      tags
     },
     computed: {
       controlItems () {
@@ -103,7 +105,8 @@
         this.$store.commit('changAdminBlog', {
           title: blog.title,
           body: blog.body,
-          markdown: blog.markdown
+          markdown: blog.markdown,
+          tags: blog.tags
         })
         this.editMarkdown = markdown.toHTML(blog.body)
         this.$store.commit('changAdminIndex', 0)
@@ -113,6 +116,7 @@
         this.$store.commit('changAdminBlog', {
           title: document.getElementById('blogTitle').value,
           body: e.target.value,
+          tags: this.editBlog.tags,
           markdown: Md
         })
       },
@@ -125,7 +129,7 @@
           markdown: this.editBlog.markdown,
           comments: [],
           hidden: false,
-          tags: [],
+          tags: this.editBlog.tags,
           meta: {
             votes: 0,
             favs: 0

@@ -5,7 +5,7 @@
     </header>
     <section>
       <p>
-        {{data.body}}
+        {{data.body.substring(0,80)}}
         <a @click="route">»</a>
       </p>
     </section>
@@ -13,8 +13,8 @@
       <a href="">{{data.author}}</a>
       on
       <a v-for="tag in tags" class="tags" href="">{{tag}} <icon name="tag"></icon> </a>
-      <a class="meta">{{data.meta.votes}}<meta-icon meta='thumbs-o-up'></meta-icon> </a>
-      <a class="meta">{{data.meta.favs}} <icon name="heart-o"></icon></a>
+      <a class="meta">{{data.meta.votes}}<meta-icon meta='votes' :index="index"></meta-icon></a>
+      <a class="meta">{{data.meta.favs}}<meta-icon meta='favs' :index="index"></meta-icon></a>
       <time>{{data.date.match(/[0-9]+[-][0-9]+[-][0-9]+/)[0]}}</time>
     </footer>
   </div>

@@ -50,6 +50,16 @@ const store = new Vuex.Store({
     changAdminBlog (state, payload) {
       state.admin.blog = payload
     },
+    addAdminBlogTag (state, value) {
+      state.admin.blog.tags.push(value)
+    },
+    removeAdminBlogTag (state, index) {
+      if (state.admin.blog.tags[index]) {
+        state.admin.blog.tags.splice(index, 1)
+      } else {
+        console.log(`removeAdminTag error is tags[index] undefined`)
+      }
+    },
     changHeaderShow (state, boolean) {
       state.headerShow = boolean
     },
@@ -67,8 +77,23 @@ const store = new Vuex.Store({
       state.selectIndex = state.blog.length - 1 // -1 是因为数组的下标是从0开始的
     },
     removeBlog (state, index) {
-      state.blog.splice(index, 1)
-      state.selectIndex = 0
+      if (state.blog[index]) {
+        state.blog.splice(index, 1)
+        state.selectIndex = 0
+      } else {
+        console.log(`removeBlog error is blog[index] undefined`)
+      }
+    },
+    /**
+     *
+     * @param state vuex
+     * @param payload  传入的参数对象
+     * @param payload.index  第几篇博客
+     * @param payload.meta  标签名
+     * @param payload.opt   加或是减
+     */
+    changeBlogMeta (state, payload) {
+      state.blog[payload.index].meta[payload.meta] += payload.opt
     },
     updateUser (state, payload) {
       state.user = payload
