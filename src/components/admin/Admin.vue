@@ -41,6 +41,7 @@
     },
     methods: {
       changeItem (index) {
+        debugger
         this.itemIndex = index
         this.$store.commit('changAdminIndex', index)
         this.$store.commit('changAdminBlog', {

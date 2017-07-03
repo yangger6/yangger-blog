@@ -17,7 +17,8 @@ if (!localStorage.getItem(key)) {
       selectIndex: 0,
       items: [
         {i: 'pencil', v: 'New Post', type: 'Editor'},
-        {i: 'file-text', v: 'Content', type: 'Content'}
+        {i: 'file-text', v: 'Content', type: 'Content'},
+        {i: 'bug', v: 'Log', type: 'Log'}
       ],
       blog: {
         title: '',
