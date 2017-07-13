@@ -8,8 +8,11 @@ import Admin from '@/components/admin/Admin'
 import Login from '@/components/admin/login/Login'
 import Reg from '@/components/admin/reg/Reg'
 import Editor from '@/components/admin/editor/editor'
+import Log from '@/components/admin/log/log'
+
 Vue.use(Router)
 export default new Router({
+  // mode: 'history',
   routes: [
     {
       path: '',
@@ -40,6 +43,11 @@ export default new Router({
           path: '/admin/editor/',
           name: 'Editor',
           component: Editor
+        },
+        {
+          path: 'admin/log',
+          name: 'Log',
+          component: Log
         }
       ]
     },

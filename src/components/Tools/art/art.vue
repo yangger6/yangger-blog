@@ -20,7 +20,7 @@
   </div>
   <div class="art-context" v-else>
     <header>
-      <h2>{{data.title}}</h2>
+      <h2 class="art-title">{{data.title}}</h2>
     </header>
     <div v-html="html"></div>
 

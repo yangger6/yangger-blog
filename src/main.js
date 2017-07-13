@@ -100,6 +100,12 @@ const store = new Vuex.Store({
     },
     pushLogs (state, payload) {
       state.log = payload
+    },
+    removeLog (state, payload) {
+      state.log[payload.selectIndex].data.splice([payload.logIndex], 1)
+    },
+    addLog (state, payload) {
+      state.log[payload.selectIndex].data = payload.data
     }
   }
 })

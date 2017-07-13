@@ -41,16 +41,23 @@
     },
     methods: {
       changeItem (index) {
-        debugger
         this.itemIndex = index
-        this.$store.commit('changAdminIndex', index)
-        this.$store.commit('changAdminBlog', {
-          title: '',
-          body: '',
-          markdown: '',
-          tags: []
-        })
-        this.$router.push({name: 'Editor', query: {type: this.type}})
+        switch (index) {
+          case 0:case 1:
+            this.$store.commit('changAdminIndex', index)
+            this.$store.commit('changAdminBlog', {
+              title: '',
+              body: '',
+              markdown: '',
+              tags: []
+            })
+            this.$router.push({name: 'Editor', query: {type: this.type}})
+            break
+          case 2:
+            this.$router.push({name: 'Log'})
+            break
+          default :break
+        }
       }
     },
     computed: {
