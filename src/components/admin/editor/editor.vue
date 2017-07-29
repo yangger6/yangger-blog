@@ -55,7 +55,7 @@
 <script>
   import {markdown} from 'markdown'
   import posts from '../../../post/post' // 数据库取数据
-  import tags from '../../Tools/tags/tags.vue'
+  import tags from '../../tools/tags/tags.vue'
   export default{
     data () {
       return {

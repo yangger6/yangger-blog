@@ -5,7 +5,7 @@
       <router-view></router-view>
     </main>
     <footer>
-      <v-canvas></v-canvas>
+      <!--<v-canvas></v-canvas>-->
     </footer>
   </div>
 </template>
@@ -13,8 +13,8 @@
   import { mapState } from 'vuex' // vuex 工具
   import localStroe from './localStore' // 本地储存
   import posts from './post/post' // 数据库取数据
-  import canvas from './components/Tools/canvas/canvas.vue' // 引用canvas
-  import header from './components/Tools/header/header.vue'
+//  import canvas from './components/tools/canvas/canvas.vue' // 引用canvas
+  import header from './components/tools/header/header.vue'
   export default {
     data () {
       return {
@@ -66,7 +66,7 @@
       }
     },
     components: {
-      'v-canvas': canvas,
+//      'v-canvas': canvas,
       'v-header': header
     }
   }

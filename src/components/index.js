@@ -1,11 +1,11 @@
 /**
  * Created by yangger on 2017/4/24.
  */
-import topBar from './Tools/header/topBar'
-import headImg from './Tools/headImg'
-import list from './Tools/list'
-import art from './Tools/art'
-import metaIcon from './Tools/metaIcon'
+import topBar from './tools/header/topBar'
+import headImg from './tools/headImg'
+import list from './tools/list'
+import art from './tools/art'
+import metaIcon from './tools/metaIcon'
 const options = {
   topBar,
   headImg,
