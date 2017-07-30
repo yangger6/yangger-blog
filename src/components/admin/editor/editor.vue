@@ -50,7 +50,8 @@
   </section>
 </template>
 <style rel="stylesheet/scss" lang="scss">
-  @import "editor";
+  @import "editor.scss";
+  @import "../../markdown/markdown.scss";
 </style>
 <script>
   import {markdown} from 'markdown'

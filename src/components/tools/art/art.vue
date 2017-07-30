@@ -18,12 +18,11 @@
       <time>{{data.date.match(/[0-9]+[-][0-9]+[-][0-9]+/)[0]}}</time>
     </footer>
   </div>
-  <div class="art-context" v-else>
+  <div class="art-context markdown" v-else>
     <header>
       <h2 class="art-title">{{data.title}}</h2>
     </header>
     <div v-html="html"></div>
-
   </div>
 </template>
 <script>
@@ -58,5 +57,6 @@
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style rel="stylesheet/scss" lang="scss">
-  @import "art";
+  @import "art.scss";
+  @import '../../markdown/markdown.scss';
 </style>
