@@ -32,7 +32,8 @@
   </div>
 </template>
 <style scoped rel="stylesheet/scss" lang="scss">
-  @import 'about'
+  @import 'about';
+  @import "media";
 </style>
 <script>
   export default{

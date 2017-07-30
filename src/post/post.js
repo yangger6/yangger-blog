@@ -2,7 +2,7 @@
  * Created by yangger on 2017/6/14.
  * 链接数据库，请求数据
  */
-const url = 'http://yangger.cn/api' // 处理请求地址
+const url = 'https://yangger.cn/api' // 处理请求地址
 export default class posts {
   static async getBlogs (Vue) {
     try {
