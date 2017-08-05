@@ -22,8 +22,8 @@
     </div>
     <div class="log">
       <h2>日日日日日志==</h2>
-      <div class="log-item" v-for="log in logs" :key="log._id">
-        <a @click="showLog(log)">{{log.date}}</a>
+      <div class="log-item" v-for="(log, index) in logs" :key="log._id">
+        <a @click="changeLogState(log)">{{log.date}}</a>
         <list v-if="log.show">
           <li v-for="text in log.data" :key="text._id">{{text.value}}</li>
         </list>
@@ -36,46 +36,26 @@
   @import "media";
 </style>
 <script>
+  import { mapGetters, mapMutations } from 'vuex'
   export default{
     data () {
       return {
-        openHead: false,
-        logs: []
+        openHead: false
       }
     },
     methods: {
-      showLog (log) {
-        log.show = !log.show
-      },
+      ...mapMutations({
+        'changeLogState': 'CHANGE_LOGSTATE'
+      }),
       open () {
         this.openHead = !this.openHead
       }
     },
     computed: {
-      info () {
-        let Info = {}
-        Info.blogCount = this.$store.state.blog.length || 0
-        let Log = {
-          logs: this.$store.state.log,
-          data: [],
-          Count: 0
-        }
-        if (Log.logs) {
-          for (let i in Log.logs) {
-            if (typeof Log.logs[i] === 'object') {
-              Log.Count += Log.logs[i].data.length
-              Log.data.push({
-                date: Log.logs[i].date,
-                show: i < 5,
-                data: Log.logs[i].data
-              })
-            }
-          }
-        }
-        Info.logCount = Log.Count || 0
-        this.logs = Log.data
-        return Info
-      }
+      ...mapGetters({
+        info: 'userInfo',
+        logs: 'logs'
+      })
     }
   }
 </script>

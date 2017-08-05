@@ -1,7 +1,7 @@
 /**
  * Created by yangger on 2017/7/30.
  */
-import posts from '@/unit2/posts'
+import posts from '@/unit/posts'
 import * as types from '../mutation-types'
 // initial state
 const state = {
@@ -9,13 +9,22 @@ const state = {
 }
 // getters
 const getters = {
-  logs: state => state.logs
+  logs: state => state.logs,
+  // logCount: state => [...state.logs.map(log => log.data.length)].reduce((prev, curr) => prev + curr, 0)
+  logCount (state) {
+    return state.logs.reduce((prev, curr) => {
+      return (prev.data ? prev.data.length : prev) + curr.data.length
+    }, 0)
+  }
 }
 
 // actions
 const actions = {
   async getLogs ({ commit }) {
-    const Logs = await posts.getLogs()
+    let Logs = await posts.getLogs()
+    Logs = Logs.map((logDay, index) => {
+      return index < 5 ? { ...logDay, show: true } : { ...logDay, show: false }
+    })
     commit(types.RECEIVE_LOGS, { Logs })
   }
 }
@@ -30,6 +39,11 @@ const mutations = {
   [types.RECEIVE_LOGS] (state, { Logs }) {
     state.logs = Logs
   },
+  /**
+   * 添加Log到store
+   * @param state
+   * @param Log 新增的log
+   */
   [types.ADD_LOG] (state, Log) {
     state.logs.push(Log)
   },
@@ -50,6 +64,9 @@ const mutations = {
    */
   [types.ADD_LOGDATA] (state, {SelectIndex, Data}) {
     state.logs[SelectIndex].data = Data
+  },
+  [types.CHANGE_LOGSTATE] (state, { _id, show }) {
+    state.logs.find(log => log._id === _id).show = !show
   }
 }
 export default {
