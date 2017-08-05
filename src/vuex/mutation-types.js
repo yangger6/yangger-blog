@@ -1,0 +1,23 @@
+/**
+ * Created by yangger on 2017/7/30.
+ */
+// Blog
+export const RECEIVE_BLOGS = 'RECEIVE_BLOGS'
+export const CHANGE_BLOGSELECTINDEX = 'CHANGE_BLOGSELECTINDEX'
+export const CHANGE_BLOGMETA = 'CHANGE_BLOGMETA'
+export const ADD_BLOG = 'ADD_BLOG'
+export const REMOVE_BLOG = 'REMOVE_BLOG'
+export const UPDATE_BLOG = 'UPDATE_BLOG'
+// Log
+export const RECEIVE_LOGS = 'RECEIVE_LOGS'
+export const ADD_LOG = 'ADD_LOG'
+export const REMOVE_LOG = 'REMOVE_LOG'
+// Admin
+export const CHANGE_ADMINSELECTINDEX = 'CHANGE_ADMINSELECTINDEX'
+export const CHANGE_ADMINBLOG = 'CHANGE_ADMINBLOG'
+export const ADD_ADMINBLOGTAG = 'ADD_ADMINBLOGTAG'
+export const REMOVE_ADMINBLOGTAG = 'REMOVE_ADMINBLOGTAG'
+// user
+export const UPDATE_USER = 'UPDATE_USER'
+// headershow
+export const CHANGE_HEADERSHOW = 'CHANGE_HEADERSHOW'
