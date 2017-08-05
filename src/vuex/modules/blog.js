@@ -18,8 +18,8 @@ const state = {
 const getters = {
   blogs: state => state.blogs.data,
   blogSelectIndex: state => state.blogs.selectIndex,
-  selectBlog: state => state.blogs.data[state.blogs.data.selectIndex],
-  queryBlog: state.queryBlog.data,
+  selectBlog: state => state.blogs.data[state.blogs.selectIndex],
+  queryBlog: state => state.queryBlog.data,
   queryBlogSelectIndex: state => state.queryBlog.selectIndex
 }
 
@@ -29,9 +29,10 @@ const actions = {
     const Blogs = await posts.getBlogs()
     commit(types.RECEIVE_BLOGS, { Blogs })
   },
-  async getBlog ({ commit, getters }) {
-    const updateBlog = []
-    commit(types.RECEIVE_BLOGS, { updateBlog })
+  async getBlog ({ commit, state }) {
+    const blogId = state.blogs.data[state.blogs.selectIndex]._id
+    const updateBlog = await posts.getBlog(blogId)
+    commit(types.RECEIVE_BLOG, { updateBlog })
   },
   async changBlogIndex ({ commit }, Index) {
     commit(types.CHANGE_BLOGSELECTINDEX, Index)
@@ -57,8 +58,13 @@ const mutations = {
   [types.RECEIVE_BLOGS] (state, { Blogs }) {
     state.blogs.data = Blogs
   },
-  [types.RECEIVE_BLOG] (state, { Blog }) {
-
+  /**
+   * 点进文章的时候更新数据
+   * @param state
+   * @param Blog 更新后的数据
+   */
+  [types.RECEIVE_BLOG] (state, { updateBlog }) {
+    state.blogs.data[state.blogs.selectIndex] = updateBlog
   },
   /**
    * 修改当前选中的博客
@@ -66,7 +72,7 @@ const mutations = {
    * @param Index 需要选中博客的Index
    */
   [types.CHANGE_BLOGSELECTINDEX] (state, Index) {
-    state.blog.selectIndex = Index
+    state.blogs.selectIndex = Index
   },
   [types.ADD_BLOG] (state, NewBlog) {
     // 先重写Vuex  以后改成Vue.set 或 state.obj = { ...state.obj, newProp: 123}

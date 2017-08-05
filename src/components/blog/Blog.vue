@@ -1,33 +1,33 @@
 <template>
   <div class='Blog'>
     <article>
-      <art :data="data" size = 'art-context'></art>
+      <art :blog="blog" size = 'art-context'></art>
     </article>
   </div>
 </template>
 <script>
-  import posts from '../../post/post'
+  import { mapGetters, mapActions } from 'vuex'
   export default {
     name: 'Blog',
     data () {
       return {
       }
     },
+    async created () {
+      await this.fetchData()
+    },
     methods: {
+      ...mapActions([
+        'getBlog'
+      ]),
       async fetchData () {
-        let that = this
-        let id = this.$store.state.blog[this.$store.state.selectIndex]._id
-        let result = await posts.getBlog(that, id)
-        this.$store.commit('updateBlog', result)
+        this.getBlog()
       }
     },
     computed: {
-      data () {
-        this.fetchData()
-        return this.$store.state.blog[this.$store.state.selectIndex]
-      }
-    },
-    mounted () {
+      ...mapGetters({
+        blog: 'selectBlog'
+      })
     }
   }
 </script>

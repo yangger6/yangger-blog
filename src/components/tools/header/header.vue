@@ -17,6 +17,7 @@
   @import "header";
 </style>
 <script>
+  import { mapMutations, mapGetters } from 'vuex' // vuex 工具
   export default{
     data () {
       return {
@@ -25,26 +26,26 @@
       }
     },
     computed: {
-      openNav () {
-        return this.$store.state.headerShow
-      }
+      ...mapGetters({
+        openNav: 'headerShow'
+      })
     },
     methods: {
+      ...mapMutations({
+        changHeaderShow: 'CHANGE_HEADERSHOW'
+      }),
       changeNav () {
-        let state = this.$store.state.headerShow
-        this.$store.commit('changHeaderShow', !state)
+        this.changHeaderShow(!this.openNav)
       },
       routeNav () {
         let route = this.$route
-        let store = this.$store
         if (route.path.match(/admin/) !== null) {
-          store.commit('changHeaderShow', false)
+          this.changHeaderShow(false)
         } else if (route.path !== '/') {
           this.toggleShow = false
-          store.commit('changHeaderShow', true)
+          this.changHeaderShow(true)
         } else if (route.path === '/') {
-          this.toggleShow = true
-          store.commit('changHeaderShow', false)
+          this.changHeaderShow(false)
         }
       }
     },

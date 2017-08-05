@@ -3,6 +3,7 @@
  */
 // Blog
 export const RECEIVE_BLOGS = 'RECEIVE_BLOGS'
+export const RECEIVE_BLOG = 'RECEIVE_BLOG'
 export const CHANGE_BLOGSELECTINDEX = 'CHANGE_BLOGSELECTINDEX'
 export const CHANGE_BLOGMETA = 'CHANGE_BLOGMETA'
 export const ADD_BLOG = 'ADD_BLOG'

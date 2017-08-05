@@ -1,9 +1,10 @@
 <template>
   <div class='Blogs'>
-    <art v-for = "(data, index) in datas" :data = data :tags= data.tags size = 'art-item' :key='data._id' :id='data._id' :index="index"></art>
+    <art v-for = "(blog, index) in blogs" :blog = blog :tags= blog.tags size = 'art-item' :key='blog._id' :id='blog._id' :index="index"></art>
   </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     name: 'Blogs',
     data () {
@@ -11,9 +12,9 @@
       }
     },
     computed: {
-      datas () {
-        return this.$store.state.blog
-      }
+      ...mapGetters({
+        blogs: 'blogs'
+      })
     }
   }
 </script>

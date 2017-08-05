@@ -10,12 +10,16 @@
   </div>
 </template>
 <script>
-  import { mapState } from 'vuex' // vuex 工具
-  import localStroe from './localStore' // 本地储存
-  import posts from './post/post' // 数据库取数据
-//  import canvas from './components/tools/canvas/canvas.vue' // 引用canvas
+  import store from './vuex/index'
+  import { mapState, mapMutations, mapActions } from 'vuex' // vuex 工具
+//  import localStroe from './localStore' // 本地储存
+  //  import posts from '@/unit/post' // 数据库取数据
+  //  import store from '@/vuex/index'
+  //  import canvas from './components/tools/canvas/canvas.vue' // 引用canvas
   import header from './components/tools/header/header.vue'
   export default {
+    store,
+    name: 'blog',
     data () {
       return {
         imgSrc: '/static/head.png',
@@ -24,49 +28,35 @@
       }
     },
     methods: {
-      async fetchData () {  // 从数据库取数据
-        let resultBlog = await posts.getBlogs(this)
-        this.$store.commit('pushBlogs', resultBlog)
-        let resultLog = await posts.getLogs(this)
-        this.$store.commit('pushLogs', resultLog)
-      }
+      ...mapMutations({
+        changHeaderShow: 'CHANGE_HEADERSHOW'
+      }),
+      ...mapActions([
+        'getBlogs',
+        'getLogs'
+      ])
     },
     computed: mapState({
       user: 'user',
       blog: 'blog',
-      selectIndex: 'selectIndex',
       admin: 'admin',
+      blogSelectIndex: 'blogSelectIndex',
       headerShow: 'headerShow',
       log: 'log'
     }),
-    created () {
+    async created () {
       if (this.$route.path === '/') {
-        this.$store.commit('changHeaderShow', false)
+        this.changHeaderShow(false)
       }
       // 组件创建完后获取数据，
       // 此时 data 已经被 observed 了
-      this.fetchData()
+      await this.getBlogs()
+      await this.getLogs()
     },
     watch: {
-      scrollWidth () {
-        this.showNav = this.$el.scrollWidth < 500
-      },
-      selectIndex: {
-        deep: true,
-        handler () {
-          localStroe.save({
-            user: this.user,
-            blog: this.blog,
-            selectIndex: this.selectIndex,
-            admin: this.admin,
-            headerShow: this.headerShow,
-            log: this.log
-          })
-        }
-      }
     },
     components: {
-//      'v-canvas': canvas,
+//        'v-canvas': canvas,
       'v-header': header
     }
   }
