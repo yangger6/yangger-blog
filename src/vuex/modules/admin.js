@@ -22,18 +22,19 @@ const state = {
 }
 // getters
 const getters = {
-  blog: state => state.admin.blog,
-  items: state => state.admin.items,
-  selectIndex: state => state.admin.selectIndex
+  admin: state => state.admin,
+  adminBlog: state => state.admin.blog,
+  adminItems: state => state.admin.items,
+  adminSelectIndex: state => state.admin.selectIndex
 }
 
 // actions
 const actions = {
-  async changAdminIndex ({ commit }, Index) {
-    commit(types.CHANGE_BLOGSELECTINDEX, Index)
+  async changeAdminIndex ({ commit }, Index) {
+    commit(types.CHANGE_ADMINSELECTINDEX, Index)
   },
-  async changAdminBlog ({ commit }, Blog) {
-    commit(types.CHANGE_ADMINBLOG, { Blog })
+  async changeAdminBlog ({ commit }, Blog) {
+    commit(types.CHANGE_ADMINBLOG, Blog)
   },
   async addAdminBlogTag ({ commit }, Tag) {
     commit(types.ADD_ADMINBLOGTAG, Tag)

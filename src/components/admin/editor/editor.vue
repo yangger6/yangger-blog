@@ -27,7 +27,7 @@
     <section class="editor-box" :class="{Content: type === 'Content'}">
       <section v-if="type === 'Editor'">
         <tags :tags="editBlog.tags"></tags>
-        <textarea name=""cols="30" rows="10" :value="this.$store.state.admin.blog.body" @keyup="toHTML"></textarea>
+        <textarea name=""cols="30" rows="10" :value="this.adminBlog.body" @keyup="toHTML"></textarea>
       </section>
       <section v-else-if="type === 'Content'">
         <ul>
@@ -40,9 +40,9 @@
         </ul>
       </section>
       <section class="markdown">
-        <div v-if="type === 'Editor'" v-html="this.$store.state.admin.blog.markdown" class="markdown" style="padding-top: 50px;box-sizing: border-box;">
+        <div v-if="type === 'Editor'" v-html="this.adminBlog.markdown" class="markdown" style="padding-top: 50px;box-sizing: border-box;">
         </div>
-        <div v-else v-html="this.$store.state.blog[this.$store.state.selectIndex].markdown">
+        <div v-else v-html="this.blog[this.blogSelectIndex].markdown">
         </div>
         <a @click="editing" v-show="type === 'Content'" ><icon  name="edit"></icon></a>
       </section>
@@ -55,8 +55,8 @@
 </style>
 <script>
   import {markdown} from 'markdown'
-  import posts from '../../../post/post' // 数据库取数据
   import tags from '../../tools/tags/tags.vue'
+  import { mapGetters, mapActions } from 'vuex'
   export default{
     data () {
       return {
@@ -70,10 +70,18 @@
       tags
     },
     computed: {
+      ...mapGetters({
+        blog: 'blogs',
+        blogSelectIndex: 'blogSelectIndex',
+        adminItems: 'adminItems',
+        adminSelectIndex: 'adminSelectIndex',
+        adminBlog: 'adminBlog',
+        user: 'user'
+      }),
       controlItems () {
         if (this.$parent.itemIndex === 0) {
           return ['Publish Now', 'Save Draft']
-        } else if (!this.$store.state.blog[this.$store.state.selectIndex].hidden) {
+        } else if (!this.blog[this.blogSelectIndex].hidden) {
           return ['Update Post', 'Unpublish']
         } else {
           return ['Publish Now', 'Save Draft']
@@ -83,38 +91,46 @@
         return this.controlItems[this.controlIndex]
       },
       items () {
-        return this.$store.state.blog
+        return this.blog
       },
       type () {
-        return this.$store.state.admin.items[this.$store.state.admin.selectIndex].type
+        return this.adminItems[this.adminSelectIndex].type
       },
       editBlog () { // 编辑博客
-        return this.$store.state.admin.blog
+        return this.adminBlog
       }
     },
     methods: {
+      ...mapActions([
+        'changeBlogIndex',
+        'changeAdminBlog',
+        'changeAdminIndex',
+        'addBlog',
+        'updateBlog',
+        'removeBlog'
+      ]),
       changeControl (index) {
         this.controlIndex = index
         this.controlShow = false
       },
       changeItemIndex (index) {
         this.itemIndex = index
-        this.$store.commit('changBlogIndex', index)
+        this.changeBlogIndex(index)
       },
-      editing () {
-        let blog = this.$store.state.blog[this.$store.state.selectIndex]
-        this.$store.commit('changAdminBlog', {
+      async editing () {
+        let blog = this.blog[this.blogSelectIndex]
+        await this.changeAdminBlog({
           title: blog.title,
           body: blog.body,
           markdown: blog.markdown,
           tags: blog.tags
         })
         this.editMarkdown = markdown.toHTML(blog.body)
-        this.$store.commit('changAdminIndex', 0)
+        this.changeAdminIndex(0)
       },
-      toHTML (e) {
+      async toHTML (e) {
         let Md = markdown.toHTML(e.target.value)
-        this.$store.commit('changAdminBlog', {
+        await this.changeAdminBlog({
           title: document.getElementById('blogTitle').value,
           body: e.target.value,
           tags: this.editBlog.tags,
@@ -138,20 +154,14 @@
         }
         var result = null
         if (con === 'Publish Now') {  //  推送文章或者将草稿修改為推送文章
-          blog.author = this.$store.state.user.userName
+          blog.author = this.user.userName
           blog.hidden = false
           if (this.$parent.itemIndex === 1) { // 將草稿推送到展示
-            blog._id = this.$store.state.blog[this.$store.state.selectIndex]._id
-            result = await posts.updateBlog(this, blog)
-            if (result.msg === 'success') {
-              this.$store.commit('updateBlog', result.data)
-            }
+            blog._id = this.blog[this.blogSelectIndex]._id
+            result = await this.updateBlog(blog)
           } else {  //  第一次編輯文章并且推送
-            result = await posts.addBlog(this, blog)
-            if (result.msg === 'success') {
-              this.$store.commit('pushBlog', result.data)
-              this.$parent.itemIndex = 1
-            }
+            result = await this.addBlog(blog)
+            if (result) this.$parent.itemIndex = 1
           }
           console.log(`Publish Now is ${result}`)
         //          分割线
@@ -159,50 +169,40 @@
           if (this.$parent.itemIndex === 1) { // 保存草稿
             blog.author = 'Draft'
             blog.hidden = true
-            blog._id = this.$store.state.blog[this.$store.state.selectIndex]._id
-            result = await posts.updateBlog(this, blog)
-            if (result.msg === 'success') {
-              this.$store.commit('updateBlog', result.data)
-            }
+            blog._id = this.blog[this.blogSelectIndex]._id
+            result = await this.updateBlog(blog)
           } else {
             blog.author = 'Draft'
             blog.hidden = true
-            result = await posts.addBlog(this, blog)
-            if (result.msg === 'success') {
-              this.$store.commit('pushBlog', result.data)
-              this.$parent.itemIndex = 1
-            }
+            result = await this.addBlog(blog)
+            if (result) this.$parent.itemIndex = 1
           }
           console.log(`Save Draft is ${result}`)
           //          分割线
         } else if (con === 'Update Post') {
-          blog.author = this.$store.state.user.name
+          blog.author = this.user.userName
           blog.hidden = false
-          blog._id = this.$store.state.blog[this.$store.state.selectIndex]._id
-          const result = await posts.updateBlog(this, blog)
-          if (result.msg === 'success') {
-            this.$store.commit('updateBlog', result.data)
-            this.$parent.itemIndex = 1
-          }
+          blog._id = this.blog[this.blogSelectIndex]._id
+          result = await this.updateBlog(blog)
+          if (result) this.$parent.itemIndex = 1
           console.log(`Update Post is ${result}`)
           //          分割线
         } else if (con === 'Unpublish') {
           blog.author = 'Draft'
           blog.hidden = true
-          blog._id = this.$store.state.blog[this.$store.state.selectIndex]._id
-          const result = await posts.updateBlog(this, blog)
-          if (result.msg === 'success') {
-            this.$store.commit('updateBlog', result.data)
-          }
+          blog._id = this.blog[this.blogSelectIndex]._id
+          result = await this.updateBlog(blog)
           console.log(`Unpublish is ${result}`)
           //          分割线
         } else if (con === 'Delect Post') {
-          let id = {_id: [this.$store.state.blog[this.$store.state.selectIndex]._id]}
-          const result = await posts.removeBlog(this, id)
-          if (result === 'success') {
-            this.$store.commit('removeBlog', this.$store.state.selectIndex)
+          blog._id = this.blog[this.blogSelectIndex]._id
+          const result = await this.removeBlog({
+            id: blog._id,
+            index: this.blogSelectIndex
+          })
+          if (result) {
+            await this.changeAdminIndex(1)
             this.$router.push({name: 'Editor', query: {type: 'Content'}})
-            this.$store.commit('changAdminIndex', 1)
           }
           console.log(`Delect Post is ${result}`)
         }

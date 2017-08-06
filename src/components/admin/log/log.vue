@@ -38,7 +38,7 @@
   @import "log.scss";
 </style>
 <script>
-  import posts from '../../../post/post' // 数据库取数据
+  import { mapGetters, mapActions } from 'vuex'
   export default{
     data () {
       return {
@@ -47,14 +47,18 @@
       }
     },
     computed: {
-      logs () {
-        return this.$store.state.log
-      },
+      ...mapGetters({
+        logs: 'logs'
+      }),
       selectLog () {
         return this.logs[this.selectLogIndex].data || []
       }
     },
     methods: {
+      ...mapActions([
+        'addLogData',
+        'removeLog'
+      ]),
       changeLogIndex (index) {
         this.selectLogIndex = index
       },
@@ -63,26 +67,17 @@
           return {value: log.value}
         })
         arr.push({value: this.newLog})
-        var result = await posts.addLog(this, {data: arr})
-        if (result.msg === 'success') {
-          this.$store.commit('addLog', {
-            selectIndex: this.selectLogIndex,
-            data: result.data.data
-          })
-        }
+        await this.addLogData({
+          data: arr,
+          index: this.selectLogIndex
+        })
         this.newLog = ''
       },
       async delectLog (index) {
-        this.$store.commit('removeLog', {
-          selectIndex: this.selectLogIndex,
-          logIndex: index
+        await this.removeLog({
+          selectLogIndex: this.selectLogIndex,
+          LogIndex: index
         })
-        let removeId = this.logs[this.selectLogIndex]._id
-        let result = await posts.removeLog(this, {
-          _id: removeId,
-          data: this.selectLog
-        })
-        console.log(result)
       }
     }
   }

@@ -34,17 +34,36 @@ const actions = {
     const updateBlog = await posts.getBlog(blogId)
     commit(types.RECEIVE_BLOG, { updateBlog })
   },
-  async changBlogIndex ({ commit }, Index) {
+  async changeBlogIndex ({ commit }, Index) {
     commit(types.CHANGE_BLOGSELECTINDEX, Index)
   },
   async addBlog ({ commit }, NewBlog) {
-    commit(types.ADD_BLOG, NewBlog)
+    const result = await posts.addBlog(NewBlog)
+    if (result.msg === 'success') {
+      commit(types.ADD_BLOG, result)
+      return result.msg
+    }
+    return 'error'
   },
   async updateBlog ({ commit }, UpdateBlog) {
-    commit(types.UPDATE_BLOG, UpdateBlog)
+    const result = await posts.updateBlog(UpdateBlog)
+    if (result.msg === 'success') {
+      commit(types.UPDATE_BLOG, result)
+      return result.msg
+    }
+    return 'error'
   },
-  async removeBlog ({commit}, Index) {
-    commit(types.REMOVE_BLOG, Index)
+  async removeBlog ({ commit }, { id, index }) {
+    const result = await posts.removeBlog({_id: [ id ]})
+    if (result === 'success') {
+      commit(types.REMOVE_BLOG, index)
+      return result
+    }
+    return 'error'
+  },
+  async changeBlogMeta ({ commit, state }, Meta) {
+    commit(types.CHANGE_BLOGMETA, Meta)
+    await posts.updateBlog(state.blogs.data[Meta.Index])
   }
 }
 
@@ -74,17 +93,17 @@ const mutations = {
   [types.CHANGE_BLOGSELECTINDEX] (state, Index) {
     state.blogs.selectIndex = Index
   },
-  [types.ADD_BLOG] (state, NewBlog) {
+  [types.ADD_BLOG] (state, { data }) {
     // 先重写Vuex  以后改成Vue.set 或 state.obj = { ...state.obj, newProp: 123}
-    state.blogs.data.push(NewBlog)
+    state.blogs.data.push(data)
     state.blogs.selectIndex += 1
   },
-  [types.UPDATE_BLOG] (state, UpdateBlog) {
-    state.blogs.data[state.blogs.selectIndex] = UpdateBlog
+  [types.UPDATE_BLOG] (state, { data }) {
+    state.blogs.data[state.blogs.selectIndex] = data
   },
   [types.REMOVE_BLOG] (state, Index) {
-    if (state.blogs[Index]) {
-      state.blogs.splice(Index, 1)
+    if (state.blogs.data[Index]) {
+      state.blogs.data.splice(Index, 1)
       state.blogs.selectIndex = 0
     } else {
       console.log(`removeBlog error is blog[index] undefined`)

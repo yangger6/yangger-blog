@@ -11,8 +11,8 @@
 </template>
 <script>
   import store from './vuex/index'
-  import { mapState, mapMutations, mapActions } from 'vuex' // vuex 工具
-//  import localStroe from './localStore' // 本地储存
+  import { mapGetters, mapMutations, mapActions } from 'vuex' // vuex 工具
+  import localStroe from './localStore' // 本地储存
   //  import posts from '@/unit/post' // 数据库取数据
   //  import store from '@/vuex/index'
   //  import canvas from './components/tools/canvas/canvas.vue' // 引用canvas
@@ -36,14 +36,16 @@
         'getLogs'
       ])
     },
-    computed: mapState({
-      user: 'user',
-      blog: 'blog',
-      admin: 'admin',
-      blogSelectIndex: 'blogSelectIndex',
-      headerShow: 'headerShow',
-      log: 'log'
-    }),
+    computed: {
+      ...mapGetters({
+        user: 'user',
+        blog: 'blogs',
+        selectIndex: 'blogSelectIndex',
+        admin: 'admin',
+        headerShow: 'headerShow',
+        log: 'logs'
+      })
+    },
     async created () {
       if (this.$route.path === '/') {
         this.changHeaderShow(false)
@@ -54,6 +56,16 @@
       await this.getLogs()
     },
     watch: {
+      selectIndex () {
+        localStroe.save({
+          user: this.user,
+          blog: this.blog,
+          selectIndex: this.selectIndex,
+          admin: this.admin,
+          headerShow: this.headerShow,
+          log: this.log
+        })
+      }
     },
     components: {
 //        'v-canvas': canvas,

@@ -18,10 +18,13 @@
     },
     methods: {
       ...mapActions([
-        'getBlog'
+        'getBlog',
+        'changeBlogIndex'
       ]),
       async fetchData () {
-        this.getBlog()
+        const blogSelectIndex = this.$route.params.index || 0
+        await this.changeBlogIndex(blogSelectIndex)
+        await this.getBlog()
       }
     },
     computed: {

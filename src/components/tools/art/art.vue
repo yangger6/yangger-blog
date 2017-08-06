@@ -47,13 +47,13 @@
     },
     methods: {
       ...mapActions([
-        'changBlogIndex'
+        'changeBlogIndex'
       ]),
     /**
      * 设置选中的文章序号 再路由
      */
       route () {
-        this.changBlogIndex(this.index)
+        this.changeBlogIndex(this.index)
         this.$router.push({name: 'Blog', params: {index: this.index}})
       }
     }

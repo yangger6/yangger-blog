@@ -6,7 +6,7 @@
   @import "metaIcon.scss";
 </style>
 <script>
-  import posts from '../../../post/post'
+  import { mapActions } from 'vuex'
   export default{
     data () {
       return {
@@ -29,16 +29,18 @@
       index: Number
     },
     methods: {
+      ...mapActions([
+        'changeBlogMeta'
+      ]),
       changeMeta () {
         let opt = 1
         if (this.isClick) opt = -1
-        this.$store.commit('changeBlogMeta', {
-          index: this.index,
-          meta: this.meta,
-          opt: opt
+        this.changeBlogMeta({
+          Index: this.index,
+          Meta: this.meta,
+          Opt: opt
         })
         this.isClick = !this.isClick
-        posts.updateBlog(this, this.$store.state.blog[this.index])
       }
     },
     computed: {

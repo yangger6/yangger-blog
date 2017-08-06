@@ -26,6 +26,23 @@ const actions = {
       return index < 5 ? { ...logDay, show: true } : { ...logDay, show: false }
     })
     commit(types.RECEIVE_LOGS, { Logs })
+  },
+  async addLogData ({ commit }, { data, index }) {
+    var result = await posts.addLog({data: data})
+    if (result.msg === 'success') {
+      commit(types.ADD_LOGDATA, {
+        data: result.data,
+        selectLogIndex: index
+      })
+    }
+  },
+  async removeLog ({ commit, state }, Index) {
+    commit(types.REMOVE_LOG, Index)
+    let result = await posts.removeLog({
+      _id: state.logs[Index.selectLogIndex]._id,
+      data: state.logs[Index.selectLogIndex].data
+    })
+    console.log(`remove log is ${result}`)
   }
 }
 
@@ -50,20 +67,20 @@ const mutations = {
   /**
    * 删除某天的某条日志
    * @param state
-   * @param SelectIndex 那一天的Index
+   * @param selectLogIndex 那一天的Index
    * @param LogIndex 那一天的那一条日志的Index
    */
-  [types.REMOVE_LOG] (state, { SelectIndex, LogIndex }) {
-    state.logs[SelectIndex].data.splice([LogIndex], 1)
+  [types.REMOVE_LOG] (state, { selectLogIndex, LogIndex }) {
+    state.logs[selectLogIndex].data.splice([LogIndex], 1)
   },
   /**
    * 往某天添加某条日志
    * @param state
-   * @param SelectIndex 那一天的index
-   * @param Data 日志的数据
+   * @param selectLogIndex 那一天的index
+   * @param data 日志的数据
    */
-  [types.ADD_LOGDATA] (state, {SelectIndex, Data}) {
-    state.logs[SelectIndex].data = Data
+  [types.ADD_LOGDATA] (state, {selectLogIndex, data}) {
+    state.logs[selectLogIndex].data = data.data
   },
   [types.CHANGE_LOGSTATE] (state, { _id, show }) {
     state.logs.find(log => log._id === _id).show = !show

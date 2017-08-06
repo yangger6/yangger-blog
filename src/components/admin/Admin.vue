@@ -32,20 +32,24 @@
 </style>
 <script>
   import editor from './editor/editor.vue'
+  import { mapGetters, mapActions } from 'vuex'
   export default{
     data () {
       return {
-        items: this.$store.state.admin.items,
         itemIndex: 0
       }
     },
     methods: {
-      changeItem (index) {
+      ...mapActions([
+        'changeAdminIndex',
+        'changeAdminBlog'
+      ]),
+      async changeItem (index) {
         this.itemIndex = index
         switch (index) {
           case 0:case 1:
-            this.$store.commit('changAdminIndex', index)
-            this.$store.commit('changAdminBlog', {
+            await this.changeAdminIndex(index)
+            await this.changeAdminBlog({
               title: '',
               body: '',
               markdown: '',
@@ -61,14 +65,16 @@
       }
     },
     computed: {
-      selectIndex () {
-        return this.$store.state.admin.selectIndex
-      },
+      ...mapGetters({
+        items: 'adminItems',
+        adminSelectIndex: 'adminSelectIndex',
+        user: 'user'
+      }),
       isLogin () {
-        return this.$store.state.user.name !== ''
+        return this.user.userName !== undefined
       },
       type () {
-        return this.$store.state.admin.items[this.$store.state.admin.selectIndex].type
+        return this.items[this.adminSelectIndex].type
       }
     },
     created () {

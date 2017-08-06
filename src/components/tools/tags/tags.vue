@@ -8,6 +8,7 @@
   @import "tags.scss";
 </style>
 <script>
+  import { mapActions } from 'vuex'
   export default{
     data () {
       return {
@@ -19,11 +20,15 @@
       tags: Array
     },
     methods: {
-      remove (index) {
-        this.$store.commit('removeAdminBlogTag', index)
+      ...mapActions([
+        'addAdminBlogTag',
+        'removeAdminBlogTag'
+      ]),
+      async remove (index) {
+        await this.removeAdminBlogTag(index)
       },
-      addTag () {
-        this.$store.commit('addAdminBlogTag', this.tag)
+      async addTag () {
+        await this.addAdminBlogTag(this.tag)
         this.tag = ''
       }
     }

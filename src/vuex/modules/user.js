@@ -5,7 +5,7 @@ import posts from '@/unit/posts'
 import * as types from '../mutation-types'
 // initial state
 const state = {
-  user: []
+  user: {}
 }
 // getters
 const getters = {
@@ -14,9 +14,20 @@ const getters = {
 
 // actions
 const actions = {
-  async updateUser ({ commit }, Login) {
-    const UserInfo = await posts.userLogin(Login)
-    commit(types.UPDATE_USER, { UserInfo })
+  async userLogin ({ commit }, Login) {
+    const result = await posts.userLogin(Login)
+    if (result.msg === 'success') {
+      commit(types.UPDATE_USER, result)
+      console.log(`Login is ${result.msg}`)
+      return true
+    } else {
+      if (result.data) {
+        console.log(`Login error is :${result.data}`)
+      } else {
+        result.map(err => console.log(err.errorMessage))
+      }
+      return false
+    }
   }
 }
 
@@ -27,8 +38,8 @@ const mutations = {
    * @param state
    * @param UserInfo 用户信息
    */
-  [types.UPDATE_USER] (state, { UserInfo }) {
-    state.user = UserInfo
+  [types.UPDATE_USER] (state, { data }) {
+    state.user = data
   }
 }
 export default {
