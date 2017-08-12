@@ -108,4 +108,11 @@
     transform: translate3d(-50%, -50%, 0);
     height: 103%;
   }
+  > img{
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

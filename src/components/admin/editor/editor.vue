@@ -51,7 +51,7 @@
 </template>
 <style rel="stylesheet/scss" lang="scss">
   @import "editor.scss";
-  @import "../../markdown/markdown.scss";
+  @import "../../tools/markdown/markdown.scss";
 </style>
 <script>
   import {markdown} from 'markdown'

@@ -62,5 +62,5 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style rel="stylesheet/scss" lang="scss">
   @import "art.scss";
-  @import '../../markdown/markdown.scss';
+  @import '../markdown/markdown.scss';
 </style>

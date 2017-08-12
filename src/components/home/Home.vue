@@ -12,7 +12,8 @@
         </div>
       </div>
     </div>
-    <video src="/static/home.mp4" autoplay="autoplay"></video>
+    <img src="/static/index.jpg" alt="">
+    <!--<video src="/static/home.mp4" autoplay="autoplay"></video>-->
   </div>
 </template>
 <script>

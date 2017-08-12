@@ -54,12 +54,27 @@ const mutations = {
   [types.CHANGE_ADMINSELECTINDEX] (state, Index) {
     state.admin.selectIndex = Index
   },
+  /**
+   * 修改当前选中的博客
+   * @param state
+   * @param Blog 传进来的博客
+   */
   [types.CHANGE_ADMINBLOG] (state, Blog) {
     state.admin.blog = Blog
   },
+  /**
+   * 增加博客的tag
+   * @param state
+   * @param Tag
+   */
   [types.ADD_ADMINBLOGTAG] (state, Tag) {
     state.admin.blog.tags.push(Tag)
   },
+  /**
+   * 移除博客的Tag
+   * @param state
+   * @param Index
+   */
   [types.REMOVE_ADMINBLOGTAG] (state, Index) {
     if (state.admin.blog.tags[Index]) {
       state.admin.blog.tags.splice(Index, 1)

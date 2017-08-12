@@ -8,6 +8,10 @@
   .Home .title h1 span {
     font-size: 8.5rem
   }
+  .Home > img {
+    height: 100%;
+    width: unset;
+  }
 }
 
 @media only screen and (max-width: 1155px) {
