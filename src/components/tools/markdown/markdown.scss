@@ -72,11 +72,13 @@
   p{
     margin: 0 0 1.7em;
   }
-  ul,li{
+  ul{
     display: block;
-    list-style-type: disc;
     -webkit-padding-start: 20px;
-    ul{
+    li{
+      list-style-type: disc;
+    }
+    ul li{
       list-style-type: circle;
     }
   }
