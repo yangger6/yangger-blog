@@ -23,6 +23,7 @@
     padding-top: 5%;
     text-align: center;
     h1{
+      font-weight: normal;
       div{
         vertical-align: top;
         width: 50px;
@@ -53,6 +54,7 @@
       width: 300px;
       margin: 70px auto 0;
       box-sizing: border-box;
+      display: block;
       a{
         font-size: 1.1rem;
         line-height: 47px;
