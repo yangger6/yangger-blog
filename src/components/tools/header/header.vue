@@ -43,11 +43,13 @@
       routeNav () {
         let route = this.$route
         if (route.path.match(/admin/) !== null) {
+          this.toggleShow = false
           this.changHeaderShow(false)
         } else if (route.path !== '/') {
           this.toggleShow = false
           this.changHeaderShow(true)
         } else if (route.path === '/') {
+          this.toggleShow = true
           this.changHeaderShow(false)
         }
       }
