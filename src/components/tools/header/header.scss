@@ -26,6 +26,11 @@ header{
           outline: none;
           overflow: hidden;
           text-decoration: none;
+          &.selected{
+            &:after{
+              width: 100%;
+            }
+          }
           &:hover:after{
             width: 100%;
           }

@@ -8,7 +8,13 @@
           <div></div>
         </h1>
         <div class="btn">
-          <router-link to="/posts"><span>VIEW THIS BLOG</span></router-link>
+          <router-link to="/posts">
+            <span>CLIKE INTO</span>
+            <div class="line line-top"></div>
+            <div class="line line-bottom"></div>
+            <div class="line line-left"></div>
+            <div class="line line-right"></div>
+          </router-link>
         </div>
       </div>
     </div>

@@ -52,6 +52,7 @@
     .btn{
       width: 300px;
       margin: 70px auto 0;
+      box-sizing: border-box;
       a{
         font-size: 1.1rem;
         line-height: 47px;
@@ -64,6 +65,37 @@
         text-align: center;
         text-decoration: none;
         margin: 0 auto;
+        .line{
+          background: #fff;
+          z-index: 10;
+          position: absolute;
+          transition: all .4s ease-in-out;
+        }
+        .line-top{
+          height: 2px;
+          width: 0;
+          top: -1px;
+          left: -100%;
+        }
+        .line-bottom{
+          height: 2px;
+          width: 0;
+          bottom: -1px;
+          z-index: 10;
+          right: -100%;
+        }
+        .line-left{
+          width: 2px;
+          height: 0;
+          bottom: -100%;
+          left: -1px;
+        }
+        .line-right{
+          width: 1.5px;
+          height: 0;
+          top: -100%;
+          right: -2px;
+        }
         span{
           transition: color .4s ease;
           position: relative;
@@ -83,13 +115,29 @@
           span{
             color: #2b2b2b;
           }
+          .line-top{
+            width: 100%;
+            left: 0;
+          }
+          .line-bottom{
+            width: 100%;
+            right: 0;
+          }
+          .line-left{
+            height: 100%;
+            bottom: 0;
+          }
+          .line-right{
+            height: 100%;
+            top: 0;
+          }
         }
         &:after{
           content: "";
           position: absolute;
           top: 0;
           left: 0;
-          width: 100%;
+          width: calc(100% + 1px);
           height: 100%;
           background-color: #2b2b2b;
           transform: scale(0.95);

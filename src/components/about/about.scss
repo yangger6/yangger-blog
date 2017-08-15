@@ -90,8 +90,16 @@
       width: 100%;
       display: block;
       transition: background .3s ease;
+      &.openLog{
+        &:before{
+          content: '> ';
+        }
+      }
       &:hover {
         background: #cecbcb;
+      }
+      &:before{
+        content: '> ';
       }
     }
     ul{

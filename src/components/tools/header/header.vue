@@ -2,10 +2,10 @@
   <header :class="{open: openNav}">
     <top-bar :size="size" class="head-list">
       <list>
-        <li><router-link to="/">首页</router-link></li>
-        <li><router-link to="/posts">文章</router-link></li>
+        <li><router-link to="/" :class="{selected: nowRoute === '/'}">首页</router-link></li>
+        <li><router-link to="/posts" :class="{selected: nowRoute === '/posts'}">文章</router-link></li>
         <li><a href="https://github.com/yangger6">Github</a></li>
-        <li><router-link to='/about'>关于我</router-link></li>
+        <li><router-link to='/about' :class="{selected: nowRoute === '/about'}">关于我</router-link></li>
       </list>
     </top-bar>
     <div class="header-toggle" @click="changeNav" v-show="toggleShow">
@@ -28,7 +28,10 @@
     computed: {
       ...mapGetters({
         openNav: 'headerShow'
-      })
+      }),
+      nowRoute () {
+        return this.$route.fullPath
+      }
     },
     methods: {
       ...mapMutations({

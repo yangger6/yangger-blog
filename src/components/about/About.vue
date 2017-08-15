@@ -23,8 +23,8 @@
     <div class="log">
       <h2>日日日日日志==</h2>
       <div class="log-item" v-for="(log, index) in logs" :key="log._id">
-        <a @click="changeLogState(log)">{{log.date}}</a>
-        <list v-if="log.show">
+        <a @click="changeLogState(log)" :class="{openLog: log.show}">{{log.date}}</a>
+        <list v-if="log.show" >
           <li v-for="text in log.data" :key="text._id">{{text.value}}</li>
         </list>
       </div>

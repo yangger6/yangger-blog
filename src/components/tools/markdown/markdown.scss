@@ -1,14 +1,20 @@
+@media only screen and (max-width: 540px) {
+  .markdown ul {
+    display: block;
+    -webkit-padding-start: 20px;
+  }
+}
 .markdown{
   position: relative;
   color: #242628;
   text-decoration: none;
-  font-size: 80%;
+  font-size: 90%;
   .art-title{
     text-align: center;
   }
   h1,h2,h3,h4,h5,h6 {
     font-size: 62.5%;
-    margin: 0 0 .3em;
+    margin: .3em 0 .3em;
     color: #242628;
     line-height: 1.15em;
     text-rendering: optimizeLegibility
@@ -74,9 +80,10 @@
   }
   ul{
     display: block;
-    -webkit-padding-start: 20px;
+    -webkit-padding-start: 40px;
     li{
       list-style-type: disc;
+      padding: .1em;
     }
     ul li{
       list-style-type: circle;
