@@ -108,12 +108,12 @@
           letter-spacing: .4em;
           text-indent: .4em;
         }
-        &:hover:after{
+        html:not(.has-touch) &:hover:after{
           background-color: rgba(255,255,255,0.8);
           transform: scale(1);
           opacity: 1;
         }
-        &:hover{
+        html:not(.has-touch) &:hover{
           span{
             color: #2b2b2b;
           }

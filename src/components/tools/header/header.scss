@@ -31,7 +31,7 @@ header{
               width: 100%;
             }
           }
-          &:hover:after{
+          html:not(.has-touch) &:hover:after{
             width: 100%;
           }
           &:after{

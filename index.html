@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans-CN">
+<html lang="zh-Hans-CN" id="html">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta http-equiv="Cache-Control" content="no-siteapp" />
     <link rel="shortcut icon" type="image/x-icon" href="./static/logo.ico" media="screen" />
-    <meta name ="viewport" content ="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"> <!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 -->
+    <meta name ="viewport" content ="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <!-- `width=device-width` 会导致 iPhone 5 添加到主屏后以 WebApp 全屏模式打开页面时出现黑边 -->
     <title>blog</title>
   </head>
   <body>
@@ -25,5 +26,10 @@
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-104502463-1', 'auto');
     ga('send', 'pageview');
+  </script>
+  <script>
+    if (navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)) {
+      document.querySelector('html').className = 'has-touch'
+    }
   </script>
 </html>
