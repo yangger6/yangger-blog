@@ -4,7 +4,7 @@
     <main>
       <router-view></router-view>
     </main>
-    <footer v-if="headerShow">
+    <footer v-if="'/posts' === $route.fullPath">
       <!--<v-canvas></v-canvas>-->
       Copyright ©2017 yangger by Vue and Koa 粤ICP备17084298号-1
     </footer>
