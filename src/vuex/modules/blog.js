@@ -32,6 +32,7 @@ const actions = {
   async getBlog ({ commit, state }, blogId) {
     const updateBlog = await posts.getBlog(blogId)
     commit(types.RECEIVE_BLOG, { updateBlog })
+    return updateBlog
   },
   async changeBlogIndex ({ commit }, Index) {
     commit(types.CHANGE_BLOGSELECTINDEX, Index)

@@ -1,7 +1,7 @@
 <template>
   <div class='Blog'>
     <article>
-      <art :blog="blog" size = 'art-context'></art>
+      <art :blog="newBlog || blog" size = 'art-context'></art>
     </article>
   </div>
 </template>
@@ -11,6 +11,7 @@
     name: 'Blog',
     data () {
       return {
+        newBlog: false
       }
     },
     async created () {
@@ -19,20 +20,13 @@
     methods: {
       ...mapActions([
         'getBlog',
-        'changeBlogIndex',
         'changeBlogIndexById'
       ]),
       async fetchData () {
-//        const blogId = this.$route.params.index || 0
-//        var blogIndex = null
-//        this.blogs.map(({postId}, i) => {
-//          if (postId === Number(blogId)) {
-//            blogIndex = i
-//          }
-//        })
-//        await this.changeBlogIndex(blogIndex)
-//        await this.getBlog(blogId)
-        const blogId = this.$route.params.index || 0
+        const blogId = this.$route.params.blogId || 0
+        if (this.blogs.length === 0) {
+          this.newBlog = await this.getBlog(blogId)
+        }
         await this.changeBlogIndexById(blogId)
         await this.getBlog(blogId)
       }

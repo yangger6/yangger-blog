@@ -1,6 +1,6 @@
 <template>
   <div class='Blogs'>
-    <art v-for = "(blog, index) in blogs" :blog = blog :tags= blog.tags size = 'art-item' :key='blog._id' :id='blog._id' :index="index"></art>
+    <art v-for = "(blog, index) in blogs" :blog = blog :tags= blog.tags size = 'art-item' :key='blog._id' :id='blog.blogId' :index="index"></art>
   </div>
 </template>
 <script>

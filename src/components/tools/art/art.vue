@@ -34,7 +34,7 @@
       blog: Object,
       tags: Array,  // 文章的类型
       index: Number,  //  文章的序号
-      id: String    // 文章的id
+      id: Number    // 文章的id
     },
     data () {
       return {
@@ -47,14 +47,14 @@
     },
     methods: {
       ...mapActions([
-        'changeBlogIndex'
+        'changeBlogIndexById'
       ]),
     /**
      * 设置选中的文章序号 再路由
      */
       route () {
-        this.changeBlogIndex(this.index)
-        this.$router.push({name: 'Blog', params: {index: this.index}})
+        this.changeBlogIndexById(this.id)
+        this.$router.push({name: 'Blog', params: {blogId: this.id}})
       }
     }
   }
