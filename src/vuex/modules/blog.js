@@ -29,13 +29,15 @@ const actions = {
     const Blogs = await posts.getBlogs()
     commit(types.RECEIVE_BLOGS, { Blogs })
   },
-  async getBlog ({ commit, state }) {
-    const blogId = state.blogs.data[state.blogs.selectIndex]._id
+  async getBlog ({ commit, state }, blogId) {
     const updateBlog = await posts.getBlog(blogId)
     commit(types.RECEIVE_BLOG, { updateBlog })
   },
   async changeBlogIndex ({ commit }, Index) {
     commit(types.CHANGE_BLOGSELECTINDEX, Index)
+  },
+  async changeBlogIndexById ({ commit }, blogId) {
+    commit(types.CHANGE_BLOGSELECTINDEXBYID, blogId)
   },
   async addBlog ({ commit }, NewBlog) {
     const result = await posts.addBlog(NewBlog)
@@ -92,6 +94,10 @@ const mutations = {
    */
   [types.CHANGE_BLOGSELECTINDEX] (state, Index) {
     state.blogs.selectIndex = Index
+  },
+  [types.CHANGE_BLOGSELECTINDEXBYID] (state, Id) {
+    var index = state.blogs.data.findIndex(({blogId}) => blogId === Number(Id))
+    state.blogs.selectIndex = index
   },
   [types.ADD_BLOG] (state, { data }) {
     // 先重写Vuex  以后改成Vue.set 或 state.obj = { ...state.obj, newProp: 123}

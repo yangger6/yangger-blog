@@ -18,7 +18,7 @@ export default class posts {
   }
   static async getBlog (id) {
     try {
-      const res = await axios.post(`${url}/blog/select`, {key: 'id', value: id})
+      const res = await axios.post(`${url}/blog/select`, {key: 'blogId', value: id})
       if (res.statusText === 'OK' && res.status === 200) {
         return res.data
       }

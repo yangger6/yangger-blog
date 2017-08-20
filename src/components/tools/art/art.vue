@@ -20,7 +20,7 @@
   </div>
   <div class="art-context markdown" v-else>
     <header>
-      <h2 class="art-title">{{blog.title}}</h2>
+      <h2 class="art-title">{{blog && blog.title}}</h2>
     </header>
     <div v-html="html"></div>
   </div>
@@ -42,7 +42,7 @@
     },
     computed: {
       html () {
-        return this.blog.markdown
+        if (this.blog) return this.blog.markdown
       }
     },
     methods: {

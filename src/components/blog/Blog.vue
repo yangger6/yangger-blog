@@ -19,16 +19,27 @@
     methods: {
       ...mapActions([
         'getBlog',
-        'changeBlogIndex'
+        'changeBlogIndex',
+        'changeBlogIndexById'
       ]),
       async fetchData () {
-        const blogSelectIndex = this.$route.params.index || 0
-        await this.changeBlogIndex(blogSelectIndex)
-        await this.getBlog()
+//        const blogId = this.$route.params.index || 0
+//        var blogIndex = null
+//        this.blogs.map(({postId}, i) => {
+//          if (postId === Number(blogId)) {
+//            blogIndex = i
+//          }
+//        })
+//        await this.changeBlogIndex(blogIndex)
+//        await this.getBlog(blogId)
+        const blogId = this.$route.params.index || 0
+        await this.changeBlogIndexById(blogId)
+        await this.getBlog(blogId)
       }
     },
     computed: {
       ...mapGetters({
+        blogs: 'blogs',
         blog: 'selectBlog'
       })
     }
