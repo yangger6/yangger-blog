@@ -33,6 +33,9 @@
         return this.$route.fullPath
       }
     },
+    mounted () {
+      this.routeNav()
+    },
     methods: {
       ...mapMutations({
         changHeaderShow: 'CHANGE_HEADERSHOW'
