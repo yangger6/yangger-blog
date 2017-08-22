@@ -1,7 +1,8 @@
 <template>
   <div class='Blog'>
     <article>
-      <art :blog="newBlog || blog" size = 'art-context'></art>
+      <p v-if="isLoading">Loading...</p>
+      <art v-if="!isLoading" :blog="newBlog" size = 'art-context'></art>
     </article>
   </div>
 </template>
@@ -11,7 +12,8 @@
     name: 'Blog',
     data () {
       return {
-        newBlog: false
+        newBlog: false,
+        isLoading: true
       }
     },
     async created () {
@@ -28,7 +30,8 @@
           this.newBlog = await this.getBlog(blogId)
         }
         await this.changeBlogIndexById(blogId)
-        await this.getBlog(blogId)
+        this.newBlog = await this.getBlog(blogId)
+        this.isLoading = false
       }
     },
     computed: {

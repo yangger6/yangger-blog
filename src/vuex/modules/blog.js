@@ -86,7 +86,9 @@ const mutations = {
    * @param Blog 更新后的数据
    */
   [types.RECEIVE_BLOG] (state, { updateBlog }) {
-    state.blogs.data[state.blogs.selectIndex] = updateBlog
+    if (state.blogs.length > 0) {
+      state.blogs.data[state.blogs.selectIndex] = updateBlog
+    }
   },
   /**
    * 修改当前选中的博客
