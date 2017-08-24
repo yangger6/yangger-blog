@@ -29,9 +29,11 @@
         if (this.blogs.length === 0) {
           this.newBlog = await this.getBlog(blogId)
         }
-        await this.changeBlogIndexById(blogId)
-        this.newBlog = await this.getBlog(blogId)
-        this.isLoading = false
+        if (!this.newBlog) {
+          await this.changeBlogIndexById(blogId)
+          this.newBlog = await this.getBlog(blogId)
+          this.isLoading = false
+        }
       }
     },
     computed: {

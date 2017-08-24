@@ -1,5 +1,10 @@
 <template>
   <div class='Home'>
+    <div class="bg-line">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <div class="Home-con">
       <div class="title">
         <h1 class="name">

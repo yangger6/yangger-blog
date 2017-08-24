@@ -31,19 +31,15 @@
     @keyframes move{
       10%{
         content: 'a';
-        color: red;
       }
       20%{
         content: 'R';
-        color: blue;
       }
       30%{
         content: 'Y';
-        color: white;
       }
       100%{
         content: 'Y';
-        color: white;
       }
     }
   }
@@ -53,23 +49,18 @@
     @keyframes move2{
       10%{
         content: '!';
-        color: yellow;
       }
       20%{
         content: 'b';
-        color: purple;
       }
       30%{
         content: '3';
-        color: orange;
       }
       40%{
         content: 'A';
-        color: white;
       }
       100%{
         content: 'A';
-        color: white;
       }
     }
   }
@@ -79,27 +70,21 @@
     @keyframes move3{
       10%{
         content: '@';
-        color: yellow;
       }
       20%{
         content: 'G';
-        color: purple;
       }
       30%{
         content: 'E';
-        color: orange;
       }
       40%{
         content: 's';
-        color: teal;
       }
       50%{
         content: 'N';
-        color: white;
       }
       100%{
         content: 'N';
-        color: white;
       }
     }
   }
@@ -109,31 +94,24 @@
     @keyframes move4{
       10%{
         content: 'X';
-        color: green;
       }
       20%{
         content: '&';
-        color: yellow;
       }
       30%{
         content: 'x';
-        color: red;
       }
       40%{
         content: 's';
-        color: teal;
       }
       50%{
         content: '?';
-        color: pink;
       }
       60%{
         content: 'G';
-        color: white;
       }
       100%{
         content: 'G';
-        color: white;
       }
     }
   }
@@ -143,35 +121,27 @@
     @keyframes move5{
       10%{
         content: '?';
-        color: purple;
       }
       20%{
         content: 'x';
-        color: orange;
       }
       30%{
         content: 'w';
-        color: purple;
       }
       40%{
         content: 'u';
-        color: pink;
       }
       50%{
         content: 'K';
-        color: green;
       }
       60%{
         content: 'v';
-        color: yellow;
       }
       70%{
         content: 'G';
-        color: white;
       }
       100%{
         content: 'G';
-        color: white;
       }
     }
   }
@@ -181,39 +151,30 @@
     @keyframes move6{
       10%{
         content: '*';
-        color: peachpuff;
       }
       20%{
         content: '&';
-        color: red;
       }
       30%{
         content: '#';
-        color: blue;
       }
       40%{
         content: 's';
-        color: green;
       }
       50%{
         content: 'c';
-        color: green;
       }
       60%{
         content: 'v';
-        color: red;
       }
       70%{
         content: 's';
-        color: chartreuse;
       }
       80%{
         content: 'E';
-        color: white;
       }
       100%{
         content: 'E';
-        color: white;
       }
     }
   }
@@ -223,43 +184,33 @@
     @keyframes move7{
       10%{
         content: '(';
-        color: peachpuff;
       }
       20%{
         content: '$';
-        color: red;
       }
       30%{
         content: '^';
-        color: blue;
       }
       40%{
         content: '#';
-        color: green;
       }
       50%{
         content: 's';
-        color: green;
       }
       60%{
         content: 'v';
-        color: red;
       }
       70%{
         content: 'q';
-        color: chartreuse;
       }
       80%{
         content: 'c';
-        color: royalblue;
       }
       90%{
         content: 'R';
-        color: white;
       }
       100%{
         content: 'R';
-        color: white;
       }
     }
   }
