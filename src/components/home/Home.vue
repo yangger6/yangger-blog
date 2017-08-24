@@ -2,9 +2,9 @@
   <div class='Home'>
     <div class="Home-con">
       <div class="title">
-        <h1>
+        <h1 class="name">
           <div></div>
-          <span>YANGGER</span>
+          <span class="font-animate"><a></a><a></a><a></a><a></a><a></a><a></a><a></a></span>
           <div></div>
         </h1>
         <div class="btn">
@@ -37,4 +37,5 @@
 <style scoped rel="stylesheet/scss" lang="scss">
   @import "home.scss";
   @import "media.scss";
+  @import "font.scss";
 </style>

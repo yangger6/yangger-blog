@@ -1,0 +1,267 @@
+.font-animate{
+  a:after{
+    transition: .5s
+  }
+  a:nth-child(1):after{
+    content: 'Y'
+  }
+  a:nth-child(2):after{
+    content: 'A'
+  }
+  a:nth-child(3):after{
+    content: 'N'
+  }
+  a:nth-child(4):after{
+    content: 'G'
+  }
+  a:nth-child(5):after{
+    content: 'G'
+  }
+  a:nth-child(6):after{
+    content: 'E'
+  }
+  a:nth-child(7):after{
+    content: 'R'
+  }
+}
+.name .font-animate {
+  a:nth-child(1):after{
+    animation: move 1s linear 1 forwards;
+    transition: .5s;
+    @keyframes move{
+      10%{
+        content: 'a';
+        color: red;
+      }
+      20%{
+        content: 'R';
+        color: blue;
+      }
+      30%{
+        content: 'Y';
+        color: green;
+      }
+      100%{
+        content: 'Y';
+        color: white;
+      }
+    }
+  }
+  a:nth-child(2):after{
+    animation: move2 1s linear 1 forwards;
+    transition: .5s;
+    @keyframes move2{
+      10%{
+        content: '!';
+        color: yellow;
+      }
+      20%{
+        content: 'b';
+        color: purple;
+      }
+      30%{
+        content: '3';
+        color: orange;
+      }
+      40%{
+        content: 'A';
+        color: white;
+      }
+      100%{
+        content: 'A';
+        color: white;
+      }
+    }
+  }
+  a:nth-child(3):after{
+    animation: move3 1s linear 1 forwards;
+    transition: .5s;
+    @keyframes move3{
+      10%{
+        content: '@';
+        color: yellow;
+      }
+      20%{
+        content: 'G';
+        color: purple;
+      }
+      30%{
+        content: 'E';
+        color: orange;
+      }
+      40%{
+        content: 's';
+        color: teal;
+      }
+      50%{
+        content: 'N';
+        color: peachpuff;
+      }
+      100%{
+        content: 'N';
+        color: white;
+      }
+    }
+  }
+  a:nth-child(4):after{
+    animation: move4 1s linear 1 forwards;
+    transition: .5s;
+    @keyframes move4{
+      10%{
+        content: 'X';
+        color: green;
+      }
+      20%{
+        content: '&';
+        color: yellow;
+      }
+      30%{
+        content: 'x';
+        color: red;
+      }
+      40%{
+        content: 's';
+        color: teal;
+      }
+      50%{
+        content: '?';
+        color: pink;
+      }
+      60%{
+        content: 'G';
+        color: white;
+      }
+      100%{
+        content: 'G';
+        color: white;
+      }
+    }
+  }
+  a:nth-child(5):after{
+    animation: move5 1s linear 1 forwards;
+    transition: .5s;
+    @keyframes move5{
+      10%{
+        content: '?';
+        color: purple;
+      }
+      20%{
+        content: 'x';
+        color: orange;
+      }
+      30%{
+        content: 'w';
+        color: purple;
+      }
+      40%{
+        content: 'u';
+        color: pink;
+      }
+      50%{
+        content: 'K';
+        color: green;
+      }
+      60%{
+        content: 'v';
+        color: yellow;
+      }
+      70%{
+        content: 'G';
+        color: red;
+      }
+      100%{
+        content: 'G';
+        color: white;
+      }
+    }
+  }
+  a:nth-child(6):after{
+    animation: move6 1s linear 1 forwards;
+    transition: .5s;
+    @keyframes move6{
+      10%{
+        content: '*';
+        color: peachpuff;
+      }
+      20%{
+        content: '&';
+        color: red;
+      }
+      30%{
+        content: '#';
+        color: blue;
+      }
+      40%{
+        content: 's';
+        color: green;
+      }
+      50%{
+        content: 'c';
+        color: green;
+      }
+      60%{
+        content: 'v';
+        color: red;
+      }
+      70%{
+        content: 's';
+        color: chartreuse;
+      }
+      80%{
+        content: 'E';
+        color: chocolate;
+      }
+      100%{
+        content: 'E';
+        color: white;
+      }
+    }
+  }
+  a:nth-child(7):after{
+    animation: move7 1s linear 1 forwards;
+    transition: .5s;
+    @keyframes move7{
+      10%{
+        content: '(';
+        color: peachpuff;
+      }
+      20%{
+        content: '$';
+        color: red;
+      }
+      30%{
+        content: '^';
+        color: blue;
+      }
+      40%{
+        content: '#';
+        color: green;
+      }
+      50%{
+        content: 's';
+        color: green;
+      }
+      60%{
+        content: 'v';
+        color: red;
+      }
+      70%{
+        content: 'q';
+        color: chartreuse;
+      }
+      80%{
+        content: 'c';
+        color: royalblue;
+      }
+      90%{
+        content: 'R';
+        color: white;
+      }
+      100%{
+        content: 'R';
+        color: white;
+      }
+    }
+  }
+}
+
