@@ -115,3 +115,139 @@
     }
   }
 }
+
+//line
+$line1-left: 267px;
+$line2-left: 369px;
+$line3-right: 287px;
+.line1-end{
+  width:100px;
+  top:34px;
+  left:183px;
+}
+.line2-end{
+  width: 400px;
+  top: 122px;
+  left: 46px;
+}
+.line3-end{
+  width: 220px;
+  bottom: 76px;
+  right: 100px;
+}
+@media screen and (max-width : 1280px){
+  $line1-left: 227px;
+  $line2-left: 321px;
+  $line3-right: 247px;
+  .Home .bg-line{
+
+    .line1-end{
+      width:100px;
+      top:34px;
+      left:143px;
+    }
+    .line2-end{
+      width: 300px;
+      top: 105px;
+      left: 66px;
+    }
+    .line3-end{
+      width: 220px;
+      bottom: 76px;
+      right: 60px;
+    }
+  }
+}
+
+@media screen and (max-width : 767px){
+  .Home .bg-line{
+    $line1-left: 145px;
+    $line2-left: 188px;
+    $line3-right: 137px;
+    .line1-end{
+      width:100px;
+      top:34px;
+      left:60px;
+    }
+    .line2-end{
+      width: 220px;
+      top: 77px;
+      left: 0;
+    }
+    .line3-end{
+      width: 150px;
+      bottom: 51px;
+      right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width : 479px){
+  .icon-bg .bg-icon-01:before{ left:106px;}
+  .icon-bg .bg-icon-02:before{ left:145px;}
+
+  .icon-bg.active .bg-icon-01:before{ width:80px; top:27px; left:39px; }
+  .icon-bg.active .bg-icon-02:before{ width:150px; top:52px; left:17px; }
+}
+.bg-line{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  span{
+    position: absolute;
+    content: '';
+    display: block;
+    height: 2px;
+    transform: rotate(-45deg);
+    background-color: #fff;
+    z-index: 9;
+  }
+  span:nth-child(1){
+    animation: line 1s ease;
+    width:100px;
+    top:34px;
+    left:183px;
+    @keyframes line {
+      0%{
+        width: 2px;
+        top: -2px;
+        left: $line1-left;
+      }
+      100%{
+        @extend .line1-end;
+      }
+    }
+  }
+  span:nth-child(2){
+    animation: line1 1s ease;
+    width: 400px;
+    top: 122px;
+    left: 46px;
+    @keyframes line1 {
+      0%{
+        width: 2px;
+        top: -2px;
+        left: $line2-left;
+      }
+      100% {
+        @extend .line2-end;
+      }
+    }
+  }
+  span:nth-child(3){
+    animation: line2 1s ease;
+    width: 220px;
+    bottom: 76px;
+    right: 100px;
+    @keyframes line2 {
+      0%{
+        width: 2px;
+        bottom: -2px;
+        right: $line3-right;
+      }
+      100%{
+        @extend .line3-end;
+      }
+    }
+  }
+}
