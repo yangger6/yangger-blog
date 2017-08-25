@@ -1,7 +1,7 @@
 <template>
   <div class='Blog'>
     <article>
-      <p v-if="isLoading">Loading...</p>
+      <p v-if="isLoading" style="color: #fff">Loading...</p>
       <art v-if="!isLoading" :blog="newBlog" size = 'art-context'></art>
     </article>
   </div>

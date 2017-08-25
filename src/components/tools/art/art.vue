@@ -19,15 +19,16 @@
     </footer>
   </div>
   <div class="art-context markdown" v-else>
-    <header>
+    <div class="bg-line" :style="{ height: headerHeight }"></div>
+    <header ref="header">
       <h1>{{blog && blog.title}}</h1>
       <div class="art-author">
         <a class="avatar-push">
           <img src="/static/head.png" alt="" width="20" height="20">
         </a>
-        <a href="" class="author-link">{{blog&& blog.author}}</a>
+        <router-link to='/about' class="author-link">{{blog&& blog.author}}</router-link>
         <span>|</span>
-        <a href="" class="author-link">{{blog&& blog.author}}'s Posts</a>
+        <router-link to='/posts' class="author-link">{{blog&& blog.author}}'s Posts</router-link>
         <span>|</span>
         Tags:
         <a v-for="tag in blog.tags" href="#" class="author-link tag">{{tag}}</a>
@@ -61,7 +62,11 @@
     },
     data () {
       return {
+        headerHeight: '0px'
       }
+    },
+    mounted () {
+      this.headerHeight = (this.$refs.header.offsetHeight + 150) + 'px'
     },
     computed: {
       html () {
