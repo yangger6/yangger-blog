@@ -30,17 +30,21 @@
     },
     methods: {
       ...mapActions([
-        'changeBlogMeta'
+        'changeBlogMeta',
+        'isLogin'
       ]),
-      changeMeta () {
-        let opt = 1
-        if (this.isClick) opt = -1
-        this.changeBlogMeta({
-          Index: this.index,
-          Meta: this.meta,
-          Opt: opt
-        })
-        this.isClick = !this.isClick
+      async changeMeta () {
+        const userLogin = await this.isLogin()
+        if (userLogin) {
+          let opt = 1
+          if (this.isClick) opt = -1
+          this.changeBlogMeta({
+            Index: this.index,
+            Meta: this.meta,
+            Opt: opt
+          })
+          this.isClick = !this.isClick
+        }
       }
     },
     computed: {

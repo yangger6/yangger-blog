@@ -45,14 +45,13 @@
 <style scoped rel="stylesheet/scss" lang="scss">
   .Blog {
     padding-top: 50px;
+    background: #1e1e1e;
   }
   article{
-    position: relative;
-    width: 80%;
-    max-width: 710px;
+    width: 90%;
+    max-width: 810px;
     margin: 4rem auto;
     padding-bottom: 4rem;
-    border-bottom: #EBF2F6 1px solid;
     word-wrap: break-word;
   }
 </style>

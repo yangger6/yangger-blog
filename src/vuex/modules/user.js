@@ -28,6 +28,9 @@ const actions = {
       }
       return false
     }
+  },
+  async isLogin ({ commit }, Login) {
+    return false
   }
 }
 

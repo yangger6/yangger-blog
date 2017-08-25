@@ -48,13 +48,20 @@
   }
   a {
     color: #5ba4e5;
-    text-decoration: underline
+    text-decoration: underline;
+    &:hover{
+      color: #a6c7f4;
+      border-bottom-color: #dfdfdf;
+    }
   }
   code{
-    padding: .2rem .3rem .1rem;
+    background: #eee;
+    padding: 1px 5px 2px;
+    margin: 0 1px;
+    border-radius: 4px;
+    position: relative;
+    top: -1px;
     border: 1px solid #d8e0e4;
-    border-radius: 2px;
-    color: #c25;
     vertical-align: middle;
     white-space: pre-wrap;
     font-size: .8em;

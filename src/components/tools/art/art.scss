@@ -76,3 +76,101 @@
     }
   }
 }
+.art-context{
+  header{
+    position: relative;
+    padding: 30px 0 50px 0;
+    h1{
+      text-align: left;
+      color: #fff;
+      padding: 0 25% 0 0;
+    }
+    .art-author{
+      border-bottom: 3px solid #5ba4e5;
+      color: #999;
+      padding: 15px 0;
+      .avatar-push{
+        display: inline-block;
+        margin-right: 3px;
+        border: 0;
+        img{
+          vertical-align: middle;
+          position: relative;
+          top: -1px;
+          border: 0;
+          display: inline-block;
+          max-width: 100%;
+          height: auto;
+        }
+      }
+      .author-link{
+        color: white;
+        cursor: pointer;
+        &.tag{
+          margin-right: 10px;
+        }
+      }
+    }
+    .art-meta{
+      position: absolute;
+      top: 0;
+      right: 20px;
+      text-align: right;
+      .meta-line{
+        margin: 0 0 10px 0;
+        .date-block{
+          background: #5ba4e5;
+          padding: 4px 8px;
+          color: black;
+          font-weight: bold;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+  }
+ .context{
+   border: 50px solid #fff;
+   background: #fff;
+ }
+ footer{
+   position: relative;
+   display: flex;
+   align-items: center;
+   .stats{
+     position: absolute;
+     right: 0;
+     top: 20px;
+     bottom: 4px;
+     .single-stat{
+       color: #fff;
+       cursor: default;
+       display: inline-block;
+       height: 100%;
+       text-align: center;
+       padding: 0 7px 0 9px;
+       margin-left: -6px;
+       a{
+         color: #fff;
+         display: inline-block;
+         position: relative;
+         top: 3px;
+       }
+       &:hover{
+         color: #5ba4e5;
+         a{
+           color: #5ba4e5;
+         }
+       }
+     }
+     &:after{
+       content: "";
+       position: absolute;
+       top: 0;
+       right: 100%;
+       width: 30px;
+       height: 100%;
+     }
+   }
+ }
+}

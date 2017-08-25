@@ -20,9 +20,32 @@
   </div>
   <div class="art-context markdown" v-else>
     <header>
-      <h2 class="art-title">{{blog && blog.title}}</h2>
+      <h1>{{blog && blog.title}}</h1>
+      <div class="art-author">
+        <a class="avatar-push">
+          <img src="/static/head.png" alt="" width="20" height="20">
+        </a>
+        <a href="" class="author-link">{{blog&& blog.author}}</a>
+        <span>|</span>
+        <a href="" class="author-link">{{blog&& blog.author}}'s Posts</a>
+        <span>|</span>
+        Tags:
+        <a v-for="tag in blog.tags" href="#" class="author-link tag">{{tag}}</a>
+      </div>
+      <div class="art-meta">
+        <div class="meta-line">
+          <time class="date-block">{{blog && blog.date.match(/[0-9]+[-][0-9]+[-][0-9]+/)[0]}}</time>
+        </div>
+      </div>
     </header>
-    <div v-html="html"></div>
+    <div v-html="html" class="context"></div>
+    <footer>
+      <div class="stats">
+        <!--<span class="single-stat">0</span>-->
+        <span class="single-stat">{{blog.meta.votes}}<meta-icon meta='votes' :index="index"></meta-icon></span>
+        <span class="single-stat">{{blog.meta.favs}}<meta-icon meta='favs' :index="index"></meta-icon></span>
+      </div>
+    </footer>
   </div>
 </template>
 <script>
@@ -63,4 +86,5 @@
 <style rel="stylesheet/scss" lang="scss">
   @import "art.scss";
   @import '../markdown/markdown.scss';
+  @import "media.scss";
 </style>
