@@ -12,7 +12,7 @@
     <footer>
       <a href="">{{blog.author}}</a>
       on
-      <a v-for="tag in tags" class="tags" href="">{{tag}} <icon name="tag"></icon> </a>
+      <a v-for="tag in tags" class="tags" href="#">{{tag}} <icon name="tag"></icon> </a>
       <a class="meta">{{blog.meta.votes}}<meta-icon meta='votes' :index="index"></meta-icon></a>
       <a class="meta">{{blog.meta.favs}}<meta-icon meta='favs' :index="index"></meta-icon></a>
       <time>{{blog.date.match(/[0-9]+[-][0-9]+[-][0-9]+/)[0]}}</time>
