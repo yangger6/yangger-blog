@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <img src="./static/index.jpg" alt="">
+    <img src="/static/index.jpg" alt="">
     <!--<video src="/static/home.mp4" autoplay="autoplay"></video>-->
   </div>
 </template>
