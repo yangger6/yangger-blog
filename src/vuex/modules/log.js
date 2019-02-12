@@ -22,10 +22,13 @@ const getters = {
 const actions = {
   async getLogs ({ commit }) {
     let Logs = await posts.getLogs()
-    Logs = Logs.map((logDay, index) => {
-      return index < 5 ? { ...logDay, show: true } : { ...logDay, show: false }
-    })
-    commit(types.RECEIVE_LOGS, { Logs })
+    console.log(Logs)
+    if (Logs) {
+      Logs = Logs.map((logDay, index) => {
+        return index < 5 ? { ...logDay, show: true } : { ...logDay, show: false }
+      })
+      commit(types.RECEIVE_LOGS, { Logs })
+    }
   },
   async addLogData ({ commit }, { data, index }) {
     var result = await posts.addLog({data: data})
