@@ -62,15 +62,18 @@
     },
     data () {
       return {
-        headerHeight: '0px'
       }
-    },
-    mounted () {
-      this.headerHeight = (this.$refs.header.offsetHeight + 150) + 'px'
     },
     computed: {
       html () {
         if (this.blog) return this.blog.markdown
+      },
+      headerHeight () {
+        if (this.$refs.header) {
+          return (this.$refs.header.offsetHeight + 150) + 'px'
+        } else {
+          return '0px'
+        }
       }
     },
     methods: {

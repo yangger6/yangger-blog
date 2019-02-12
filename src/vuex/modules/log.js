@@ -1,7 +1,7 @@
 /**
  * Created by yangger on 2017/7/30.
  */
-import posts from '@/unit/posts'
+import posts from '@/utils/posts'
 import * as types from '../mutation-types'
 // initial state
 const state = {
@@ -22,13 +22,10 @@ const getters = {
 const actions = {
   async getLogs ({ commit }) {
     let Logs = await posts.getLogs()
-    console.log(Logs)
-    if (Logs) {
-      Logs = Logs.map((logDay, index) => {
-        return index < 5 ? { ...logDay, show: true } : { ...logDay, show: false }
-      })
-      commit(types.RECEIVE_LOGS, { Logs })
-    }
+    Logs = Logs.map((logDay, index) => {
+      return index < 5 ? { ...logDay, show: true } : { ...logDay, show: false }
+    })
+    commit(types.RECEIVE_LOGS, { Logs })
   },
   async addLogData ({ commit }, { data, index }) {
     var result = await posts.addLog({data: data})

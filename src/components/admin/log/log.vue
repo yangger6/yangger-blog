@@ -10,7 +10,7 @@
   <section class="log-box">
     <section class="log-list">
       <input type="text">
-      <list v-for="(log, index) in logs">
+      <list v-for="(log, index) in logs" :key="log.id">
         <li>
           <a :class="{selected: selectLogIndex === index}"  @click="changeLogIndex(index)">
             <h3>{{log.date}}</h3>

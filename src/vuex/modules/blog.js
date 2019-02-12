@@ -1,7 +1,7 @@
 /**
  * Created by yangger on 2017/7/30.
  */
-import posts from '@/unit/posts'
+import posts from '@/utils/posts'
 import * as types from '../mutation-types'
 // initial state
 const state = {
