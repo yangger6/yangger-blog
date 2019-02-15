@@ -6,7 +6,7 @@
     </main>
     <footer v-if="(/\/blog|\/post/).test($route.fullPath)">
       <!--<v-canvas></v-canvas>-->
-      Copyright ©2017 yangger by Vue and Koa 粤ICP备17084298号-1
+      Copyright ©2017-2019 yangger by Vue and Koa 粤ICP备17084298号-1
     </footer>
   </div>
 </template>

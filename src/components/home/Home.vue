@@ -24,6 +24,9 @@
       </div>
     </div>
     <img src="/static/index.jpg" alt="">
+    <footer class="copy-right">
+      Copyright ©2017-2019 yangger by Vue and Koa 粤ICP备17084298号-1
+    </footer>
     <!--<video src="/static/home.mp4" autoplay="autoplay"></video>-->
   </div>
 </template>

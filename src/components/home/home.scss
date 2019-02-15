@@ -165,4 +165,13 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
+  .copy-right{
+    position: fixed;
+    bottom: 5px;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+    color: #fff;
+    font-size: 14px;
+  }
 }
