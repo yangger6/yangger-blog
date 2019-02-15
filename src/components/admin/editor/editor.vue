@@ -54,9 +54,9 @@
   @import "../../tools/markdown/markdown.scss";
 </style>
 <script>
-  import {markdown} from 'markdown'
   import tags from '../../tools/tags/tags.vue'
   import { mapGetters, mapActions } from 'vuex'
+  const md = require('markdown-it')()
   export default{
     data () {
       return {
@@ -125,11 +125,11 @@
           markdown: blog.markdown,
           tags: blog.tags
         })
-        this.editMarkdown = markdown.toHTML(blog.body)
+        this.editMarkdown = md.render(blog.body)
         this.changeAdminIndex(0)
       },
       async toHTML (e) {
-        let Md = markdown.toHTML(e.target.value)
+        let Md = md.render(e.target.value)
         await this.changeAdminBlog({
           title: document.getElementById('blogTitle').value,
           body: e.target.value,

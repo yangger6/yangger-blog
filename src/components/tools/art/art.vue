@@ -52,7 +52,7 @@
 <script>
   import { mapActions } from 'vuex'
   export default {
-    name: 'article',
+    name: 'Article',
     props: {
       size: String, // 区别渲染 item 还是 文章
       blog: Object,
@@ -62,18 +62,20 @@
     },
     data () {
       return {
+        headerHeight: '0px'
       }
+    },
+    mounted () {
+      const jsq = setInterval(() => {
+        if (this.$refs.header) {
+          this.headerHeight = this.$refs.header.offsetHeight + 150 + 'px'
+          clearInterval(jsq)
+        }
+      }, 100)
     },
     computed: {
       html () {
         if (this.blog) return this.blog.markdown
-      },
-      headerHeight () {
-        if (this.$refs.header) {
-          return (this.$refs.header.offsetHeight + 150) + 'px'
-        } else {
-          return '0px'
-        }
       }
     },
     methods: {
