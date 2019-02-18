@@ -13,9 +13,6 @@
     <div class="message">
         <h4>Yangger Blog</h4>
     </div>
-    <div class="logo">
-      <img src="~@/assets/logo-drop.png" alt="">
-    </div>
       <div class="black-line"></div>
       <div class="left">
         <div class="box-frame"><div></div><div></div><div></div></div>
@@ -71,7 +68,7 @@
   .about{
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,.5);
+    background: #232728;
     position: absolute;
     z-index: 99999;
     display: flex;
@@ -336,7 +333,8 @@
     .left{
       width: 100%;
       height: 100%;
-      background: #020202;
+      overflow: hidden;
+      background: #0b0d0c;
       display: flex;
       align-items: center;
       position: relative;
