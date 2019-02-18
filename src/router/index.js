@@ -3,13 +3,12 @@ import Router from 'vue-router'
 import Home from '@/components/home/Home'
 import Posts from '@/components/posts/Posts'
 import Blog from '@/components/blog/Blog'
-import About from '@/components/about/About'
 import Admin from '@/components/admin/Admin'
 import Login from '@/components/admin/login/Login'
 import Reg from '@/components/admin/reg/Reg'
 import Editor from '@/components/admin/editor/editor'
 import Log from '@/components/admin/log/log'
-
+import About from '@/views/about'
 Vue.use(Router)
 export default new Router({
   mode: 'history',
