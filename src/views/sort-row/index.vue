@@ -1,18 +1,18 @@
 <template>
   <div class="sort-row">
-    <ul :class="{'hold-on': sortHold}">
+    <ul :class="{'hold-on': sortHold}" ref="sortRow">
       <li
         v-for="(item, index) in sortList"
-        :key="item.id"
-        @touchstart.prevent="e => holdOn(index, e)"
-        @touchmove.prevent="(e) => moving(index, e)"
-        @touchend.prevent="holdEnd(index)"
+        :key="index"
+        @touchstart.prevent="e => holdOn(item, e)"
+        @touchmove.prevent="(e) => moving(item, e)"
+        @touchend.prevent="holdEnd(item)"
         :class="{'hold-on': item.isHold}"
-        :style="{transform: 'translate3d(0, ' + item.y + 'px, 0)'}"
+        :data-index="index"
       >
         <section>
           <header>
-            <span>{{index + 1}}</span>
+            <span>{{item.index}}</span>
           </header>
           <section>
             <div class="context">{{item.value}}</div>
@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-  import IHandle from './i-handle'
+  import IHandle from './i-handle/index'
   export default {
     name: 'sort-row',
     components: {
@@ -37,47 +37,86 @@
         Timer: null,
         sortHold: false,
         dragObj: {
+          move: 0,
           startY: 0
         },
         sortList: [
-          {value: '选项A', isHold: false, y: 0},
-          {value: '选项B', isHold: false, y: 0},
-          {value: '选项C', isHold: false, y: 0},
-          {value: '选项D', isHold: false, y: 0}
+          {index: 1, value: '选项A', isHold: false},
+          {index: 2, value: '选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B', isHold: false},
+          {index: 3, value: '选项C', isHold: false},
+          {index: 4, value: '选项D', isHold: false}
         ]
       }
     },
+    mounted () {
+      [...this.$refs.sortRow.childNodes].map((node, index) => {
+        this.sortList[index].vNode = node
+      })
+    },
     methods: {
-      holdOn (index, event) {
+      holdOn (item, event) {
         this.Timer = setTimeout(() => {
-          this.sortList[index].isHold = true
+          item.isHold = true
           this.dragObj.startY = event.touches[0].clientY
+          this.dragObj.startIndex = item.index
           this.sortHold = true
         }, 200)
       },
-      moving (index, event) {
+      moving (item, event) {
         if (this.sortHold) {
-          const moveLenth = event.touches[0].clientY - this.dragObj.startY
-          this.sortList[index].y = moveLenth
-          if (moveLenth > 24) { // height 24
-            // this.movingY(index + 1, 54)
-            this.changeIndex(index, index + 1)
+          const touch = event.touches[0]
+          const moveLenth = touch.clientY - this.dragObj.startY
+          const currentNode = touch.target.offsetParent
+          const currentY = currentNode.getBoundingClientRect().top
+          const currentIndex = this.sortList.findIndex(({index}) => this.dragObj.startIndex === index)
+          const nextNode = this.sortList[currentIndex + 1] && this.sortList[currentIndex + 1].vNode
+          const prevNode = this.sortList[currentIndex - 1] && this.sortList[currentIndex - 1].vNode
+          this.movingY(currentNode, moveLenth)
+          if (nextNode) {
+            if (currentY + currentNode.offsetHeight > nextNode.getBoundingClientRect().top + nextNode.offsetHeight / 2) {
+              this.dragObj.move++
+              this.movingY(nextNode, -currentNode.offsetHeight)
+              this.chaneIndex(item.index - 1, item.index)
+            }
+          }
+          if (prevNode) {
+            if (currentY < prevNode.getBoundingClientRect().top + prevNode.offsetHeight / 2) {
+              debugger
+              this.movingY(prevNode, 0)
+              this.chaneIndex(item.index - 1, item.index)
+              this.dragObj.move--
+            }
           }
         }
       },
-      holdEnd (index) {
+      holdEnd (item) {
         clearTimeout(this.Timer)
-        this.sortList[index].isHold = false
+        item.isHold = false
         this.sortHold = false
-        this.dragObj.startY = 0
+        this.dragObj = {
+          move: 0,
+          startY: 0
+        };
+        [...this.$refs.sortRow.childNodes].map((node, index) => {
+          node.removeAttribute('style')
+        })
+        console.log(this.sortList.map(({ index }) => index))
       },
-      changeIndex (oldIndex, newIndex) {
-        const temp = this.sortList[oldIndex]
-        this.sortList[oldIndex] = this.sortList[newIndex]
-        this.sortList[newIndex] = temp
+      movingY (item, y) {
+        item.style.transform = 'translate3d(0, ' + y + 'px, 0)'
       },
-      movingY (index, y) {
-        this.sortList[index].y += y
+      chaneIndex (oldIndex, newIndex) {
+        const index = this.sortList[oldIndex].index
+        const node = this.sortList[oldIndex].vNode
+        this.sortList[oldIndex].index = this.sortList[newIndex].index
+        this.sortList[oldIndex].vNode = this.sortList[newIndex].vNode
+        this.sortList[newIndex].index = index
+        this.sortList[newIndex].vNode = node
+      }
+    },
+    computed: {
+      moveChange () {
+        return this.dragObj.move
       }
     }
   }
@@ -120,7 +159,7 @@
           border-top: 1px solid #e1edf1;
         }
         &.hold-on{
-          z-index: 1;
+          z-index: 10;
           &:before {
             left: 0;
             border-color: #2863F3;

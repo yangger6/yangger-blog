@@ -14,7 +14,7 @@
         </h1>
         <div class="btn">
           <router-link to="/posts">
-            <span>CLIKE INTO</span>
+            <span>CLICK INTO</span>
             <div class="line line-top"></div>
             <div class="line line-bottom"></div>
             <div class="line line-left"></div>
