@@ -60,6 +60,7 @@
           const moveLenth = event.touches[0].clientY - this.dragObj.startY
           this.sortList[index].y = moveLenth
           if (moveLenth > 24) { // height 24
+            // this.movingY(index + 1, 54)
             this.changeIndex(index, index + 1)
           }
         }
@@ -75,7 +76,8 @@
         this.sortList[oldIndex] = this.sortList[newIndex]
         this.sortList[newIndex] = temp
       },
-      movingY () {
+      movingY (index, y) {
+        this.sortList[index].y += y
       }
     }
   }
