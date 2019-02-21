@@ -1,18 +1,19 @@
 <template>
-  <div class="about">
-    <div class="nav-box">
-      <section>
-        <router-link to="/">主页</router-link>
-        <router-link to="/about">我的</router-link>
-      </section>
-      <section>
-        <router-link to="https://github.com/yangger6">GITHUB</router-link>
-        <router-link to="/posts">文章</router-link>
-      </section>
-    </div>
-    <div class="message">
-        <h4>Yangger Blog</h4>
-    </div>
+  <div class="about-box">
+    <div class="about">
+      <!--<div class="nav-box">-->
+      <!--<section>-->
+      <!--<router-link to="/">主页</router-link>-->
+      <!--<router-link to="/about">我的</router-link>-->
+      <!--</section>-->
+      <!--<section>-->
+      <!--<router-link to="https://github.com/yangger6">GITHUB</router-link>-->
+      <!--<router-link to="/posts">文章</router-link>-->
+      <!--</section>-->
+      <!--</div>-->
+      <!--<div class="message">-->
+      <!--<h4>Yangger Blog</h4>-->
+      <!--</div>-->
       <div class="black-line"></div>
       <div class="left">
         <div class="box-frame"><div></div><div></div><div></div></div>
@@ -43,6 +44,7 @@
           </li>
         </ul>
       </div>
+    </div>
   </div>
 </template>
 
@@ -65,13 +67,21 @@
 </script>
 
 <style lang="scss" scoped>
-  .about{
+  .about-box{
     width: 100%;
-    height: 100%;
-    background: #232728;
     position: absolute;
-    z-index: 99999;
+    overflow: hidden;
+    height: 100%;
+  }
+  .about{
+    width: calc(100% + 400px);
+    overflow: hidden;
+    height: 100%;
+    background: #010206;
+    position: absolute;
+    z-index: 9;
     display: flex;
+    transition: all .3s ease;
     .nav-box{
       position: absolute;
       top: calc(50% - 25px);
@@ -331,15 +341,15 @@
       }
     }
     .left{
-      width: 100%;
+      width: calc(100% - 400px);
       height: 100%;
       overflow: hidden;
-      background: #0b0d0c;
+      background: #010206;
       display: flex;
       align-items: center;
       position: relative;
       .context{
-        margin-left: 150px;
+        margin-left: 250px;
         width: 350px;
         height: 400px;
         color: #fff;
@@ -369,7 +379,7 @@
       }
     }
     .right{
-      width: 600px;
+      width: 400px;
       height: 100%;
       background: #fff;
       display: flex;

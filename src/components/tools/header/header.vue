@@ -48,10 +48,10 @@
         if (route.path.match(/admin/) !== null) {
           this.toggleShow = false
           this.changHeaderShow(false)
-        } else if (route.path !== '/') {
+        } else if (route.path !== '/' && route.path !== '/about') {
           this.toggleShow = false
           this.changHeaderShow(true)
-        } else if (route.path === '/') {
+        } else if (route.path === '/' || route.path === '/about') {
           this.toggleShow = true
           this.changHeaderShow(false)
         }

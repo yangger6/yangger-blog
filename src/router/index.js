@@ -9,6 +9,7 @@ import Reg from '@/components/admin/reg/Reg'
 import Editor from '@/components/admin/editor/editor'
 import Log from '@/components/admin/log/log'
 import About from '@/views/about'
+import SortRow from '@/views/sort-row'
 Vue.use(Router)
 export default new Router({
   mode: 'history',
@@ -59,6 +60,11 @@ export default new Router({
       path: '/reg/',
       name: 'Register',
       component: Reg
+    },
+    {
+      path: '/test/sort-row',
+      name: 'sort-row',
+      component: SortRow
     }
   ]
 })
