@@ -12,7 +12,7 @@
       >
         <section>
           <header>
-            <span>{{item.index}}</span>
+            <span :data-index="item.vNode && Number(item.vNode.getAttribute('data-index')) + 1"></span>
           </header>
           <section>
             <div class="context">{{item.value}}</div>
@@ -36,21 +36,25 @@
       return {
         Timer: null,
         sortHold: false,
+        changing: false,
         dragObj: {
           move: 0,
           startY: 0
         },
         sortList: [
-          {index: 1, value: '选项A', isHold: false},
-          {index: 2, value: '选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B', isHold: false},
-          {index: 3, value: '选项C', isHold: false},
-          {index: 4, value: '选项D', isHold: false}
+          {index: 0, value: '选项A', isHold: false},
+          {index: 1, value: '选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B选项B', isHold: false},
+          {index: 2, value: '选项C', isHold: false},
+          {index: 3, value: '选项D', isHold: false}
         ]
       }
     },
     mounted () {
       [...this.$refs.sortRow.childNodes].map((node, index) => {
-        this.sortList[index].vNode = node
+        this.$set(this.sortList, index, {
+          ...this.sortList[index],
+          vNode: node
+        })
       })
     },
     methods: {
@@ -63,29 +67,39 @@
         }, 200)
       },
       moving (item, event) {
-        if (this.sortHold) {
+        if (this.sortHold && !this.changing) {
           const touch = event.touches[0]
           const moveLenth = touch.clientY - this.dragObj.startY
           const currentNode = touch.target.offsetParent
           const currentY = currentNode.getBoundingClientRect().top
           const currentIndex = this.sortList.findIndex(({index}) => this.dragObj.startIndex === index)
+          console.log(this.sortList)
           const nextNode = this.sortList[currentIndex + 1] && this.sortList[currentIndex + 1].vNode
           const prevNode = this.sortList[currentIndex - 1] && this.sortList[currentIndex - 1].vNode
+          let log = 1
+          if (log) {
+            console.log(`-------nextNode--------`)
+            console.log(nextNode)
+            console.log(`---------------`)
+            console.log(`-------prevNode--------`)
+            console.log(prevNode)
+            console.log(`---------------`)
+          }
           this.movingY(currentNode, moveLenth)
           if (nextNode) {
             if (currentY + currentNode.offsetHeight > nextNode.getBoundingClientRect().top + nextNode.offsetHeight / 2) {
+              this.changing = true
               this.dragObj.move++
               this.movingY(nextNode, -currentNode.offsetHeight)
-              this.chaneIndex(item.index - 1, item.index)
+              this.chaneIndex(item.index, item.index + 1)
             }
           }
           if (prevNode) {
-            if (currentY < prevNode.getBoundingClientRect().top + prevNode.offsetHeight / 2) {
-              debugger
-              this.movingY(prevNode, 0)
-              this.chaneIndex(item.index - 1, item.index)
-              this.dragObj.move--
-            }
+            // if (currentY < prevNode.getBoundingClientRect().top + prevNode.offsetHeight / 2) {
+            //   this.movingY(prevNode, 0)
+            //   this.chaneIndex(item.index - 1, item.index)
+            //   this.dragObj.move--
+            // }
           }
         }
       },
@@ -103,21 +117,25 @@
         console.log(this.sortList.map(({ index }) => index))
       },
       movingY (item, y) {
+        console.log('moving ' + item.getAttribute('data-index') + ' to ' + y)
         item.style.transform = 'translate3d(0, ' + y + 'px, 0)'
       },
       chaneIndex (oldIndex, newIndex) {
+        console.log(`change index ${oldIndex} -> ${newIndex}`)
         const index = this.sortList[oldIndex].index
-        const node = this.sortList[oldIndex].vNode
+        const oldNode = this.sortList[oldIndex].vNode
+        const newNode = this.sortList[newIndex].vNode
+        const showIndex = oldNode.getAttribute('data-index')
+        oldNode.setAttribute('data-index', newIndex)
+        newNode.setAttribute('data-index', showIndex)
         this.sortList[oldIndex].index = this.sortList[newIndex].index
-        this.sortList[oldIndex].vNode = this.sortList[newIndex].vNode
+        this.sortList[oldIndex].vNode = newNode
         this.sortList[newIndex].index = index
-        this.sortList[newIndex].vNode = node
+        this.sortList[newIndex].vNode = oldNode
+        this.changing = false
       }
     },
     computed: {
-      moveChange () {
-        return this.dragObj.move
-      }
     }
   }
 </script>
@@ -208,6 +226,9 @@
               justify-content: center;
               color: #fff;
               transition: .2s;
+              &:before{
+                content: attr(data-index);
+              }
             }
           }
           footer {
