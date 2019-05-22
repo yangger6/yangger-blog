@@ -1,29 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
-
 <style lang="less">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  body,html,#app{height: 100%;display: flex;flex: 1}
+  body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}
+  article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display:block; }
+  table{border-collapse:collapse;border-spacing:0}
+  audio,canvas,video { display: inline-block;*display: inline;*zoom: 1;}
+  fieldset,img{border:0}
+  address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}
+  ol,ul,li{list-style:none}
+  caption,th{text-align:left}
+  h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+  q:before,q:after{content:''}
+  abbr,acronym{border:0;font-variant:normal}
+  sup{vertical-align:text-top}
+  sub{vertical-align:text-bottom}
+  input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}
+  input,textarea,select{*font-size:100%}
+  /* scrollbar */
+  ::-webkit-scrollbar{width:3px;height:10px}
+  ::-webkit-scrollbar-button{display:none}
+  ::-webkit-scrollbar-track{background-color:black}
+  ::-webkit-scrollbar-track-piece{background:#FFF}
+  ::-webkit-scrollbar-thumb{background-color:#8E8E8E;border-radius:5px}
+  ::-webkit-scrollbar-thumb:hover{background-color:#3B3B3B}
+  ::-webkit-scrollbar-corner{background-color:#535353}
+  .fa-icon {
+    width: auto;
+    height: 1em; /* or any other relative font sizes */
   }
-}
 </style>
