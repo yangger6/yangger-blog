@@ -4,7 +4,8 @@
   </div>
 </template>
 <style lang="less">
-  body,html,#app{height: 100%;display: flex;flex: 1}
+  @import '//at.alicdn.com/t/font_215287_8h7qrrlq5zh.css';
+  body,html,#app{height: 100%;display: flex;flex: 1;overflow: hidden}
   body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}
   article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display:block; }
   table{border-collapse:collapse;border-spacing:0}
@@ -28,8 +29,13 @@
   ::-webkit-scrollbar-thumb{background-color:#8E8E8E;border-radius:5px}
   ::-webkit-scrollbar-thumb:hover{background-color:#3B3B3B}
   ::-webkit-scrollbar-corner{background-color:#535353}
-  .fa-icon {
-    width: auto;
-    height: 1em; /* or any other relative font sizes */
+  :root {
+    font-size: 10px;
+    font-family: 'Open Sans','Helvetica Neue',Arial,'Hiragino Sans GB','Microsoft YaHei','WenQuanYi Micro Hei','sans-serif';
   }
+  /*"Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif*/ // en waiting i18n
+  @min-font-size: 1.4rem;
+  @max-font-size: 1.8rem;
+  @min-screen: 320px;
+  @max-screen: 1440px;
 </style>
