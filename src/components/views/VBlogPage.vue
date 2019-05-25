@@ -1,47 +1,50 @@
 <template lang="pug">
-    section(:style="dominantStyle").v-blog-page
+    section.v-blog-page
         header
             .introducer
                 p(:style="dominantStyle") When a Web Design Template Makes Sense. In general …When a Web Design Template Makes Sense
         main
-            a.number
+            a.number(:style="dominantStyle")
                 | 01
             .mask
-                img(:src="imgSrc")
+                img(:src="imgSrc" :style="{filter: `drop-shadow(0 20px 20px ${this.dominant})`}")
         footer
             .line
             p.info
-                span.tags
+                span.tags(:style="secondaryStyle")
                     a HTML5
                     a CSS3
             span.date
                 | 2019-05-23
             h1 I Create Website Design, that Make Sense.
-            a.view VIEW MORE
+            a.view(:style="secondaryStyle") VIEW MORE
 
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import analyze from 'rgbaster'
+    import analyze from 'rgbaster';
     @Component({
     })
     export default class VBlogPage extends Vue {
-        dominant: string = 'rgb(72, 109, 131)'
-        secondary: string = '#5A5AFF'
-        imgSrc: string = require('@/assets/3.jpg')
+        dominant: string = 'rgb(72, 109, 131)';
+        secondary: string = '#5A5AFF';
+        imgSrc: string = 'https://oss.yangger.cn/assets/image/2019/5/25/1558774409320_535486115.jpeg';
         created() {
-            this.getImageColor()
+            this.getImageColor();
         }
         async getImageColor() {
             const result = await analyze(
                 this.imgSrc,
                 {
-                    ignore: [ 'rgb(255,255,255)', 'rgb(0,0,0)' ]
-                })
+                    ignore: [
+                        'rgb(255, 255, 255)',
+                        'rgb(0, 0, 0)',
+                    ],
+                });
             if (result && result.length) { // using 30-40ms
-                this.dominant = result[0].color
-                this.secondary = result[1].color
+                this.dominant = result[0].color;
+                this.secondary = result[1].color;
                // const length = result.length // Not very ideal.
                // let count = 0
                // for (let i = 0; i < length; i++) {
@@ -62,15 +65,15 @@
         }
         get dominantStyle() {
             return {
-                color: this.dominant,
-                'border-color': this.dominant
-            }
+                'color:': this.dominant,
+                'border-color': this.dominant,
+            };
         }
         get secondaryStyle() {
             return {
-                color: this.secondary,
-                'border-color': this.secondary
-            }
+                'color': this.secondary,
+                'border-color': this.secondary,
+            };
         }
     }
 </script>
@@ -156,7 +159,6 @@
                     width: 100%;
                     height: 85%;
                     object-fit: cover;
-                    filter: drop-shadow(0 20px 20px rgba(105, 105, 105, 0.98))
                 }
             }
         }
