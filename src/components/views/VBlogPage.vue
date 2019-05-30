@@ -7,7 +7,7 @@
             a.number(:style="dominantStyle")
                 | 01
             .mask
-                img(:src="imgSrc" :style="{filter: `drop-shadow(0 20px 20px ${this.dominant})`}")
+                img(:src="imgSrc" :style="{filter: `drop-shadow(0 20px 20px ${schema.dominant})`}")
         footer
             .line
             p.info
@@ -16,66 +16,70 @@
                     a CSS3
             span.date
                 | 2019-05-23
-            h1 I Create Website Design, that Make Sense.
+            h1(:style="dominantStyle") I Create Website Design, that Make Sense.
             a.view(:style="secondaryStyle") VIEW MORE
 
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
-    import analyze from 'rgbaster';
-    @Component({
-    })
-    export default class VBlogPage extends Vue {
-        dominant: string = 'rgb(72, 109, 131)';
-        secondary: string = '#5A5AFF';
-        imgSrc: string = 'https://oss.yangger.cn/assets/image/2019/5/25/1558774409320_535486115.jpeg';
-        created() {
-            this.getImageColor();
-        }
-        async getImageColor() {
-            const result = await analyze(
-                this.imgSrc,
-                {
-                    ignore: [
-                        'rgb(255, 255, 255)',
-                        'rgb(0, 0, 0)',
-                    ],
-                });
-            if (result && result.length) { // using 30-40ms
-                this.dominant = result[0].color;
-                this.secondary = result[1].color;
-               // const length = result.length // Not very ideal.
-               // let count = 0
-               // for (let i = 0; i < length; i++) {
-               //     const color = result[i].color
-               //     const num = Number(color.match(/\d+/)[0])
-               //     if (num > 45 && num < 200) {
-               //         if (count === 0) {
-               //             this.dominant = color
-               //             count ++
-               //         } else if (count === 1) {
-               //             this.secondary = color
-               //         } else {
-               //             break
-               //         }
-               //     }
-               // }
-           }
-        }
-        get dominantStyle() {
-            return {
-                'color:': this.dominant,
-                'border-color': this.dominant,
-            };
-        }
-        get secondaryStyle() {
-            return {
-                'color': this.secondary,
-                'border-color': this.secondary,
-            };
-        }
+  import { Component, Vue } from 'vue-property-decorator';
+  import analyze from 'rgbaster';
+  import {namespace} from 'vuex-class';
+  import {DOMINANT_CHANGE, ISchema, SECONDARY_CHANGE} from '../../store/profile/types';
+  const profileModule = namespace('profile');
+  @Component({
+  })
+  export default class VBlogPage extends Vue {
+    @profileModule.Getter('schema') schema!: ISchema;
+    @profileModule.Mutation(DOMINANT_CHANGE) updateDominant!: (color: string) => void;
+    @profileModule.Mutation(SECONDARY_CHANGE) updateSecondary!: (color: string) => void;
+    imgSrc: string = require('@/assets/3.jpg');
+    created() {
+      this.getImageColor();
     }
+    async getImageColor() {
+      const result = await analyze(
+        this.imgSrc,
+        {
+          ignore: [
+            'rgb(255, 255, 255)',
+            'rgb(0, 0, 0)',
+          ],
+        });
+      if (result && result.length) { // using 30-40ms
+        this.updateDominant(result[0].color);
+        this.updateSecondary(result[1].color);
+        // const length = result.length // Not very ideal.
+        // let count = 0
+        // for (let i = 0; i < length; i++) {
+        //     const color = result[i].color
+        //     const num = Number(color.match(/\d+/)[0])
+        //     if (num > 45 && num < 200) {
+        //         if (count === 0) {
+        //             this.dominant = color
+        //             count ++
+        //         } else if (count === 1) {
+        //             this.secondary = color
+        //         } else {
+        //             break
+        //         }
+        //     }
+        // }
+      }
+    }
+    get dominantStyle() {
+      return {
+        'color': this.schema.dominant,
+        'border-color': this.schema.secondary,
+      };
+    }
+    get secondaryStyle() {
+      return {
+        'color': this.schema.dominant,
+        'border-color': this.schema.secondary,
+      };
+    }
+  }
 </script>
 <style lang="less" scoped>
     @media screen and (max-width: 1440px) {
@@ -92,7 +96,7 @@
                 }
             }
             /*& + section {*/
-                /*min-width: 360px;*/
+            /*min-width: 360px;*/
             /*}*/
         }
     }
@@ -221,7 +225,7 @@
             }
         }
         /*& + section {*/
-            /*width: 25%;*/
+        /*width: 25%;*/
         /*}*/
     }
 </style>

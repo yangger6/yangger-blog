@@ -7,6 +7,10 @@ import { RootState } from '../types';
 
 export const state: ProfileState = {
   error: false,
+  schema: {
+    secondary: '#5A5AFF',
+    dominant: 'rgb(72, 109, 131)',
+  },
 };
 
 const namespaced: boolean = true;

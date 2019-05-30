@@ -1,14 +1,23 @@
 <template lang="pug">
     i.menu
-        div.line.line-1
-        div.line.line-2
+        div(:style="backgoundColor").line.line-1
+        div(:style="backgoundColor").line.line-2
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
+    import {namespace} from 'vuex-class';
+    import {ISchema} from '../../store/profile/types';
+    const profileModule = namespace('profile');
     @Component({
     })
     export default class TheMenu extends Vue {
+      @profileModule.Getter('schema') schema!: ISchema;
+      get backgoundColor() {
+        return {
+          'background-color': this.schema.dominant,
+        };
+      }
     }
 </script>
 <style lang="less" scoped>
@@ -31,7 +40,6 @@
             }
         }
         .line{
-            background-color: #7c88cf;
             height: 3px;
             transition: all .3s ease-in-out;
         }
