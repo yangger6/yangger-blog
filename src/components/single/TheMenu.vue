@@ -24,19 +24,22 @@
     .menu{
         z-index: 999;
         width: 23px;
-        height: 17px;
+        height: 11px;
         position: fixed;
         left: 50px;
         top: 50px;
         cursor: pointer;
-        padding: 14px 11px;
+        padding: 18px 11px;
+        background: #fff;
+        border-radius: 50%;
         &:hover {
             .line-1{
                 transform: rotate(135deg);
+                top: 6px;
+                position: relative;
             }
             .line-2{
                 transform: rotate(225deg);
-                margin-top: -3px;
             }
         }
         .line{
