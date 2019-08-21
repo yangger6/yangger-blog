@@ -10,6 +10,7 @@ export const state: ProfileState = {
   schema: {
     secondary: '#5A5AFF',
     dominant: 'rgb(72, 109, 131)',
+    openPage: false,
   },
 };
 

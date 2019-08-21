@@ -1,5 +1,5 @@
 <template lang="pug">
-    section.v-blog-page(ref="page")
+    section.v-blog-page(:class="{'open-page': schema.openPage}")
         header
             .introducer
                 p(:style="dominantStyle") When a Web Design Template Makes Sense. In general …When a Web Design Template Makes Sense
@@ -26,7 +26,7 @@
   import { Component, Vue } from 'vue-property-decorator';
   import analyze from 'rgbaster';
   import {namespace} from 'vuex-class';
-  import {DOMINANT_CHANGE, ISchema, SECONDARY_CHANGE} from '../../store/profile/types';
+  import {DOMINANT_CHANGE, ISchema, OPENPAGE_CHANGE, SECONDARY_CHANGE} from '../../store/profile/types';
   const profileModule = namespace('profile');
   @Component({
   })
@@ -34,6 +34,7 @@
     @profileModule.Getter('schema') schema!: ISchema;
     @profileModule.Mutation(DOMINANT_CHANGE) updateDominant!: (color: string) => void;
     @profileModule.Mutation(SECONDARY_CHANGE) updateSecondary!: (color: string) => void;
+    @profileModule.Mutation(OPENPAGE_CHANGE) updatePage!: (show: boolean) => void;
     imgSrc: string = require('@/assets/background.png');
     created() {
       this.getImageColor();
@@ -53,7 +54,7 @@
       }
     }
     openPage() {
-      (this.$refs.page as Element).classList.add('open-page');
+      this.updatePage(true);
     }
     get dominantStyle() {
       return {
@@ -94,6 +95,9 @@
         display: flex;
         width: 100%;
         height: 100%;
+        > * {
+            transition: .3s all ease-in-out;
+        }
         & + section{
             position: absolute;
             left: 73%;
@@ -246,6 +250,7 @@
                 img {
                     animation-duration: 2s;
                     animation-name: open-page;
+                    animation-fill-mode:forwards;
                     height: 100%;
                 }
             }

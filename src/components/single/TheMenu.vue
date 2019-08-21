@@ -1,7 +1,7 @@
 <template lang="pug">
     i.menu
-        div(:style="backgoundColor").line.line-1
-        div(:style="backgoundColor").line.line-2
+        div(:style="backgroundColor").line.line-1
+        div(:style="backgroundColor").line.line-2
 </template>
 
 <script lang="ts">
@@ -13,7 +13,7 @@
     })
     export default class TheMenu extends Vue {
       @profileModule.Getter('schema') schema!: ISchema;
-      get backgoundColor() {
+      get backgroundColor() {
         return {
           'background-color': this.schema.dominant,
         };

@@ -1,8 +1,8 @@
 const proxy = {
     '/api': {
-        target: 'localhost:3000',
-        secure: false,
-        changOrigin: true
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false
     },
 }
 module.exports = proxy

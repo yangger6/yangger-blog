@@ -6,5 +6,4 @@ export const getters: GetterTree<ProfileState, RootState> = {
   schema(state: ProfileState): ISchema {
     return state.schema;
   },
-
 };
