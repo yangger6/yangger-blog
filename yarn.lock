@@ -3600,6 +3600,11 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
+fecha@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.npm.taobao.org/fecha/download/fecha-3.0.3.tgz#fabbd416497649a42c24d34bfa726b579203a1e2"
+  integrity sha1-+rvUFkl2SaQsJNNL+nJrV5IDoeI=
+
 figgy-pudding@^3.5.1:
   version "3.5.1"
   resolved "https://registry.npmjs.org/figgy-pudding/-/figgy-pudding-3.5.1.tgz#862470112901c727a0e495a80744bd5baa1d6790"

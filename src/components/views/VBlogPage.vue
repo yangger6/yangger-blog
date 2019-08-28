@@ -1,60 +1,74 @@
 <template lang="pug">
-    section.v-blog-page(:class="{'open-page': schema.openPage}")
+    section.v-blog-page(:class="{'open-page': schema.openPage && isCurrentBlog}")
         header
             .introducer
-                p(:style="dominantStyle") When a Web Design Template Makes Sense. In general …When a Web Design Template Makes Sense
+                p(:style="dominantStyle") {{blog.describe}}
         main
             a.number(:style="dominantStyle")
-                | 01
+                | {{pad(blog.id)}}
             .mask(@click="openPage")
                 img(:src="imgSrc" :style="{filter: `drop-shadow(0 20px 20px ${schema.dominant})`}")
         footer
             .line
             p.info
                 span.tags(:style="secondaryStyle")
-                    a HTML5
-                    a CSS3
+                    a(v-for='tag in blog.tags' :key="tag") {{tag}}
             div.title
-                span.date
-                    | 2019-05-23
-                h1(:style="dominantStyle") I Create Website Design, that Make Sense.
+                span.date.update-time
+                    | {{blog.updateTime | date-format}}
+                h1(:style="dominantStyle") {{blog.title}}
                 a.view(:style="secondaryStyle") VIEW MORE
-
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
-  import analyze from 'rgbaster';
+  import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
   import {namespace} from 'vuex-class';
   import {DOMINANT_CHANGE, ISchema, OPENPAGE_CHANGE, SECONDARY_CHANGE} from '../../store/profile/types';
+  import {IBlogItem} from '../../interface/IServices/IBlog';
   const profileModule = namespace('profile');
   @Component({
   })
   export default class VBlogPage extends Vue {
     @profileModule.Getter('schema') schema!: ISchema;
+    @profileModule.State('blogId') blogId!: number;
     @profileModule.Mutation(DOMINANT_CHANGE) updateDominant!: (color: string) => void;
     @profileModule.Mutation(SECONDARY_CHANGE) updateSecondary!: (color: string) => void;
     @profileModule.Mutation(OPENPAGE_CHANGE) updatePage!: (show: boolean) => void;
-    imgSrc: string = require('@/assets/background.png');
+    @Prop({
+      type: Object,
+      default() {
+        return {};
+      },
+    }) blog!: IBlogItem;
+    imgSrc: string = '';
+    currentSchema: ISchema = {
+      dominant: '',
+      secondary: '',
+      openPage: false,
+    };
     created() {
-      this.getImageColor();
+      this.imgSrc = this.blog.cover;
     }
-    async getImageColor() {
-      const result = await analyze(
-        this.imgSrc,
-        {
-          ignore: [
-            'rgb(255, 255, 255)',
-            'rgb(0, 0, 0)',
-          ],
-        });
-      if (result && result.length) {
-        this.updateDominant(result[0].color);
-        this.updateSecondary(result[1].color);
-      }
+    updateSchemaBySelf() {
+      this.updateDominant(this.currentSchema.dominant);
+      this.updateSecondary(this.currentSchema.secondary);
     }
     openPage() {
-      this.updatePage(true);
+      if (this.isCurrentBlog) {
+        this.updatePage(true);
+      }
+    }
+    @Watch('blogId')
+    updateSchema(blogId: number) {
+      if (this.blogId === this.blog.id) {
+        this.updateSchemaBySelf();
+      }
+    }
+    pad(num: number) {
+      return (1e15 + num + '').slice(-2);
+    }
+    get isCurrentBlog() {
+      return this.blogId === this.blog.id;
     }
     get dominantStyle() {
       return {
@@ -86,21 +100,17 @@
                     padding-right: 70px;
                 }
             }
-            /*& + section {*/
-            /*min-width: 360px;*/
-            /*}*/
         }
     }
     section{
         display: flex;
         width: 100%;
         height: 100%;
-        > * {
+        * {
             transition: .3s all ease-in-out;
         }
         & + section{
             position: absolute;
-            left: 73%;
             header{
                 opacity: 0;
             }
@@ -127,6 +137,8 @@
                 p {
                     font-style: italic;
                     font-weight: 300;
+                    width: 65%;
+                    word-wrap: break-word;
                 }
                 position: absolute;
                 font-size: 1.8rem;
@@ -186,7 +198,7 @@
             .line{
                 top: 0;
                 position: absolute;
-                left: 50%;
+                left: 45%;
                 height: 100%;
                 border-right: 1px solid #d2d2d2;
             }
@@ -202,6 +214,10 @@
                     color: #8b8b8b;
                     font-style: italic;
                     font-weight: 300;
+                    &.update-time + .create-time{
+                        text-decoration: line-through;
+                        top: -2rem;
+                    }
                 }
                 h1{
                     position: absolute;

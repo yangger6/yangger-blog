@@ -1,22 +1,55 @@
 <template lang="pug">
     .home.container
         the-menu
-        v-blog-page
-        v-blog-page
+        .move-box(:style="moveStyle")
+            v-blog-page(v-for="(blog, index) in blogList" :key="blog.index" :blog="blog" @click.native="changeSelectBlog(blog.id, index)" :style="{left: index * 73 + '%'}")
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import {Component, Vue} from 'vue-property-decorator';
 import VBlogPage from '@/components/views/VBlogPage.vue';
 import TheMenu from '@/components/single/TheMenu.vue';
-import IBlog from '../api/IServices/IBlog';
+import IBlog, {IBlogItem} from '../interface/IServices/IBlog';
+import {namespace} from 'vuex-class';
+import {BLOGID_CHANGE} from '../store/profile/types';
+const profileModule = namespace('profile');
 
 @Component({
     components: {TheMenu, VBlogPage},
 })
 export default class Home extends Vue {
+  @profileModule.Mutation(BLOGID_CHANGE) updateBlogId!: (blogId: number) => void;
+  blogList: IBlogItem[] = [];
+  currentIndex: number = 0;
+  stopAnimation: boolean = false;
   async created() {
-    const result = await IBlog.post();
+    try {
+      const {data} = await IBlog.get();
+      this.updateBlogId(data[0].id);
+      this.blogList = [...data, data[0], data[1]];
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  changeSelectBlog(blogId: number, index: number) {
+    if (this.blogList.length === index + 2) {
+      setTimeout(() => {
+        this.stopAnimation = true;
+        this.currentIndex = 0;
+        this.$nextTick(() => {
+          this.stopAnimation = false;
+        });
+      }, 510);
+    }
+    this.currentIndex = index;
+    this.updateBlogId(blogId);
+  }
+  get moveStyle() {
+    return {
+      width: this.blogList.length * 100 + '%',
+      transform: `translate3d(-${this.currentIndex * 73}%, 0, 0)`,
+      transition: this.stopAnimation ? 'none' : 'all .5s ease-in-out',
+    };
   }
 }
 </script>
@@ -24,5 +57,9 @@ export default class Home extends Vue {
     .container{
         display: flex;
         flex: 1;
+        .move-box {
+            position: relative;
+            display: flex;
+        }
     }
 </style>

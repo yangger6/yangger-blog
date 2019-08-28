@@ -1,5 +1,5 @@
 import axios from './baseAxios';
-import {IServiceProxyOptions} from '@/api/IServices/IBaseService';
+import {IServiceProxyOptions} from '@/interface/IServices/IBaseService';
 import apiConfig from '@/config/api';
 export default class BaseService<R> {
   post<T>(url: string = '', params: object = {}): Promise<R> {
@@ -24,12 +24,11 @@ export default class BaseService<R> {
             args[0] = `${apiConfig.prefix}/${basePath}/${args[0] || ''}`;
             return target[ property ] (...args);
           } else {
-            const api = target.interfaceOpts[property];
             let url = '';
             url = property.replace(/([A-Z])/g, '-$1').toLowerCase();
             let method = 'post';
             if (requestMethodMap) {
-              method = requestMethodMap[property];
+              method = requestMethodMap[property] || method;
             }
             if (target[method]) {
               const data = await target[method](`${apiConfig.prefix}/${basePath}/${url}`, ...args);

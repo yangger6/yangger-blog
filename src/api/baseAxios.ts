@@ -35,7 +35,7 @@ axios.interceptors.response.use(
       data.data = data.data || {};
       return data;
     }
-    if (data.status === '200' || data.success === true) {
+    if (status === 200 || data.msg === 'ok') {
       return data.data;
     } else {
       return Promise.reject(data);

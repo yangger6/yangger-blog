@@ -12,6 +12,7 @@ export const state: ProfileState = {
     dominant: 'rgb(72, 109, 131)',
     openPage: false,
   },
+  blogId: 0,
 };
 
 const namespaced: boolean = true;
