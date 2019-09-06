@@ -7,10 +7,10 @@ import { RootState } from '../types';
 
 export const state: ProfileState = {
   error: false,
-  schema: {
+  openPage: false,
+  theme: {
     secondary: '#5A5AFF',
     dominant: 'rgb(72, 109, 131)',
-    openPage: false,
   },
   blogId: 0,
 };

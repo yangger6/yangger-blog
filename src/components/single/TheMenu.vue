@@ -1,5 +1,5 @@
 <template lang="pug">
-    i.menu(@click="updatePage(false)" :class="{'open-delay': schema.openPage}")
+    i.menu(@click="updatePage(false)" :class="{'open-delay': openPage}")
         div(:style="backgroundColor").line.line-1
         div(:style="backgroundColor").line.line-2
 </template>
@@ -7,16 +7,17 @@
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
     import {namespace} from 'vuex-class';
-    import {ISchema, OPENPAGE_CHANGE} from '../../store/profile/types';
+    import {ITheme, OPENPAGE_CHANGE} from '../../store/profile/types';
     const profileModule = namespace('profile');
     @Component({
     })
     export default class TheMenu extends Vue {
-      @profileModule.Getter('schema') schema!: ISchema;
+      @profileModule.Getter('theme') theme!: ITheme;
+      @profileModule.State('openPage') openPage!: boolean;
       @profileModule.Mutation(OPENPAGE_CHANGE) updatePage!: (show: boolean) => void;
       get backgroundColor() {
         return {
-          'background-color': this.schema.dominant,
+          'background-color': this.theme.dominant,
         };
       }
     }

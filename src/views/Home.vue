@@ -2,7 +2,12 @@
     .home.container
         the-menu
         .move-box(:style="moveStyle")
-            v-blog-page(v-for="(blog, index) in blogList" :key="blog.index" :blog="blog" @click.native="changeSelectBlog(blog.id, index)" :style="{left: index * 73 + '%'}")
+            v-blog-page(
+            v-for="(blog, index) in blogList"
+            :key="blog.index" :blog="blog"
+            @click.native="changeSelectBlog(blog.id, index)"
+            :style="{left: index * 73 + '%'}"
+            @updateTheme="updateTheme")
 </template>
 
 <script lang="ts">
@@ -11,7 +16,7 @@ import VBlogPage from '@/components/views/VBlogPage.vue';
 import TheMenu from '@/components/single/TheMenu.vue';
 import IBlog, {IBlogItem} from '../interface/IServices/IBlog';
 import {namespace} from 'vuex-class';
-import {BLOGID_CHANGE} from '../store/profile/types';
+import {BLOGID_CHANGE, ITheme, THEME_CHANGE} from '../store/profile/types';
 const profileModule = namespace('profile');
 
 @Component({
@@ -19,6 +24,7 @@ const profileModule = namespace('profile');
 })
 export default class Home extends Vue {
   @profileModule.Mutation(BLOGID_CHANGE) updateBlogId!: (blogId: number) => void;
+  @profileModule.Mutation(THEME_CHANGE) updateTheme!: (theme: ITheme) => void;
   blogList: IBlogItem[] = [];
   currentIndex: number = 0;
   stopAnimation: boolean = false;
@@ -26,6 +32,7 @@ export default class Home extends Vue {
     try {
       const {data} = await IBlog.get();
       this.updateBlogId(data[0].id);
+      this.updateTheme(data[0].theme);
       this.blogList = [...data, data[0], data[1]];
     } catch (e) {
       console.log(e);

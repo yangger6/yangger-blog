@@ -1,13 +1,13 @@
 <template lang="pug">
-    section.v-blog-page(:class="{'open-page': schema.openPage && isCurrentBlog}")
+    section.v-blog-page(:class="{'open-page': openPage && isCurrentBlog}")
         header
             .introducer
                 p(:style="dominantStyle") {{blog.describe}}
         main
             a.number(:style="dominantStyle")
                 | {{pad(blog.id)}}
-            .mask(@click="openPage")
-                img(:src="imgSrc" :style="{filter: `drop-shadow(0 20px 20px ${schema.dominant})`}")
+            .mask(@click="openPageHandle")
+                img(:src="imgSrc" :style="{filter: `drop-shadow(0 20px 20px ${theme.dominant})`}")
         footer
             .line
             p.info
@@ -23,16 +23,15 @@
 <script lang="ts">
   import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
   import {namespace} from 'vuex-class';
-  import {DOMINANT_CHANGE, ISchema, OPENPAGE_CHANGE, SECONDARY_CHANGE} from '../../store/profile/types';
+  import {ITheme, OPENPAGE_CHANGE} from '../../store/profile/types';
   import {IBlogItem} from '../../interface/IServices/IBlog';
   const profileModule = namespace('profile');
   @Component({
   })
   export default class VBlogPage extends Vue {
-    @profileModule.Getter('schema') schema!: ISchema;
+    @profileModule.Getter('theme') theme!: ITheme;
+    @profileModule.State('openPage') openPage!: boolean;
     @profileModule.State('blogId') blogId!: number;
-    @profileModule.Mutation(DOMINANT_CHANGE) updateDominant!: (color: string) => void;
-    @profileModule.Mutation(SECONDARY_CHANGE) updateSecondary!: (color: string) => void;
     @profileModule.Mutation(OPENPAGE_CHANGE) updatePage!: (show: boolean) => void;
     @Prop({
       type: Object,
@@ -41,27 +40,22 @@
       },
     }) blog!: IBlogItem;
     imgSrc: string = '';
-    currentSchema: ISchema = {
-      dominant: '',
-      secondary: '',
-      openPage: false,
-    };
+
     created() {
       this.imgSrc = this.blog.cover;
     }
-    updateSchemaBySelf() {
-      this.updateDominant(this.currentSchema.dominant);
-      this.updateSecondary(this.currentSchema.secondary);
+    updateThemeBySelf() {
+      this.$emit('updateTheme', this.blog.theme);
     }
-    openPage() {
+    openPageHandle() {
       if (this.isCurrentBlog) {
         this.updatePage(true);
       }
     }
     @Watch('blogId')
-    updateSchema(blogId: number) {
+    updateSchema() {
       if (this.blogId === this.blog.id) {
-        this.updateSchemaBySelf();
+        this.updateThemeBySelf();
       }
     }
     pad(num: number) {
@@ -72,14 +66,14 @@
     }
     get dominantStyle() {
       return {
-        'color': this.schema.dominant,
-        'border-color': this.schema.secondary,
+        'color': this.theme.dominant,
+        'border-color': this.theme.secondary,
       };
     }
     get secondaryStyle() {
       return {
-        'color': this.schema.dominant,
-        'border-color': this.schema.secondary,
+        'color': this.theme.dominant,
+        'border-color': this.theme.secondary,
       };
     }
   }

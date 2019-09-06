@@ -1,5 +1,6 @@
 import {createProxy} from '@/api/BaseService';
 import {IPageResult} from '@/interface/IBase';
+import {ITheme} from '@/store/profile/types';
 
 export interface IBlogItem {
   id: number;
@@ -12,6 +13,7 @@ export interface IBlogItem {
   describe: string;
   body: string;
   author: string;
+  theme: ITheme;
   createTime: Date;
   updateTime: Date;
 }
