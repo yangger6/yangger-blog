@@ -1,12 +1,13 @@
 <template lang="pug">
     .home.container
         the-menu
-        .move-box(:style="moveStyle")
+        .move-box(ref='box' :style="{width: blogList.length * 100 + '%'}")
             v-blog-page(
             v-for="(blog, index) in blogList"
-            :key="blog.index" :blog="blog"
-            @click.native="changeSelectBlog(blog.id, index)"
+            :key="index" :blog="blog"
             :style="{left: index * 73 + '%'}"
+            :index="getIndex(index)",
+            @click.native="changeSelectBlog(blog.id, index)"
             @updateTheme="updateTheme")
 </template>
 
@@ -23,40 +24,63 @@ const profileModule = namespace('profile');
     components: {TheMenu, VBlogPage},
 })
 export default class Home extends Vue {
+  @profileModule.State('openPage') openPage!: boolean;
   @profileModule.Mutation(BLOGID_CHANGE) updateBlogId!: (blogId: number) => void;
   @profileModule.Mutation(THEME_CHANGE) updateTheme!: (theme: ITheme) => void;
   blogList: IBlogItem[] = [];
   currentIndex: number = 0;
-  stopAnimation: boolean = false;
+  isAnimation: boolean = false; // 是否开始动画
+  timer: any = null;
   async created() {
     try {
       const {data} = await IBlog.get();
-      this.updateBlogId(data[0].id);
-      this.updateTheme(data[0].theme);
+      const {id, theme} = data[0];
+      this.updateBlogId(id);
+      this.updateTheme(theme);
       this.blogList = [...data, data[0], data[1]];
     } catch (e) {
       console.log(e);
     }
   }
-  changeSelectBlog(blogId: number, index: number) {
-    if (this.blogList.length === index + 2) {
-      setTimeout(() => {
-        this.stopAnimation = true;
-        this.currentIndex = 0;
-        this.$nextTick(() => {
-          this.stopAnimation = false;
-        });
-      }, 510);
-    }
-    this.currentIndex = index;
-    this.updateBlogId(blogId);
+  getIndex(index: number) {
+    const BLOG_LENGTH = this.blogList.length;
+    // TODO 短时间应该写不到99条Blog 或者改成只取10条
+    const numberHelper = (num: number) => ('0' + num).slice(-2);
+    return index + 2 >= BLOG_LENGTH ? numberHelper(BLOG_LENGTH - index - 1) : numberHelper(index + 1);
   }
-  get moveStyle() {
-    return {
-      width: this.blogList.length * 100 + '%',
-      transform: `translate3d(-${this.currentIndex * 73}%, 0, 0)`,
-      transition: this.stopAnimation ? 'none' : 'all .5s ease-in-out',
-    };
+  changeSelectBlog(blogId: number, index: number) {
+    if (this.currentIndex !== index && !this.openPage) {
+      this.currentIndex = index;
+      this.updateBlogId(blogId);
+      this.movingPage(index);
+    }
+  }
+  movingPage(index: number, time: number = 1000) {
+    const box: HTMLElement = this.$refs.box as any;
+    if (!this.isAnimation) {
+      let reFresh = false;
+      if (index + 2 === this.blogList.length) {
+        reFresh = true;
+      }
+      const stepLength = 73;
+      let startX = (index - 1) * stepLength;
+      const endX = index * stepLength;
+      const LOOP = () => {
+        const MOVE_X =  73 / (time / 60);
+        startX += MOVE_X;
+        box.style.left = `-${Math.min(startX, endX)}%`;
+        if (startX > endX) {
+          if (reFresh) {
+            setTimeout(() => box.style.left = '0%', 0);
+          }
+          return window.cancelAnimationFrame(this.timer);
+        }
+        this.timer = requestAnimationFrame(() => {
+          LOOP();
+        });
+      };
+      LOOP();
+    }
   }
 }
 </script>

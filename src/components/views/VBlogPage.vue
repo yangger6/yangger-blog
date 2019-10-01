@@ -5,7 +5,7 @@
                 p(:style="dominantStyle") {{blog.describe}}
         main
             a.number(:style="dominantStyle")
-                | {{pad(blog.id)}}
+                | {{index}}
             .mask(@click="openPageHandle")
                 img(:src="imgSrc" :style="{filter: `drop-shadow(0 20px 20px ${theme.dominant})`}")
         footer
@@ -17,7 +17,7 @@
                 span.date.update-time
                     | {{blog.updateTime | date-format}}
                 h1(:style="dominantStyle") {{blog.title}}
-                a.view(:style="secondaryStyle") VIEW MORE
+                a.view(:style="secondaryStyle" @click="openPageHandle") VIEW MORE
 </template>
 
 <script lang="ts">
@@ -39,6 +39,7 @@
         return {};
       },
     }) blog!: IBlogItem;
+    @Prop(Number) index!: number;
     imgSrc: string = '';
 
     created() {
@@ -57,9 +58,6 @@
       if (this.blogId === this.blog.id) {
         this.updateThemeBySelf();
       }
-    }
-    pad(num: number) {
-      return (1e15 + num + '').slice(-2);
     }
     get isCurrentBlog() {
       return this.blogId === this.blog.id;
