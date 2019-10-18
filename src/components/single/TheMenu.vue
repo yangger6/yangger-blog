@@ -8,13 +8,20 @@
     import { Component, Vue } from 'vue-property-decorator';
     import {namespace} from 'vuex-class';
     import {ITheme, OPENPAGE_CHANGE} from '../../store/profile/types';
+
     const profileModule = namespace('profile');
-    @Component({
-    })
+
+    @Component({})
     export default class TheMenu extends Vue {
-      @profileModule.Getter('theme') theme!: ITheme;
-      @profileModule.State('openPage') openPage!: boolean;
-      @profileModule.Mutation(OPENPAGE_CHANGE) updatePage!: (show: boolean) => void;
+      @profileModule.Getter('theme')
+      theme!: ITheme;
+
+      @profileModule.State('openPage')
+      openPage!: boolean;
+
+      @profileModule.Mutation(OPENPAGE_CHANGE)
+      updatePage!: (show: boolean) => void;
+
       get backgroundColor() {
         return {
           'background-color': this.theme.dominant,

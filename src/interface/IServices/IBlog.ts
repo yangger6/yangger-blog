@@ -13,6 +13,7 @@ export interface IBlogItem {
   describe: string;
   body: string;
   author: string;
+  html: string;
   theme: ITheme;
   createTime: Date;
   updateTime: Date;

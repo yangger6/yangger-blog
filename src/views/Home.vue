@@ -5,7 +5,7 @@
             v-blog-page(
             v-for="(blog, index) in blogList"
             :key="index" :blog="blog"
-            :style="{left: index * 73 + '%'}"
+            :style="{left: index * 73 + '%', 'z-index': -index}"
             :index="getIndex(index)",
             @click.native="changeSelectBlog(blog.id, index)"
             @updateTheme="updateTheme")
@@ -37,7 +37,11 @@ export default class Home extends Vue {
       const {id, theme} = data[0];
       this.updateBlogId(id);
       this.updateTheme(theme);
-      this.blogList = [...data, data[0], data[1]];
+      const copyBlog: IBlogItem = JSON.parse(JSON.stringify(data[0]));
+      copyBlog.id = -1;
+      const copyBlog1: IBlogItem = JSON.parse(JSON.stringify(data[1]));
+      copyBlog1.id = -2;
+      this.blogList = [...data, copyBlog, copyBlog1];
     } catch (e) {
       console.log(e);
     }

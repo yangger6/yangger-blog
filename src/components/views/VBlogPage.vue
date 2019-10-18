@@ -17,16 +17,24 @@
                 span.date.update-time
                     | {{blog.updateTime | date-format}}
                 h1(:style="dominantStyle") {{blog.title}}
+                .introducer
+                    p(:style="dominantStyle") {{blog.describe}}
                 a.view(:style="secondaryStyle" @click="openPageHandle") VIEW MORE
+            v-mark-down(:html="blog.html" v-if="openPage && isCurrentBlog")
 </template>
 
 <script lang="ts">
   import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
   import {namespace} from 'vuex-class';
-  import {ITheme, OPENPAGE_CHANGE} from '../../store/profile/types';
-  import {IBlogItem} from '../../interface/IServices/IBlog';
+  import {ITheme, OPENPAGE_CHANGE} from '@/store/profile/types';
+  import {IBlogItem} from '@/interface/IServices/IBlog';
+  import VMarkDown from '@/components/views/VMarkDown.vue';
   const profileModule = namespace('profile');
+
   @Component({
+      components: {
+          VMarkDown,
+      },
   })
   export default class VBlogPage extends Vue {
     @profileModule.Getter('theme') theme!: ITheme;
@@ -39,7 +47,7 @@
         return {};
       },
     }) blog!: IBlogItem;
-    @Prop(Number) index!: number;
+    @Prop(String) index!: string;
     imgSrc: string = '';
 
     created() {
@@ -171,6 +179,27 @@
             padding-top: 50px;
             padding-left: 100px;
             padding-right: 150px;
+            overflow: auto;
+            .introducer{
+                &:before{
+                    content: '';
+                    position: absolute;
+                    left: -10px;
+                    width: 2px;
+                    height: 30px;
+                    background: #262626;
+                }
+                p {
+                    font-style: italic;
+                    font-weight: 300;
+                    word-wrap: break-word;
+                }
+                position: absolute;
+                font-size: 1.8rem;
+                bottom: 0;
+                opacity: 0;
+                padding-right: 50px;
+            }
             .info{
                 display: flex;
                 justify-content: space-between;
@@ -231,6 +260,10 @@
                     }
                 }
             }
+            article{
+                position: relative;
+                opacity: 0;
+            }
         }
         /*& + section {*/
         /*width: 25%;*/
@@ -268,6 +301,18 @@
                 animation-delay: 2s;
                 animation-duration: .7s;
                 animation-name: up-title;
+                animation-fill-mode:forwards;
+            }
+            .introducer{
+                animation-delay: 2.2s;
+                animation-duration: .5s;
+                animation-name: up-describe;
+                animation-fill-mode:forwards;
+            }
+            article{
+                animation-delay: 2.7s;
+                animation-duration: 1s;
+                animation-name: up-html;
                 animation-fill-mode:forwards;
             }
         }
