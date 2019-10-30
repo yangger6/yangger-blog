@@ -1,5 +1,5 @@
 <template lang="pug">
-    section.v-blog-page(:class="{'open-page': openPage && isCurrentBlog}")
+    section.v-blog-page(:class="{'open-page': openPage && isCurrentBlog}" :style="{'z-index': openPage && isCurrentBlog ? '999': ''}")
         header
             .introducer
                 p(:style="dominantStyle") {{blog.describe}}
@@ -21,6 +21,7 @@
                     p(:style="dominantStyle") {{blog.describe}}
                 a.view(:style="secondaryStyle" @click="openPageHandle") VIEW MORE
             v-mark-down(:html="blog.html" v-if="openPage && isCurrentBlog")
+            the-gitalk(v-if="openPage && isCurrentBlog")
 </template>
 
 <script lang="ts">
@@ -29,10 +30,12 @@
   import {ITheme, OPENPAGE_CHANGE} from '@/store/profile/types';
   import {IBlogItem} from '@/interface/IServices/IBlog';
   import VMarkDown from '@/components/views/VMarkDown.vue';
+  import TheGitalk from '@/components/single/TheGitalk.vue';
   const profileModule = namespace('profile');
 
   @Component({
       components: {
+          TheGitalk,
           VMarkDown,
       },
   })
@@ -52,14 +55,21 @@
 
     created() {
       this.imgSrc = this.blog.cover;
+      this.loadImageListPosition();
     }
     updateThemeBySelf() {
       this.$emit('updateTheme', this.blog.theme);
     }
     openPageHandle() {
       if (this.isCurrentBlog) {
+        this.$router.replace(`/blog/${this.blogId}`);
+        document.title = this.blog.title;
         this.updatePage(true);
       }
+    }
+    loadImageListPosition() {
+        console.log(1);
+        debugger
     }
     @Watch('blogId')
     updateSchema() {
@@ -179,7 +189,7 @@
             padding-top: 50px;
             padding-left: 100px;
             padding-right: 150px;
-            overflow: auto;
+            overflow: hidden;
             .introducer{
                 &:before{
                     content: '';
@@ -297,6 +307,10 @@
             }
         }
         footer {
+            animation-delay: 2.7s;
+            animation-duration: 0s;
+            animation-name: footer-hidden-to-show;
+            animation-fill-mode:forwards;
             .title {
                 animation-delay: 2s;
                 animation-duration: .7s;

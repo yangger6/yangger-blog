@@ -5,7 +5,7 @@
             v-blog-page(
             v-for="(blog, index) in blogList"
             :key="index" :blog="blog"
-            :style="{left: index * 73 + '%', 'z-index': -index}"
+            :style="{left: index * 73 + '%'}"
             :index="getIndex(index)",
             @click.native="changeSelectBlog(blog.id, index)"
             @updateTheme="updateTheme")

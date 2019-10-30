@@ -31,7 +31,7 @@
 </script>
 <style lang="less" scoped>
     .menu{
-        z-index: 999;
+        z-index: 99999;
         width: 23px;
         height: 11px;
         position: fixed;
