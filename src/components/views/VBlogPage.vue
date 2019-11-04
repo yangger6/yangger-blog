@@ -8,7 +8,7 @@
                 | {{index}}
             .mask(@click="openPageHandle")
                 img(:src="imgSrc" :style="{filter: `drop-shadow(0 20px 20px ${theme.dominant})`}")
-        footer
+        footer(ref="blogPage")
             .line
             p.info
                 span.tags(:style="secondaryStyle")
@@ -20,7 +20,7 @@
                 .introducer
                     p(:style="dominantStyle") {{blog.describe}}
                 a.view(:style="secondaryStyle" @click="openPageHandle") VIEW MORE
-            v-mark-down(:html="blog.html" v-if="openPage && isCurrentBlog")
+            v-mark-down(:html="blog.html" v-if="openPage && isCurrentBlog" ref="article")
             the-gitalk(v-if="openPage && isCurrentBlog")
 </template>
 
@@ -31,6 +31,7 @@
   import {IBlogItem} from '@/interface/IServices/IBlog';
   import VMarkDown from '@/components/views/VMarkDown.vue';
   import TheGitalk from '@/components/single/TheGitalk.vue';
+  import {throttle} from '../../utils/decorators/helpful';
   const profileModule = namespace('profile');
 
   @Component({
@@ -53,9 +54,36 @@
     @Prop(String) index!: string;
     imgSrc: string = '';
 
+    lastScrollTop: number = 0;
+
     created() {
       this.imgSrc = this.blog.cover;
-      this.loadImageListPosition();
+    }
+    mounted() {
+        const context = this.$refs.blogPage as HTMLElement;
+        context.addEventListener('scroll', this.scrollYGetImage, false);
+    }
+    @throttle(1000)
+    scrollYGetImage(el: Event) {
+        const st = (el.target as HTMLElement).scrollTop;
+        const article = (this.$refs.article as Vue & {
+            scrollDownGetSrc: (scrollY: number) => string,
+            scrollUpGetSrc: (scrollY: number) => string,
+        });
+        if (st > this.lastScrollTop) {
+            // downscroll code
+            // 滚动高度 +  屏幕可视高度？
+            this.FadeInOutImage(article.scrollDownGetSrc(st));
+        } else {
+            // upscroll code
+            this.FadeInOutImage(article.scrollUpGetSrc(st));
+        }
+        this.lastScrollTop = st <= 0 ? 0 : st; // phone st maybe < 0
+    }
+    FadeInOutImage(src: string) {
+        if (src) {
+            this.imgSrc = src;
+        }
     }
     updateThemeBySelf() {
       this.$emit('updateTheme', this.blog.theme);
@@ -66,10 +94,6 @@
         document.title = this.blog.title;
         this.updatePage(true);
       }
-    }
-    loadImageListPosition() {
-        console.log(1);
-        debugger
     }
     @Watch('blogId')
     updateSchema() {
