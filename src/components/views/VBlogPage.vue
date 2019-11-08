@@ -7,7 +7,12 @@
             a.number(:style="dominantStyle")
                 | {{index}}
             .mask(@click="openPageHandle")
-                img(:src="imgSrc" :style="{filter: `drop-shadow(0 20px 20px ${theme.dominant})`}")
+                img(
+                v-for="(img, index) in coverImageList"
+                :style="{...currentCoverImageStyle(index), 'z-index': 50 - index}"
+                :src="img.src"
+                :key="img.src"
+                :alt="img.alt")
         footer(ref="blogPage")
             .line
             p.info
@@ -20,7 +25,7 @@
                 .introducer
                     p(:style="dominantStyle") {{blog.describe}}
                 a.view(:style="secondaryStyle" @click="openPageHandle") VIEW MORE
-            v-mark-down(:html="blog.html" v-if="openPage && isCurrentBlog" ref="article")
+            v-mark-down(:html="blog.html" v-if="openPage && isCurrentBlog" ref="article" @loaded="updateImageList")
             the-gitalk(v-if="openPage && isCurrentBlog")
 </template>
 
@@ -32,6 +37,8 @@
   import VMarkDown from '@/components/views/VMarkDown.vue';
   import TheGitalk from '@/components/single/TheGitalk.vue';
   import {throttle} from '../../utils/decorators/helpful';
+  import {ICoverImage} from '../../interface/components/IVMarkDown';
+  import {ICoverImageInfo} from '../../interface/components/IVBlogPage';
   const profileModule = namespace('profile');
 
   @Component({
@@ -45,6 +52,8 @@
     @profileModule.State('openPage') openPage!: boolean;
     @profileModule.State('blogId') blogId!: number;
     @profileModule.Mutation(OPENPAGE_CHANGE) updatePage!: (show: boolean) => void;
+
+    // prop
     @Prop({
       type: Object,
       default() {
@@ -52,38 +61,58 @@
       },
     }) blog!: IBlogItem;
     @Prop(String) index!: string;
-    imgSrc: string = '';
 
+    // data
+    coverImageList: ICoverImage[] = [];
     lastScrollTop: number = 0;
+    Scroll: {
+        lastScrollTop: number,
+        direction: 'up' | 'down',
+    } = {
+        lastScrollTop: 0,
+        direction: 'down',
+    };
+    coverImageStyle: ICoverImageInfo = {
+        width: 100,
+        height: 85,
+        opacity: 1,
+        index: 0,
+        src: this.blog.cover,
+    };
 
     created() {
-      this.imgSrc = this.blog.cover;
+      this.coverImageList = [{
+          min: 0,
+          alt: '',
+          src: this.blog.cover,
+      }];
     }
     mounted() {
         const context = this.$refs.blogPage as HTMLElement;
         context.addEventListener('scroll', this.scrollYGetImage, false);
     }
-    @throttle(1000)
+    @throttle(100) // 滚动防抖100ms
     scrollYGetImage(el: Event) {
         const st = (el.target as HTMLElement).scrollTop;
         const article = (this.$refs.article as Vue & {
-            scrollDownGetSrc: (scrollY: number) => string,
-            scrollUpGetSrc: (scrollY: number) => string,
+            scrollDownGetSrc: (imageList: ICoverImage[], scrollY: number) => ICoverImageInfo,
+            scrollUpGetSrc: (imageList: ICoverImage[], scrollY: number) => ICoverImageInfo,
         });
-        if (st > this.lastScrollTop) {
+        if (st > this.Scroll.lastScrollTop) {
             // downscroll code
             // 滚动高度 +  屏幕可视高度？
-            this.FadeInOutImage(article.scrollDownGetSrc(st));
+            this.Scroll.direction = 'up';
+            this.FadeInOutImage(article.scrollDownGetSrc(this.coverImageList, st));
         } else {
             // upscroll code
-            this.FadeInOutImage(article.scrollUpGetSrc(st));
+            this.Scroll.direction = 'down';
+            this.FadeInOutImage(article.scrollUpGetSrc(this.coverImageList, st));
         }
-        this.lastScrollTop = st <= 0 ? 0 : st; // phone st maybe < 0
+        this.Scroll.lastScrollTop = st <= 0 ? 0 : st; // phone st maybe < 0
     }
-    FadeInOutImage(src: string) {
-        if (src) {
-            this.imgSrc = src;
-        }
+    FadeInOutImage(img: ICoverImageInfo) {
+        this.coverImageStyle = img;
+        console.log(img.index);
     }
     updateThemeBySelf() {
       this.$emit('updateTheme', this.blog.theme);
@@ -95,11 +124,30 @@
         this.updatePage(true);
       }
     }
+    updateImageList(imageList: ICoverImage[]) {
+        // 动画结束后再加载图片 节省性能
+        setTimeout(() => {
+            this.coverImageStyle.height = 100; // 高度初始化
+            this.coverImageList = this.coverImageList.concat(imageList);
+        }, 1600);
+    }
     @Watch('blogId')
     updateSchema() {
       if (this.blogId === this.blog.id) {
         this.updateThemeBySelf();
       }
+    }
+    get currentCoverImageStyle() {
+        return (index: number) => {
+            return index === this.coverImageStyle.index
+                ? {
+                    filter: `drop-shadow(0 20px 20px ${this.theme.dominant})`,
+                    width: this.coverImageStyle.width + '%',
+                    height: this.coverImageStyle.height + '%',
+                    opacity: this.coverImageStyle.opacity,
+                }
+                : {};
+        };
     }
     get isCurrentBlog() {
       return this.blogId === this.blog.id;
@@ -193,6 +241,8 @@
             }
             .mask{
                 width: 100%;
+                overflow: hidden;
+                position: relative;
                 height: 100%;
                 border-left: 1px solid #d2d2d2;
                 border-right: 1px solid #d2d2d2;
@@ -200,7 +250,11 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                flex-wrap: wrap;
                 img{
+                    transition: all .1s ease-in-out;
+                    position: absolute;
+                    opacity: 1;
                     width: 100%;
                     height: 85%;
                     object-fit: cover;
@@ -323,9 +377,11 @@
             animation-fill-mode:forwards;
             .mask {
                 img {
-                    animation-duration: 2s;
-                    animation-name: open-page;
-                    animation-fill-mode:forwards;
+                    &:first-child{
+                        animation-duration: 2s;
+                        animation-name: open-page;
+                        animation-fill-mode:forwards;
+                    }
                     height: 100%;
                 }
             }
