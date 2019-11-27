@@ -1,5 +1,5 @@
 <template lang="pug">
-    section.v-blog-page(:class="{'open-page': openPage && isCurrentBlog}" :style="{'z-index': openPage && isCurrentBlog ? '999': ''}")
+    section.v-blog-page(:class="{'open-page': isCurrentOpenBlog}" :style="{'z-index': isCurrentOpenBlog ? '999': ''}")
         header
             .introducer
                 p(:style="dominantStyle") {{blog.describe}}
@@ -10,6 +10,7 @@
                 img(
                 v-for="(img, index) in coverImageList"
                 :style="{...currentCoverImageStyle(index), 'z-index': 50 - index}"
+                :class="fadeInOrOutClass(index)",
                 :src="img.src"
                 :key="img.src"
                 :alt="img.alt")
@@ -25,8 +26,8 @@
                 .introducer
                     p(:style="dominantStyle") {{blog.describe}}
                 a.view(:style="secondaryStyle" @click="openPageHandle") VIEW MORE
-            v-mark-down(:html="blog.html" v-if="openPage && isCurrentBlog" ref="article" @loaded="updateImageList")
-            the-gitalk(v-if="openPage && isCurrentBlog")
+            v-mark-down(:html="blog.html" v-if="isCurrentOpenBlog" ref="article" @loaded="updateImageList")
+            the-gitalk(v-if="isCurrentOpenBlog")
 </template>
 
 <script lang="ts">
@@ -98,14 +99,14 @@
             scrollDownGetSrc: (imageList: ICoverImage[], scrollY: number) => ICoverImageInfo,
             scrollUpGetSrc: (imageList: ICoverImage[], scrollY: number) => ICoverImageInfo,
         });
-        if (st > this.Scroll.lastScrollTop) {
+        if (st >= this.Scroll.lastScrollTop) {
             // downscroll code
             // 滚动高度 +  屏幕可视高度？
-            this.Scroll.direction = 'up';
+            this.Scroll.direction = 'down';
             this.FadeInOutImage(article.scrollDownGetSrc(this.coverImageList, st));
         } else {
             // upscroll code
-            this.Scroll.direction = 'down';
+            this.Scroll.direction = 'up';
             this.FadeInOutImage(article.scrollUpGetSrc(this.coverImageList, st));
         }
         this.Scroll.lastScrollTop = st <= 0 ? 0 : st; // phone st maybe < 0
@@ -137,20 +138,34 @@
         this.updateThemeBySelf();
       }
     }
+
+    @Watch('isCurrentOpenBlog')
+    clearCoverImageList(val: boolean) {
+        if (!val) { // close blog
+            this.coverImageList = [this.coverImageList[0]];
+        }
+    }
     get currentCoverImageStyle() {
         return (index: number) => {
+            if (!this.isCurrentOpenBlog) {
+                return {};
+            }
             return index === this.coverImageStyle.index
                 ? {
                     filter: `drop-shadow(0 20px 20px ${this.theme.dominant})`,
                     width: this.coverImageStyle.width + '%',
                     height: this.coverImageStyle.height + '%',
                     opacity: this.coverImageStyle.opacity,
+                    zIndex: 999,
                 }
                 : {};
         };
     }
     get isCurrentBlog() {
       return this.blogId === this.blog.id;
+    }
+    get isCurrentOpenBlog() {
+        return this.isCurrentBlog && this.openPage;
     }
     get dominantStyle() {
       return {
@@ -163,6 +178,19 @@
         'color': this.theme.dominant,
         'border-color': this.theme.secondary,
       };
+    }
+    get fadeInOrOutClass() {
+        return (imageIndex: number) => {
+            if (imageIndex < this.coverImageStyle.index) {
+                const isDownDirection = this.Scroll.direction === 'down';
+                return {
+                    'fade-out-move': isDownDirection,
+                    'fade-in-move': !isDownDirection,
+                };
+            } else {
+                return {};
+            }
+        };
     }
   }
 </script>
@@ -258,6 +286,9 @@
                     width: 100%;
                     height: 85%;
                     object-fit: cover;
+                    &.fade-in{
+
+                    }
                 }
             }
         }
