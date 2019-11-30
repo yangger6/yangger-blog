@@ -9,7 +9,7 @@
             .mask(@click="openPageHandle")
                 img(
                 v-for="(img, index) in coverImageList"
-                :style="{...currentCoverImageStyle(index), 'z-index': 50 - index}"
+                :style="{...currentCoverImageStyle(index)}"
                 :class="fadeInOrOutClass(index)",
                 :src="img.src"
                 :key="img.src"
@@ -158,7 +158,9 @@
                     opacity: this.coverImageStyle.opacity,
                     zIndex: 999,
                 }
-                : {};
+                : {
+                    zIndex: 500 - index - (this.coverImageStyle.index > index ? 200 : 0),
+                };
         };
     }
     get isCurrentBlog() {
