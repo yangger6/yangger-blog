@@ -41,16 +41,6 @@
         padding: 18px 11px;
         background: #fff;
         border-radius: 50%;
-        &:hover {
-            .line-1{
-                transform: rotate(135deg);
-                top: 6px;
-                position: relative;
-            }
-            .line-2{
-                transform: rotate(225deg);
-            }
-        }
         @keyframes animation-line-1{
             100% {
                 transform: rotate(135deg);

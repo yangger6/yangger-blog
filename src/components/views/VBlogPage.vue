@@ -15,18 +15,21 @@
                 :key="img.src"
                 :alt="img.alt")
         footer(ref="blogPage")
-            .line
-            p.info
-                span.tags(:style="secondaryStyle")
-                    a(v-for='tag in blog.tags' :key="tag") {{tag}}
-            div.title
-                span.date.update-time
-                    | {{blog.updateTime | date-format}}
-                h1(:style="dominantStyle") {{blog.title}}
-                .introducer
-                    p(:style="dominantStyle") {{blog.describe}}
-                a.view(:style="secondaryStyle" @click="openPageHandle") VIEW MORE
-            v-mark-down(:html="blog.html" v-if="isCurrentOpenBlog" ref="article" @loaded="updateImageList")
+            .padding-box
+                .full-height-page
+                    .line
+                    p.info
+                        span.tags(:style="secondaryStyle")
+                            a(v-for='tag in blog.tags' :key="tag") {{tag}}
+                    div.title
+                        span.date.update-time
+                            | {{blog.updateTime | date-format}}
+                        h1(:style="dominantStyle") {{blog.title}}
+                        .introducer
+                            p(:style="dominantStyle") {{blog.describe}}
+                        a.view(:style="secondaryStyle" @click="openPageHandle") VIEW MORE
+                v-mark-down(:html="blog.html" v-if="isCurrentOpenBlog" ref="article" @loaded="updateImageList")
+            v-author-box(:author="blog.author" :headImage="blog.headImage" v-if="isCurrentOpenBlog")
             the-gitalk(v-if="isCurrentOpenBlog")
 </template>
 
@@ -40,10 +43,12 @@
   import {throttle} from '../../utils/decorators/helpful';
   import {ICoverImage} from '../../interface/components/IVMarkDown';
   import {ICoverImageInfo} from '../../interface/components/IVBlogPage';
+  import VAuthorBox from '@/components/views/VAuthorBox.vue';
   const profileModule = namespace('profile');
 
   @Component({
       components: {
+          VAuthorBox,
           TheGitalk,
           VMarkDown,
       },
@@ -297,10 +302,20 @@
         footer{
             position: relative;
             flex: 1;
-            padding-top: 50px;
-            padding-left: 100px;
-            padding-right: 150px;
             overflow: hidden;
+            display: flex;
+            flex-wrap: wrap;
+            .padding-box{
+                padding-top: 50px;
+                padding-left: 100px;
+                padding-right: 150px;
+                width: 100%;
+                box-sizing: border-box;
+                flex: 1;
+            }
+            .full-height-page{
+                height: 100%;
+            }
             .introducer{
                 &:before{
                     content: '';
@@ -372,7 +387,7 @@
                     cursor: pointer;
                     line-height: 1.7rem;
                     position: absolute;
-                    left: 23%;
+                    left: 150px;
                     bottom: 0;
                     border-bottom: 1px solid;
                     transition: all .15s ease-in-out;
@@ -383,6 +398,9 @@
             }
             article{
                 position: relative;
+                opacity: 0;
+            }
+            .the-gitalk{
                 opacity: 0;
             }
         }
@@ -440,6 +458,14 @@
                 animation-delay: 2.7s;
                 animation-duration: 1s;
                 animation-name: up-html;
+                animation-fill-mode:forwards;
+            }
+            .the-gitalk{
+                padding: 20px;
+                flex: 1;
+                animation-duration: .3s;
+                animation-delay: 2.7s;
+                animation-name: fade-in;
                 animation-fill-mode:forwards;
             }
         }

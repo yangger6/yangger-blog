@@ -28,7 +28,7 @@
             this.imagePositionList = this.imagePositionList
                 .sort((prev: {min: number}, next: {min: number}) => {
                     return prev.min - next.min;
-            });
+                });
             this.$emit('loaded', this.imagePositionList);
         }
         scrollDownGetSrc(imageList: ICoverImage[], scrollY: number) {
@@ -61,19 +61,28 @@
         }
         scrollUpGetSrc(imageList: ICoverImage[], scrollY: number) {
             let deep = 0;
-            // 从下到上 先倒序
-            // const reverseList = Array.from(imageList).reverse();
+            // 从下到上
             for (const {min, src} of imageList) {
-                deep++;
-                const nextMin = imageList[deep].min; // 距离最近的上一个图片的距离顶部高度
-                if (scrollY >= min && scrollY <= nextMin) {
-                    const percentage = 1 - (scrollY - min) / (nextMin - min);
-                    const fallBack = percentage > 1; // 理论上缩小是不会出现放大的范畴
+                try {
+                    deep++;
+                    const nextMin = imageList[deep].min; // 距离最近的上一个图片的距离顶部高度
+                    if (scrollY >= min && scrollY <= nextMin) {
+                        const percentage = 1 - (scrollY - min) / (nextMin - min);
+                        const fallBack = percentage > 1; // 理论上缩小是不会出现放大的范畴
+                        return {
+                            src,
+                            width: fallBack ? 100 : 150 - (50 * percentage), // 最大长度缩放 150% 最小100%,
+                            height: fallBack ? 100 : 130 - (30 * percentage), // 最大高度缩放 130% 最小100%,
+                            opacity: fallBack ? 1 : percentage, // 最大0透明度，最小1,
+                            index: deep - 1,
+                        };
+                    }
+                } catch (e) {
                     return {
                         src,
-                        width: fallBack ? 100 : 150 - (50 * percentage), // 最大长度缩放 150% 最小100%,
-                        height: fallBack ? 100 : 130 - (30 * percentage), // 最大高度缩放 130% 最小100%,
-                        opacity: fallBack ? 1 : percentage, // 最大0透明度，最小1,
+                        width: 100,
+                        height: 100,
+                        opacity: 1,
                         index: deep - 1,
                     };
                 }

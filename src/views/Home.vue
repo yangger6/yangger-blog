@@ -3,6 +3,7 @@
         the-menu
         .move-box(ref='box' :style="{width: blogList.length * 100 + '%'}")
             v-blog-page(
+            :ref="'blogPage' + blog.id"
             v-for="(blog, index) in blogList"
             :key="index" :blog="blog"
             :style="{left: index * 73 + '%'}"
@@ -42,6 +43,16 @@ export default class Home extends Vue {
       const copyBlog1: IBlogItem = JSON.parse(JSON.stringify(data[1]));
       copyBlog1.id = -2;
       this.blogList = [...data, copyBlog, copyBlog1];
+      this.$nextTick(() => {
+          const selectBlogId = Number(this.$route.params.id);
+          if (selectBlogId) {
+              const selectBlogIndex = this.blogList.findIndex((blog) => blog.id === selectBlogId);
+              this.changeSelectBlog(selectBlogId, selectBlogIndex);
+              let vn: any = this.$refs[`blogPage${selectBlogId}`];
+              vn = vn && vn[0];
+              vn.openPageHandle();
+          }
+      });
     } catch (e) {
       console.log(e);
     }

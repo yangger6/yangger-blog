@@ -4,7 +4,7 @@
   </div>
 </template>
 <style lang="less">
-  @import '//at.alicdn.com/t/font_215287_8h7qrrlq5zh.css';
+  @import '//at.alicdn.com/t/font_215287_9391w9kcgqs.css';
   @font-face {
       font-family: "Fira Code Medium";
       src: url("./font/fira-code/FiraCode-Medium.ttf"),
