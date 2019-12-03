@@ -2,16 +2,16 @@
     .v-author-box
         .share-box(:style="dominantStyle")
             i.iconfont.icon-share
-        section.author-info
+        section.author-info(:style="secondaryStyle")
             header
                 .circle-box
                     img(:src="headImage")
             main
                 h2.author-name {{author || 'YANGGER'}}
-                p.author-profile Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.
+                p.author-profile TECHNOLOGY HOUSE CHANGES THE WORLD.
             footer
                 b MORE FROM AUTHOR
-                b.line
+                b.line(:style="{background: 'rgb(' + this.theme.secondary.join(',') + ')'}")
                 b.left
                     i.iconfont.icon-arrow-lift
                     | OLDER
@@ -33,12 +33,12 @@
         @profileModule.Getter('theme') theme!: ITheme;
         get dominantStyle() {
             return {
-                'background-color': this.theme.secondary,
+                'background-color': `rgb(${this.theme.dominant.join(',')})`,
             };
         }
         get secondaryStyle() {
             return {
-                color: this.theme.secondary,
+                color: `rgb(${this.theme.secondary.join(',')})`,
             };
         }
     }
@@ -96,6 +96,7 @@
                 justify-content: space-between;
                 .author-name{
                     font-size: 21px;
+                    width: 100%;
                 }
                 .author-profile{
                     font-size: 16px;
@@ -110,7 +111,6 @@
                 justify-content: space-between;
                 .line{
                     height: 2px;
-                    background: #000;
                     margin: 0 20px;
                     flex: 1;
                 }

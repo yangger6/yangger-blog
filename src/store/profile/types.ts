@@ -5,8 +5,8 @@ export interface ProfileState {
   blogId: number;
 }
 export interface ITheme {
-  dominant: string;
-  secondary: string;
+  dominant: number[];
+  secondary: number[];
 }
 // mutations
 export const DOMINANT_CHANGE =  'DOMINANT_CHANGE';

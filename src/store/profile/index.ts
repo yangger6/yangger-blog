@@ -9,8 +9,8 @@ export const state: ProfileState = {
   error: false,
   openPage: false,
   theme: {
-    secondary: '#5A5AFF',
-    dominant: 'rgb(72, 109, 131)',
+    secondary: [90, 90, 255],
+    dominant: [72, 109, 131],
   },
   blogId: 0,
 };

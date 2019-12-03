@@ -28,7 +28,7 @@
                         .introducer
                             p(:style="dominantStyle") {{blog.describe}}
                         a.view(:style="secondaryStyle" @click="openPageHandle") VIEW MORE
-                v-mark-down(:html="blog.html" v-if="isCurrentOpenBlog" ref="article" @loaded="updateImageList")
+                v-mark-down(:html="blog.body" v-if="isCurrentOpenBlog" ref="article" @loaded="updateImageList")
             v-author-box(:author="blog.author" :headImage="blog.headImage" v-if="isCurrentOpenBlog")
             the-gitalk(v-if="isCurrentOpenBlog")
 </template>
@@ -176,14 +176,14 @@
     }
     get dominantStyle() {
       return {
-        'color': this.theme.dominant,
-        'border-color': this.theme.secondary,
+          'color': `rgb(${this.theme.dominant.join(',')})`,
+          'border-color': `rgb(${this.theme.dominant.join(',')})`,
       };
     }
     get secondaryStyle() {
       return {
-        'color': this.theme.dominant,
-        'border-color': this.theme.secondary,
+          'color': `rgb(${this.theme.secondary.join(',')})`,
+          'border-color': `rgb(${this.theme.secondary.join(',')})`,
       };
     }
     get fadeInOrOutClass() {

@@ -10,10 +10,10 @@ import {
 } from './types';
 
 export const mutations: MutationTree<ProfileState> = {
-  [DOMINANT_CHANGE](state: ProfileState, payload: string) {
+  [DOMINANT_CHANGE](state: ProfileState, payload: number[]) {
     state.theme.dominant = payload;
   },
-  [SECONDARY_CHANGE](state: ProfileState, payload: string) {
+  [SECONDARY_CHANGE](state: ProfileState, payload: number[]) {
     state.theme.secondary = payload;
   },
   [THEME_CHANGE](state: ProfileState, payload: ITheme) {
