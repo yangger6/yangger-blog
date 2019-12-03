@@ -1,0 +1,86 @@
+// homePage
+@keyframes close-header {
+  from {
+    opacity: 0;
+    width: 25%;
+  }
+  to {
+    opacity: 0;
+    width: 0;
+    padding: 0;
+  }
+}
+@keyframes open-page {
+  0% {
+    width: 100%;
+    height: 85%;
+  }
+  15% {
+    width: 105%;
+    height: 88%;
+  }
+  30% {
+    width: 100%;
+    height: 85%;
+  }
+  45% {
+    width: 104%;
+    height: 87%;
+  }
+  60% {
+    width: 100%;
+    height: 85%;
+  }
+  80% {
+    width: 100%;
+    height: 100%;
+  }
+  100% {
+    filter: unset;
+  }
+}
+@keyframes open-main {
+  from {
+    width: 25%;
+  }
+  to {
+    width: 50%;
+  }
+}
+@keyframes up-title {
+  from {
+    top: 40%;
+  }
+  to {
+    top: 10%;
+  }
+}
+@keyframes up-describe {
+  form{
+    bottom: 0%;
+    opacity: 0;
+  }
+  to{
+    bottom: 40%;
+    opacity: 1;
+  }
+}
+@keyframes up-html {
+  form{
+    opacity: 0;
+    bottom: -1000px;
+  }
+  to{
+    opacity: 1;
+    bottom: 0;
+  }
+}
+
+@keyframes footer-hidden-to-show {
+  from {
+    overflow: hidden;
+  }
+  to {
+    overflow: auto;
+  }
+}
