@@ -1,4 +1,4 @@
-import axios from './baseAxios';
+import axios from './BaseAxios';
 import {IServiceProxyOptions} from '@/interface/IServices/IBaseService';
 import apiConfig from '@/config/api';
 export default class BaseService<R> {
