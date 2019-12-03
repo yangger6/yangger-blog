@@ -8,7 +8,7 @@
             :key="index" :blog="blog"
             :style="{left: index * 73 + '%'}"
             :index="getIndex(index)",
-            @click.native="changeSelectBlog(blog.id, index)"
+            @click.native="changeSelectBlog(blog.currentId || blog.id, index)"
             @updateTheme="updateTheme")
 </template>
 
@@ -39,8 +39,10 @@ export default class Home extends Vue {
       this.updateBlogId(id);
       this.updateTheme(theme);
       const copyBlog: IBlogItem = JSON.parse(JSON.stringify(data[0]));
+      copyBlog.currentId = copyBlog.id;
       copyBlog.id = -1;
       const copyBlog1: IBlogItem = JSON.parse(JSON.stringify(data[1]));
+      copyBlog1.currentId = copyBlog1.id;
       copyBlog1.id = -2;
       this.blogList = [...data, copyBlog, copyBlog1];
       this.$nextTick(() => {

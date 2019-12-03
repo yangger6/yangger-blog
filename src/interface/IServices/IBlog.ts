@@ -4,6 +4,7 @@ import {ITheme} from '@/store/profile/types';
 
 export interface IBlogItem {
   id: number;
+  currentId: number; // TODO 界面设计上的需要，后期可能会改
   cover: string;
   headImage: string;
   tags: string[];

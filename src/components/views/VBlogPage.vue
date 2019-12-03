@@ -1,5 +1,5 @@
 <template lang="pug">
-    section.v-blog-page(:class="{'open-page': isCurrentOpenBlog}" :style="{'z-index': isCurrentOpenBlog ? '999': ''}")
+    section.v-blog-page(:class="{'open-page': isCurrentOpenBlog, 'current': isCurrentBlog}" :style="{'z-index': isCurrentOpenBlog ? '999': ''}")
         header
             .introducer
                 p(:style="dominantStyle") {{blog.describe}}
@@ -209,7 +209,7 @@
             max-width: 1440px;
             main{
                 .mask{
-                    width: 375px;
+                    /*width: 375px;*/
                 }
             }
             footer {
@@ -226,11 +226,21 @@
         * {
             transition: .3s all ease-in-out;
         }
-        & + section{
-            position: absolute;
+        &.current {
+            .title{
+                opacity: 1;
+            }
+        }
+        &.current + section{
             header{
                 opacity: 0;
             }
+        }
+        &.open-page{
+            position: absolute;
+        }
+        & + section{
+            position: absolute;
             main {
                 .mask{
                     border: none;
@@ -317,6 +327,12 @@
                 height: 100%;
             }
             .introducer{
+                position: absolute;
+                font-size: 1.8rem;
+                bottom: 0;
+                opacity: 0;
+                top: 45%;
+                padding-right: 50px;
                 &:before{
                     content: '';
                     position: absolute;
@@ -330,11 +346,6 @@
                     font-weight: 300;
                     word-wrap: break-word;
                 }
-                position: absolute;
-                font-size: 1.8rem;
-                bottom: 0;
-                opacity: 0;
-                padding-right: 50px;
             }
             .info{
                 display: flex;
@@ -364,6 +375,7 @@
                 height: 250px;
                 position: relative;
                 top: 40%;
+                opacity: 0;
                 .date {
                     position: absolute;
                     top: 0;

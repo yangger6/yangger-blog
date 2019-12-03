@@ -45,7 +45,7 @@
 </script>
 <style lang="less">
     .v-author-box{
-        box-shadow: 0 -2px 4px #00000050;
+        box-shadow: 0 -4px 4px #00000050;
         width: 100%;
         height: 318px;
         padding: 65px;
