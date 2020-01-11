@@ -32,8 +32,10 @@ export default class Home extends Vue {
   currentIndex: number = 0;
   isAnimation: boolean = false; // 是否开始动画
   timer: any = null;
+  loading: boolean = false;
   async created() {
     try {
+      this.loading = true;
       const {data} = await IBlog.get();
       const {id, theme} = data[0];
       this.updateBlogId(id);
@@ -57,6 +59,8 @@ export default class Home extends Vue {
       });
     } catch (e) {
       console.log(e);
+    } finally {
+        this.loading = false;
     }
   }
   getIndex(index: number) {

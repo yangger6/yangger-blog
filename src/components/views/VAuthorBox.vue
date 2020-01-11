@@ -8,7 +8,7 @@
                     img(:src="headImage")
             main
                 h2.author-name {{author || 'YANGGER'}}
-                p.author-profile TECHNOLOGY HOUSE CHANGES THE WORLD.
+                p.author-profile TECHNOLOGY CHANGES THE WORLD.
             footer
                 b MORE FROM AUTHOR
                 b.line(:style="{background: 'rgb(' + this.theme.secondary.join(',') + ')'}")

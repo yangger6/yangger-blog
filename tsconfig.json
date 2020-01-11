@@ -10,7 +10,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "baseUrl": "../../../Downloads/vue-blog-2.0",
+    "baseUrl": "./",
     "types": [
       "webpack-env",
       "mocha",

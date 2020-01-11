@@ -33,7 +33,7 @@
     .menu{
         z-index: 99999;
         width: 23px;
-        height: 11px;
+        height: 9px;
         position: fixed;
         left: 50px;
         top: 50px;
@@ -70,6 +70,9 @@
         .line{
             height: 3px;
             transition: all .3s ease-in-out;
+        }
+        .line-1{
+            margin-top: -2px;
         }
         .line-2{
             margin-top: 3px;
