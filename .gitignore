@@ -36,3 +36,6 @@ yarn-error.log*
 # editor
 .idea
 .vscode
+
+# tools
+/tools

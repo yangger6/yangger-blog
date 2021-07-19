@@ -1,0 +1,12 @@
+html {
+    /*font-size: 62.5%;*/
+}
+/* aside */
+aside .logo {
+    width: 24.2rem;
+    height: 22rem;
+}
+
+html.dark body {
+    background: #000;
+}
