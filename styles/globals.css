@@ -3,8 +3,8 @@ html {
 }
 /* aside */
 aside .logo {
-    width: 24.2rem;
-    height: 22rem;
+    width: 242px;
+    height: 220px;
 }
 
 html.dark body {

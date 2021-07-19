@@ -11,7 +11,7 @@ const Aside = () => {
       {/*shadow*/}
       {/*<div className='absolute z-10 top-0 left-0 w-full h-1/2 bg-gradient-to-b from-black to-transparent'></div>*/}
       {/*person*/}
-      <div className='flex ml-11'>
+      <div className='flex mx-11 justify-center'>
         <Image src={darkPerson} alt={'person'}></Image>
       </div>
     </aside>
