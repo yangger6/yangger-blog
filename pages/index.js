@@ -1,17 +1,29 @@
-import Link from 'next/link'
-import Aside from '../components/Aside'
-export default function Home() {
+import React from 'react'
+import Layout from '../components/layout'
+import Seo from '../components/seo'
+import { fetchAPI } from '../lib/api'
+import Article from '../components/Article'
+
+const Home = ({ articles, categories, homepage }) => {
   return (
-    <div className={'flex mx-auto'}>
-      <Aside />
-      <main></main>
-      <footer></footer>
-    </div>
+    <Layout categories={categories}>
+      <Seo seo={homepage.seo} />
+      <Article />
+    </Layout>
   )
 }
-
 export async function getStaticProps() {
+  // Run API calls in parallel
+  const [articles, categories, homepage] = await Promise.all([
+    fetchAPI('/articles?status=published'),
+    fetchAPI('/categories'),
+    fetchAPI('/homepage'),
+  ])
+
   return {
-    props: {},
+    props: { articles, categories, homepage },
+    revalidate: 1,
   }
 }
+
+export default Home

@@ -1,4 +1,9 @@
+:root {
+    --theme-color: #7BF0BE;
+    --gray-green: #74CCA7;
+}
 html {
+    font-family: 'Inter','PingFang SC','Microsoft YaHei',Arial,sans-serif;
     /*font-size: 62.5%;*/
 }
 /* aside */
@@ -9,4 +14,32 @@ aside .logo {
 
 html.dark body {
     background: #000;
+}
+
+.full-image{
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+}
+.person {
+    width: 287px;
+    height: 387px;
+}
+
+.article {
+    position: relative;
+}
+
+.article:before{
+    content: ' ';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--theme-color);
+}
+
+/*日期*/
+.date {
+    font-family: Orbitron;
 }
