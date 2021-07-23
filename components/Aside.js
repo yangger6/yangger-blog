@@ -3,7 +3,9 @@ import Image from 'next/image'
 import darkLogo from '../public/dark-logo.svg'
 import darkPerson from '../public/dark-person.svg'
 import IconPark from './IconPark'
+import classNames from 'classnames'
 const Aside = () => {
+  const touchHover = 'transform translate-x-px6 transition-all'
   return (
     <aside className='flex flex-wrap flex-col w-full relative lg:w-275/16 lg:h-auto lg:border-r dark:border-primary lg:pl-px24'>
       <div className='profile flex w-full relative lg:h-px250 lg:border-b dark:border-primary'>
@@ -19,45 +21,19 @@ const Aside = () => {
       </div>
       <div className='tag-list w-full relative border-b dark:border-primary hidden lg:flex'>
         <div className='inner flex-col gap-y-px10 h-px300 flex w-full overflow-y-scroll'>
-          <div className='mt-px40 text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #php分页数据结构 (3)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
-          <div className='text-base dark:text-primary transform translate-x-px6 transition-all'>
-            #C语言 (2)
-          </div>
+          <div className='mt-px40 text-base dark:text-primary'>#php分页数据结构 (3)</div>
+          <div className={classNames(('text-base dark:text-primary', touchHover))}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
         </div>
         {/*shadow*/}
         <div className='absolute z-10 bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black' />
