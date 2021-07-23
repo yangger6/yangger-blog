@@ -2,7 +2,7 @@ import React from 'react'
 import Tag from './Tag'
 const Article = () => {
   return (
-    <article className='article flex flex-col py-px60'>
+    <article className='article flex flex-col py-px60 border-b dark:border-primary'>
       <header className='mb-2'>
         <div className='date text-xs leading-5 dark:text-grayGreen'>2021 / 02 / 05</div>
       </header>

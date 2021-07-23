@@ -2,11 +2,13 @@ import Aside from './Aside'
 import Footer from './Footer'
 
 const Layout = ({ children, categories, seo }) => (
-  <>
+  <div className='flex flex-wrap'>
     <Aside />
-    <main className='flex flex-wrap flex-row relative mt-px60 mx-5 md:mx-16'>{children}</main>
-    <Footer />
-  </>
+    <div className='flex flex-wrap flex-1'>
+      <main className='flex flex-wrap flex-row relative mx-5 md:mx-16'>{children}</main>
+      <Footer />
+    </div>
+  </div>
 )
 
 export default Layout

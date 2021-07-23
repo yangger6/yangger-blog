@@ -7,10 +7,10 @@ html {
     /*font-size: 62.5%;*/
 }
 /* aside */
-aside .logo {
-    width: 242px;
-    height: 220px;
-}
+/*aside .logo {*/
+/*    width: 242px;*/
+/*    height: 220px;*/
+/*}*/
 
 html.dark body {
     background: #000;
@@ -28,15 +28,6 @@ html.dark body {
 
 .article {
     position: relative;
-}
-
-.article:before{
-    content: ' ';
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 1px;
-    background-color: var(--theme-color);
 }
 
 /*日期*/

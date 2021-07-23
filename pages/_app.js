@@ -1,6 +1,7 @@
 import { createContext, useEffect } from 'react'
 import App from 'next/app'
 import Head from 'next/head'
+import Script from 'next/script'
 import 'tailwindcss/tailwind.css'
 
 import '../styles/font.css'
@@ -24,8 +25,12 @@ function MyApp({ Component, pageProps }) {
       : 'light'
   }, [])
   const { global } = pageProps
+  const iconParkLink = `
+     https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_2112_5.38455a5ff1e7c1ac634461fcf58e8a66.js
+     `
   return (
     <>
+      <Script src={iconParkLink} />
       <Head></Head>
       <GlobalContext.Provider value={global}>
         <Component {...pageProps} />

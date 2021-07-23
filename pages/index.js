@@ -3,12 +3,20 @@ import Layout from '../components/layout'
 import Seo from '../components/seo'
 import { fetchAPI } from '../lib/api'
 import Article from '../components/Article'
+import Pagination from '../components/Pagination'
 
 const Home = ({ articles, categories, homepage }) => {
   return (
     <Layout categories={categories}>
       <Seo seo={homepage.seo} />
       <Article />
+      <Article />
+      <Article />
+      <Article />
+      <Article />
+      <Article />
+      <Article />
+      <Pagination />
     </Layout>
   )
 }

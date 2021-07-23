@@ -5,10 +5,19 @@ const themeColors = {
   black: '#000',
 }
 const staticPx = {
-  px60: '60px',
+  '-px5': '-5px',
+  '-px24': '-24px',
   px2: '2px',
+  px5: '5px',
   px14: '14px',
   px17: '17px',
+  px10: '10px',
+  px20: '20px',
+  px24: '24px',
+  px40: '40px',
+  px60: '60px',
+  px250: '250px',
+  px300: '300px',
 }
 module.exports = {
   purge: [],
@@ -21,6 +30,10 @@ module.exports = {
       colors: themeColors,
       width: {
         '275/16': '17.1875rem',
+        ...staticPx,
+      },
+      height: {
+        ...staticPx,
       },
       margin: {
         ...staticPx,
@@ -29,6 +42,9 @@ module.exports = {
         ...staticPx,
       },
       gap: {
+        ...staticPx,
+      },
+      translate: {
         ...staticPx,
       },
     },
