@@ -2,7 +2,7 @@
     --theme-color: #7BF0BE;
     --gray-green: #74CCA7;
 }
-html {
+html * {
     font-family: 'Inter','PingFang SC','Microsoft YaHei',Arial,sans-serif;
     /*font-size: 62.5%;*/
 }

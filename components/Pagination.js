@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import classNames from 'classnames'
-import AnimateArrow from './AnimateArrow'
+import { AnimateLongArrow } from './AnimateArrow'
 import { useHover } from '../hooks'
 
 const Pagination = ({}) => {
@@ -12,7 +12,7 @@ const Pagination = ({}) => {
       <span className={classNames(normal, darkMode, 'mr-px60')}>上一页</span>
       <span ref={hoverRef} className={classNames(normal, darkMode)}>
         下一页
-        <AnimateArrow isHover={isHovered} color={isHovered ? '#7BF0BE' : '#fff'} />
+        <AnimateLongArrow isHover={isHovered} fromColor='#fff' toColor='#7BF0BE' />
       </span>
     </div>
   )

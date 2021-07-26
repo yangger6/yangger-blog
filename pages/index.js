@@ -9,7 +9,7 @@ const Home = ({ articles, categories, homepage }) => {
   return (
     <Layout categories={categories}>
       <Seo seo={homepage.seo} />
-      <Article />
+      <Article type='banner' />
       <Article />
       <Article />
       <Article />

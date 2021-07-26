@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "Inter";
+    src: url("Inter-Regular.eot"); /* IE9 */
+    src: url("Inter-Regular.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("./min/Inter-Regular.ttf") format("truetype"), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+    url("Inter-Regular.woff") format("woff"), /* chrome, firefox */
+    url("Inter-Regular.svg#Inter-Regular") format("svg"); /* iOS 4.1- */
+    font-style: normal;
+    font-weight: normal;
+}
+
+

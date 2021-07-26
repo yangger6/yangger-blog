@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }) {
   }, [])
   const { global } = pageProps
   const iconParkLink = `
-     https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_2112_5.38455a5ff1e7c1ac634461fcf58e8a66.js
+     https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_2112_8.ffe9b6b2442df0c60d612c1bd72a5112.js
      `
   return (
     <>
