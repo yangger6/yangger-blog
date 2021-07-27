@@ -28,8 +28,6 @@ const staticPx = {
   px250: '250px',
   px278: '278px',
   px300: '300px',
-  'art-1/3': 'calc(33.33% - 26.66)',
-  'art-1/2': 'calc(33.33% - 26.66)',
 }
 module.exports = {
   purge: [],

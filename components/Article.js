@@ -6,12 +6,12 @@ const Article = ({ type }) => {
   if (type === 'banner') {
     typeClassNames = 'lg:w-full'
   } else {
-    typeClassNames = 'lg:w-1/2 xl:w-1/3'
+    typeClassNames = 'items lg:w-1/2 xl:w-1/3'
   }
   return (
     <article
       className={classNames(
-        'article flex flex-col py-px60 border-b dark:border-primary',
+        'article flex flex-col py-px60 border-b dark:border-primary lg:px-px20',
         typeClassNames,
       )}
     >
