@@ -33,9 +33,12 @@ export const AnimateShortArrow = ({ fromColor, toColor, isHover }) => {
   }
   return (
     <div
-      className={classNames('animate-short-arrow ml-px4 w-0 transition-all overflow-hidden', {
-        'w-full': isHover,
-      })}
+      className={classNames(
+        'absolute left-full animate-short-arrow ml-px4 w-0 transition-all overflow-hidden top-0',
+        {
+          'w-px11': isHover,
+        },
+      )}
     >
       <IconPark size='11' name='tag-right' color={isHover ? toColor : fromColor} />
     </div>
