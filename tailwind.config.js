@@ -30,7 +30,6 @@ const staticPx = {
   px300: '300px',
 }
 module.exports = {
-  purge: [],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
@@ -72,4 +71,14 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  purge: {
+    enabled: process.env.NODE_ENV === 'production',
+    content: [
+      'components/**/*.js',
+      'layouts/**/*.js',
+      'pages/**/*.js',
+      'plugins/**/*.js',
+      'nuxt.config.js',
+    ],
+  },
 }
