@@ -2,27 +2,28 @@ import IconPark from './IconPark'
 import classNames from 'classnames'
 
 export const AnimateLongArrow = ({ fromColor, toColor, isHover }) => {
-  if (!toColor) {
-    toColor = fromColor
-  }
   return (
-    <div className='animate-arrow flex items-center ml-px20'>
+    <div
+      className={classNames(
+        'animate-arrow flex items-center ml-px20 w-px24 h-px12 relative transition-all',
+        {
+          'w-px32': isHover,
+        },
+      )}
+    >
+      {/*line*/}
       <div
+        className='absolute left-0 w-full h-px'
+        style={{
+          backgroundColor: isHover ? toColor : fromColor,
+        }}
+      />
+      {/*arrow*/}
+      <div
+        className='absolute border-solid border border-t-0 border-r border-b border-l-0 p-px4 right-0 transform -rotate-45'
         style={{
           borderColor: isHover ? toColor : fromColor,
-          transform: 'scaleY(.9) translateY(-0.66px)',
         }}
-        className='link w-px5 border-t'
-      />
-      <IconPark
-        name='right-rest'
-        className={classNames(
-          {
-            'translate-x-px5': isHover,
-          },
-          'transition-all transform -ml-px5',
-        )}
-        color={isHover ? toColor : fromColor}
       />
     </div>
   )
