@@ -5,7 +5,8 @@ import darkPerson from '../public/dark-person.svg'
 import IconPark from './IconPark'
 import classNames from 'classnames'
 import { useHover } from '../hooks'
-const Aside = () => {
+const Aside = ({ categories }) => {
+  console.log(categories)
   const [logoHoverRef, isLogoHovered] = useHover(false)
   const touchHover =
     'transform hover:translate-x-px6 transition-all hover:text-white cursor-pointer'
@@ -49,21 +50,18 @@ const Aside = () => {
       </div>
       <div className='tag-list w-full relative border-b dark:border-primary hidden lg:flex'>
         <div className='inner flex-col gap-y-px10 h-px300 flex w-full overflow-y-scroll overflow-x-hidden'>
-          <div className={classNames('mt-px40 text-base dark:text-primary', touchHover)}>
-            #php分页数据结构 (3)
-          </div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
-          <div className={classNames('text-base dark:text-primary', touchHover)}>#C语言 (2)</div>
+          {categories.map((category, index) => {
+            return (
+              <div
+                key={category.id}
+                className={classNames('text-base dark:text-primary', touchHover, {
+                  'mt-px40': index === 0,
+                })}
+              >
+                #{category.name} ({category.articles.length})
+              </div>
+            )
+          })}
         </div>
         {/*shadow*/}
         <div className='absolute z-10 bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black pointer-events-none' />
