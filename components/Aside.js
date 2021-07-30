@@ -6,7 +6,6 @@ import IconPark from './IconPark'
 import classNames from 'classnames'
 import { useHover } from '../hooks'
 const Aside = ({ categories }) => {
-  console.log(categories)
   const [logoHoverRef, isLogoHovered] = useHover(false)
   const touchHover =
     'transform hover:translate-x-px6 transition-all hover:text-white cursor-pointer'

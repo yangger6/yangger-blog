@@ -1,4 +1,4 @@
-import { createContext, useEffect } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import App from 'next/app'
 import Head from 'next/head'
 import Script from 'next/script'
@@ -13,18 +13,18 @@ import { fetchAPI } from '../lib/api'
 export const GlobalContext = createContext({})
 
 function MyApp({ Component, pageProps }) {
+  const [theme, setTheme] = useState('light')
   useEffect(() => {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
       const newColorScheme = e.matches ? 'dark' : 'light'
       document.getElementsByTagName('html')[0].className = newColorScheme
+      setTheme(newColorScheme)
     })
-    document.getElementsByTagName('html')[0].className = window.matchMedia(
-      '(prefers-color-scheme: dark)',
-    ).matches
-      ? 'dark'
-      : 'light'
+    const nowTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    document.getElementsByTagName('html')[0].className = nowTheme
+    setTheme(nowTheme)
   }, [])
-  const { global } = pageProps
+  const { global, articleInfo } = pageProps
   const iconParkLink = `
      https://lf1-cdn-tos.bytegoofy.com/obj/iconpark/icons_2112_8.ffe9b6b2442df0c60d612c1bd72a5112.js
      `
@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Script src={iconParkLink} />
       <Head></Head>
-      <GlobalContext.Provider value={global}>
+      <GlobalContext.Provider value={{ global, theme, articleInfo }}>
         <Component {...pageProps} />
       </GlobalContext.Provider>
     </>
@@ -48,8 +48,19 @@ MyApp.getInitialProps = async (ctx) => {
   const appProps = await App.getInitialProps(ctx)
   // Fetch global site settings from Strapi
   const global = await fetchAPI('/global')
+  const articles = await fetchAPI('/articles?status=published')
+
   // Pass the data to our page via props
-  return { ...appProps, pageProps: { global } }
+  return {
+    ...appProps,
+    pageProps: {
+      global,
+      articleInfo: {
+        count: articles.length,
+        pageSize: 1,
+      },
+    },
+  }
 }
 
 export default MyApp
