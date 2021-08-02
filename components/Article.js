@@ -1,15 +1,17 @@
 import React from 'react'
 import Tag from './Tag'
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 const Article = ({ type, article }) => {
+  const router = useRouter()
   let typeClassNames = 'w-full'
   let contextClassNames = 'w-full'
   let subContextClassNames = 'hidden'
   if (type === 'Banner') {
     typeClassNames = 'lg:w-full'
-    contextClassNames = 'w-7/10 flex flex-col'
+    contextClassNames = 'w-full flex flex-col lg:w-7/10'
     subContextClassNames =
-      'w-3/10 flex flex-col pl-px40 dark:text-white items-center h-full justify-center'
+      'w-3/10 flex-col pl-px40 dark:text-white items-center h-full justify-center hidden lg:flex'
   } else {
     typeClassNames = 'items lg:w-1/2 xl:w-1/3'
   }
@@ -30,6 +32,9 @@ const Article = ({ type, article }) => {
               'text-2xl leading-10/15 md:leading-10/15 font-bold dark:text-white mb-px24 cursor-pointer transition-all dark:hover:text-primary',
               type === 'banner' ? 'md:text-4xl' : 'md:text-2xl',
             )}
+            onClick={(e) => {
+              router.push(`/${article.slug}`)
+            }}
           >
             {article.title}
           </h1>

@@ -6,6 +6,7 @@ import 'tailwindcss/tailwind.css'
 
 import '../styles/font.css'
 import '../styles/globals.css'
+import '../styles/markdown.css'
 
 import { fetchAPI } from '../lib/api'
 

@@ -1,0 +1,67 @@
+article #markdown {
+}
+
+article #markdown p {
+    margin: 10px 0;
+}
+/*dark mode*/
+
+html.dark article #markdown {
+    color: rgba(255, 255, 255, .8);
+}
+html.dark article #markdown h1,
+html.dark article #markdown h2,
+html.dark article #markdown h3,
+html.dark article #markdown h4,
+html.dark article #markdown h5,
+html.dark article #markdown h6 {
+    color: #fff;
+}
+
+/*title */
+
+article #markdown h1,
+article #markdown h2,
+article #markdown h3,
+article #markdown h4,
+article #markdown h5,
+article #markdown h6 {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+article #markdown h1 {
+    font-size: 2.25rem;
+}
+article #markdown h2 {
+    font-size: 1.625rem;
+}
+
+article #markdown h3 {
+    font-size: 1.25rem;
+}
+
+article #markdown h4,
+article #markdown h5,
+article #markdown h6 {
+    font-size: 1rem;
+}
+
+/*font*/
+
+article #markdown strong,
+article #markdown em,
+article #markdown del,
+article #markdown u {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 150%;
+}
+
+article #markdown em{
+
+}
