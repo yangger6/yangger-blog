@@ -18,13 +18,13 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "eslint-config-next": "^11.0.1",
-    "eslint-plugin-prettier": "^3.4.0"
-  },
-  "devDependencies": {
+    "eslint-plugin-prettier": "^3.4.0",
     "@moohng/postcss-px2vw": "^1.0.2",
     "autoprefixer": "^10.2.6",
     "eslint": "7.30.0",
     "postcss": "^8.3.5",
     "tailwindcss": "^2.2.4"
+  },
+  "devDependencies": {
   }
 }
