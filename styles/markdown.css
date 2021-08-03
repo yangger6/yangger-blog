@@ -1,8 +1,22 @@
+/*except*/
+@media (max-width: 1024px) {
+    article #markdown {
+        width: 100vw!important;
+    }
+}
+
 article #markdown {
+    width: 100%;
+    overflow-x: auto;
 }
 
 article #markdown p {
-    margin: 10px 0;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: calc(2px * 5) 0;
 }
 /*dark mode*/
 
@@ -17,6 +31,37 @@ html.dark article #markdown h5,
 html.dark article #markdown h6 {
     color: #fff;
 }
+html.dark article #markdown blockquote,
+html.dark article #markdown hr
+{
+    border-color: var(--dark-theme-color);
+}
+
+html.dark article #markdown a {
+    color: var(--dark-theme-color);
+}
+html.dark article #markdown a {
+    color: var(--dark-theme-color);
+    border-color: var(--dark-theme-color);
+}
+html.dark article #markdown ul li:before {
+    background-color: var(--dark-theme-color);
+}
+html.dark article #markdown ol li::marker {
+    color: var(--dark-theme-color);
+}
+html.dark article #markdown table,
+html.dark article #markdown th,
+html.dark article #markdown td {
+    border-color: var(--dark-theme-color);
+}
+
+html.dark article #markdown pre,
+html.dark article #markdown code {
+    background-color: #222;
+    color: rgba(255, 255, 255, .8);
+}
+
 
 /*title */
 
@@ -30,7 +75,7 @@ article #markdown h6 {
     font-style: normal;
     font-weight: bold;
     line-height: 1.5;
-    margin: 10px 0;
+    margin: calc(2px * 5) 0;
 }
 article #markdown h1 {
     font-size: 2.25rem;
@@ -62,6 +107,61 @@ article #markdown u {
     line-height: 150%;
 }
 
-article #markdown em{
+/*blockquote*/
 
+article #markdown blockquote{
+    border-left: 2px solid;
+    padding-left: calc(3px * 4);
 }
+
+/*href*/
+article #markdown a {
+    cursor: pointer;
+    border-bottom: 1px solid;
+}
+
+/*list */
+
+article #markdown ul li:before{
+    content: ' ';
+    width: calc(3px * 2);
+    height: calc(3px * 2);
+    border-radius: 50%;
+    margin: calc(3px * 3);
+    float: left;
+    background-color: #000;
+}
+
+article #markdown ol {
+    list-style-type: decimal;
+    padding-left: calc(3px * 8);
+}
+article #markdown ol li::marker{
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    padding-left: calc(3px * 8);
+    text-align: left!important;
+}
+
+/*table*/
+
+article #markdown table,
+article #markdown th,
+article #markdown td {
+    border: 1px solid;
+    border-color: #000;
+    padding: calc(2px * 2) calc(5px * 4);
+}
+
+/*code*/
+
+article #markdown pre,
+article #markdown code {
+    padding: 2px 4px;
+}
+article #markdown pre code {
+    padding: unset;
+}
+
+/*normarl*/

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { fetchAPI, fetchArticles } from '../lib/api'
 import BlogPage from './page/[page]'
+import { PAGE_SIZE } from './_app'
 
 const Home = ({ articles, categories, homepage }) => {
   return <BlogPage categories={categories} homepage={homepage} articles={articles} />
@@ -8,7 +9,7 @@ const Home = ({ articles, categories, homepage }) => {
 export async function getStaticProps() {
   // Run API calls in parallel
   const [articles, categories, homepage] = await Promise.all([
-    fetchArticles(1, 1),
+    fetchArticles(1, PAGE_SIZE),
     fetchAPI('/categories'),
     fetchAPI('/homepage'),
   ])

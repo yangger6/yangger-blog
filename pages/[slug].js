@@ -5,6 +5,8 @@ import Seo from '../components/Seo'
 import React from 'react'
 import classNames from 'classnames'
 import Tag from '../components/Tag'
+import { AnimateLongArrow } from '../components/AnimateArrow'
+import Article from '../components/Article'
 
 const ArticlePage = ({ article, categories, homepage }) => {
   return (
@@ -20,9 +22,11 @@ const ArticlePage = ({ article, categories, homepage }) => {
           >
             {article.title}
           </h1>
-          <p className='mt-px16 mb-px24 text-sm text-opacity-80 text-white flex items-center gap-px8'>
-            <span>本文字数: {article.content.length}</span>
-            <span>阅读时间: {Math.floor(article.content.length / 400)}分钟</span>
+          <p className='mt-px16 mb-px24 text-opacity-80 text-white flex items-center gap-px8'>
+            <span className='text-sm'>本文字数: {article.content.length}</span>
+            <span className='text-sm'>
+              阅读时间: {Math.floor(article.content.length / 400)}分钟
+            </span>
           </p>
         </header>
         <footer>
@@ -39,6 +43,21 @@ const ArticlePage = ({ article, categories, homepage }) => {
           <Markdown id='markdown'>{article.content}</Markdown>
         </main>
       </article>
+      <div className='line my-px60 w-full h-px dark:bg-primary' />
+      <div className='more flex flex-col'>
+        <div className='title flex h-px36 text-2xl items-center dark:text-white'>
+          <span className='font-light'>更多阅读</span>
+          <AnimateLongArrow isHover={false} fromColor='#fff' toColor='#7BF0BE' />
+        </div>
+        <div className='more-articles flex flex-wrap'>
+          {article.prevItem && (
+            <Article className='w-full' type='items' article={article.prevItem} />
+          )}
+          {article.nextItem && (
+            <Article className='w-full' type='items' article={article.nextItem} />
+          )}
+        </div>
+      </div>
     </Layout>
   )
 }

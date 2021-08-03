@@ -1,6 +1,6 @@
 :root {
-    --theme-color: #7BF0BE;
-    --gray-green: #74CCA7;
+    --dark-theme-color: #7BF0BE;
+    --dark-gray-green: #74CCA7;
 }
 html * {
     font-family: 'Inter','PingFang SC','Microsoft YaHei',Arial,sans-serif;

@@ -2,7 +2,7 @@ import React from 'react'
 import Tag from './Tag'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-const Article = ({ type, article }) => {
+const Article = ({ type, article, className: propClassName }) => {
   const router = useRouter()
   let typeClassNames = 'w-full'
   let contextClassNames = 'w-full'
@@ -20,6 +20,7 @@ const Article = ({ type, article }) => {
       className={classNames(
         'article flex py-px60 border-b dark:border-primary lg:px-px20',
         typeClassNames,
+        propClassName,
       )}
     >
       <div className={contextClassNames}>
