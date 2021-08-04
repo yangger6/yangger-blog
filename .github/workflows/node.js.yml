@@ -29,6 +29,8 @@ jobs:
     - run: yarn install
     - name: Create .env file
       run: |
+        echo ${{env.NODE_ENV}}
+        echo ${{env.NEXT_PUBLIC_STRAPI_API_URL}}
         touch .env
         echo NODE_ENV=${{env.NODE_ENV}}\\nNEXT_PUBLIC_STRAPI_API_URL=${{env.NEXT_PUBLIC_STRAPI_API_URL}} >> .env
     - name: Test Env
