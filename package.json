@@ -9,7 +9,7 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint",
-    "zip": "rm -f ./out.zip && tar -zcvf ./out.zip ./out"
+    "compress": "rm -f ./out.zip && tar -zcvf ./out.zip ./out"
   },
   "dependencies": {
     "classnames": "^2.3.1",
