@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "ssg": "yarn build && yarn export",
     "export": "next export",
     "start": "next start",
     "lint": "next lint"
