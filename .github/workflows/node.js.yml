@@ -39,4 +39,4 @@ jobs:
       with:
         tag_name: staticHtml
         name: release-${{ steps.date.outputs.date }}
-        files: ./out
+        files: ./out/*
