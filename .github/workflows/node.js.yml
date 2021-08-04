@@ -34,8 +34,7 @@ jobs:
     - name: Test Env
       run: |
         echo 123
-        cat .env
+        cat .env | echo
     - run: yarn ssg
-        
         
     
