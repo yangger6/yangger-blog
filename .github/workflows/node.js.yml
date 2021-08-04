@@ -33,10 +33,13 @@ jobs:
         envkey_NODE_ENV: ${{ secrets.NODE_ENV }}
         envkey_NEXT_PUBLIC_STRAPI_API_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_API_URL }}
         file_name: .env
-    - run: yarn ssg   
+    - name: build
+      run: yarn ssg   
+    - name: compress
+      run: yarn compress
     - name: Upload static html files to release
       uses: softprops/action-gh-release@v1
       with:
         tag_name: staticHtml
         name: release-${{ steps.date.outputs.date }}
-        files: ./out/*
+        files: ./out.tar.gz
