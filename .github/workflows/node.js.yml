@@ -29,14 +29,10 @@ jobs:
     - run: yarn install
     - name: Create .env file
       run: |
-        echo ${{env.NODE_ENV}}
-        echo ${{env.NEXT_PUBLIC_STRAPI_API_URL}}
+        echo ${{secrets.NODE_ENV}}
+        echo ${{secrets.NEXT_PUBLIC_STRAPI_API_URL}}
         touch .env
-        echo NODE_ENV=${{env.NODE_ENV}}\\nNEXT_PUBLIC_STRAPI_API_URL=${{env.NEXT_PUBLIC_STRAPI_API_URL}} >> .env
-    - name: Test Env
-      run: |
-        echo 123
-        cat .env | echo
+        echo NODE_ENV=${{secrets.NODE_ENV}}\\nNEXT_PUBLIC_STRAPI_API_URL=${{secrets.NEXT_PUBLIC_STRAPI_API_URL}} >> .env
     - run: yarn ssg
         
     
