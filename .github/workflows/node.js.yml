@@ -20,6 +20,9 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
@@ -42,4 +45,4 @@ jobs:
       with:
         tag_name: staticHtml
         name: release-${{ steps.date.outputs.date }}
-        files: ./out.tar.gz
+        files: ./staticHtml.tar.gz
