@@ -28,4 +28,7 @@ jobs:
         cache: 'yarn'
     - run: yarn install
     - run: yarn ssg
+      env: 
+        NEXT_PUBLIC_STRAPI_API_URL: ${{env.NEXT_PUBLIC_STRAPI_API_URL}}
+        NODE_ENV: ${{env.NODE_ENV}}
     
