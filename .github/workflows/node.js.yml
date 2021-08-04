@@ -31,7 +31,8 @@ jobs:
       run: |
         touch .env
         echo NODE_ENV=${{env.NODE_ENV}}\\nNEXT_PUBLIC_STRAPI_API_URL=${{env.NEXT_PUBLIC_STRAPI_API_URL} >> .env
-      rub: |
+    - name: Test Env
+      run: |
         echo 123
         cat .env
     - run: yarn ssg
