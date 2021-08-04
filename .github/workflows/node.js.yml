@@ -30,8 +30,12 @@ jobs:
     - name: Create .env file
       uses: SpicyPizza/create-envfile@v1
       with:
-        envkey_NODE_ENV: ${{secrets.NODE_ENV}}
-        envkey_NEXT_PUBLIC_STRAPI_API_URL: ${{secrets.NEXT_PUBLIC_STRAPI_API_URL}}
+        envkey_NODE_ENV: ${{ secrets.NODE_ENV }}
+        envkey_NEXT_PUBLIC_STRAPI_API_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_API_URL }}
         file_name: .env
-    - run: yarn ssg        
-    
+    - run: yarn ssg   
+    - name: Upload static html files to release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: release-${{ steps.date.outputs.date }}
+        files: ./out
