@@ -9,7 +9,7 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint",
-    "compress": "rm -f ./out.tar.gz && cd ./out && tar -zcvf ../out.tar.gz *"
+    "compress": "rm -f ./staticHtml.tar.gz && cd ./out && tar -zcvf ../staticHtml.tar.gz *"
   },
   "dependencies": {
     "classnames": "^2.3.1",
