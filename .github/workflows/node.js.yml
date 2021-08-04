@@ -28,11 +28,10 @@ jobs:
         cache: 'yarn'
     - run: yarn install
     - name: Create .env file
-      run: |
-        echo ${{secrets.NODE_ENV}}
-        echo ${{secrets.NEXT_PUBLIC_STRAPI_API_URL}}
-        touch .env
-        echo NODE_ENV=${{secrets.NODE_ENV}}\\nNEXT_PUBLIC_STRAPI_API_URL=${{secrets.NEXT_PUBLIC_STRAPI_API_URL}} >> .env
-    - run: yarn ssg
-        
+      uses: SpicyPizza/create-envfile@v1
+      with:
+        envkey_NODE_ENV: ${{secrets.NODE_ENV}}
+        envkey_NEXT_PUBLIC_STRAPI_API_URL: ${{secrets.NEXT_PUBLIC_STRAPI_API_URL}}
+        file_name: .env
+    - run: yarn ssg        
     
