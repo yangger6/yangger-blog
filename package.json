@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "next lint",
     "compress": "rm -f ./staticHtml.zip && cd ./out && zip -r ../staticHtml.zip ./* -r",
-    "watch": "pm2 start ./pm2/index.js --name watchStaticFiles"
+    "watch": "pm2 start ./pm2/index.js --name watchStaticFileUpdateServer --watch"
   },
   "dependencies": {
     "@moohng/postcss-px2vw": "^1.0.2",

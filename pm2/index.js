@@ -70,7 +70,7 @@ const startTimer = async () => {
           console.log('done')
           console.log(`==================== task-${taskId} end====================`)
           console.log(`\n start delay ${config.delay / 1000 / 60} min`)
-          await delay(1000 * 5, config.delay || 10 * 60 * 1000)
+          await delay(config.delay || 10 * 60 * 1000)
           console.log('done \n')
           await startTimer()
         })
