@@ -35,6 +35,7 @@ jobs:
       with:
         envkey_NODE_ENV: ${{ secrets.NODE_ENV }}
         envkey_NEXT_PUBLIC_STRAPI_API_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_API_URL }}
+        envkey_NEXT_PUBLIC_BASE_PATH: ${{ secrets.NEXT_PUBLIC_BASE_PATH }}
         file_name: .env
     - name: build
       run: yarn ssg
