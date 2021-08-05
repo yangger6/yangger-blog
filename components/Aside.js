@@ -5,6 +5,7 @@ import darkPerson from '../public/dark-person.svg'
 import IconPark from './IconPark'
 import classNames from 'classnames'
 import { useHover } from '../hooks'
+import ImageWithBasePath from './ImageWithBasePath'
 const Aside = ({ categories }) => {
   const [logoHoverRef, isLogoHovered] = useHover(false)
   const touchHover =
@@ -16,7 +17,7 @@ const Aside = ({ categories }) => {
           ref={logoHoverRef}
           className='absolute top-px29 left-px17 flex flex-wrap items-center z-20 lg:top-px33 lg:left-0 lg:w-px230 lg:h-px33 xl:top-px40 xl:w-px278 xl:h-px40'
         >
-          <Image className='w-px203 h-px29' src={darkLogo} alt='logo' />
+          <ImageWithBasePath className='w-px203 h-px29' src={darkLogo} alt='logo' />
           <div
             className={classNames(
               'rounded-full ml-px10 w-px10 h-px10 transition-all dark:bg-white',
@@ -44,7 +45,7 @@ const Aside = ({ categories }) => {
         />
         {/*person*/}
         <div className='person flex mx-auto justify-center w-full'>
-          <Image src={darkPerson} alt={'person'} layout={'fill'} />
+          <ImageWithBasePath src={darkPerson} alt={'person'} layout={'fill'} />
         </div>
       </div>
       <div className='tag-list w-full relative border-b dark:border-primary hidden lg:flex'>
