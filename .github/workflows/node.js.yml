@@ -37,7 +37,7 @@ jobs:
         envkey_NEXT_PUBLIC_STRAPI_API_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_API_URL }}
         file_name: .env
     - name: build
-      run: yarn ssg   
+      run: yarn ssg
     - name: compress
       run: yarn compress
     - name: Upload static html files to release
@@ -45,4 +45,4 @@ jobs:
       with:
         tag_name: release-${{ steps.date.outputs.date }}
         name: release-${{ steps.date.outputs.date }}
-        files: ./staticHtml.tar.gz
+        files: ./staticHtml.zip
