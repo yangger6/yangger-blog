@@ -35,6 +35,7 @@ const startTimer = async (prevTagName = '') => {
     console.log('done')
     console.log('latest tag: \t', latestTag)
     if (latestTag === prevTagName) {
+      console.log('have not update')
       // have not update
       console.log(`==================== task-${taskId} end====================`)
       console.log(`\n start delay ${config.delay / 1000 / 60} min`)
