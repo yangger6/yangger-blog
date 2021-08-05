@@ -8,7 +8,6 @@ const ImageWithBasePath = (props) => {
   if (srcObj.src && srcObj.src.startsWith('/')) {
     srcObj.src = `${basePath || ''}${srcObj.src}`
   }
-  console.log(srcObj)
   return <Image {...props} src={srcObj} />
 }
 

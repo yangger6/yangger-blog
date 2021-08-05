@@ -8,8 +8,6 @@ import { GlobalContext } from '../_app'
 
 const BlogPage = ({ articles, categories, homepage, page = 1 }) => {
   const { articleInfo } = useContext(GlobalContext)
-  console.log(articleInfo)
-  console.log(page)
   return (
     <Layout categories={categories}>
       <Seo seo={homepage.seo} />
