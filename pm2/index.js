@@ -15,7 +15,7 @@ const git = simpleGit(options)
 
 const delay = (t) => new Promise((resolve) => setTimeout(resolve, t))
 
-const startTimer = async () => {
+const startTimer = async (prevTagName = '') => {
   const taskId = new Date().getTime()
   try {
     // pull get tag
@@ -34,6 +34,15 @@ const startTimer = async () => {
     const latestTag = await getLatestTag({})
     console.log('done')
     console.log('latest tag: \t', latestTag)
+    if (latestTag === prevTagName) {
+      // have not update
+      console.log(`==================== task-${taskId} end====================`)
+      console.log(`\n start delay ${config.delay / 1000 / 60} min`)
+      await delay(config.delay || 10 * 60 * 1000)
+      console.log('done \n')
+      await startTimer(latestTag)
+      return
+    }
     if (originRemoteUrl && latestTag) {
       // 删除旧压缩包
       console.log('delete old zip')
@@ -72,7 +81,7 @@ const startTimer = async () => {
           console.log(`\n start delay ${config.delay / 1000 / 60} min`)
           await delay(config.delay || 10 * 60 * 1000)
           console.log('done \n')
-          await startTimer()
+          await startTimer(latestTag)
         })
         .pipe(fs.createWriteStream(path.join(__dirname, 'staticHtml.zip')))
     } else {
