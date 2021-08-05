@@ -39,3 +39,7 @@ yarn-error.log*
 
 # tools
 /tools
+
+# pm2
+pm2/dist
+pm2/staticHtml.zip
