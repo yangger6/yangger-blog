@@ -1,9 +1,4 @@
-const themeColors = {
-  primary: '#7BF0BE',
-  ash: '#CCC',
-  grayGreen: '#74CCA7',
-  black: '#000',
-}
+const themeColors = require('./theme')
 const staticPx = {
   '-px5': '-5px',
   '-px15': '-15px',

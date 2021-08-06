@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
 import darkLogo from '../public/dark-logo.svg'
 import darkPerson from '../public/dark-person.svg'
@@ -6,7 +6,13 @@ import IconPark from './IconPark'
 import classNames from 'classnames'
 import { useHover } from '../hooks'
 import ImageWithBasePath from './ImageWithBasePath'
+import themeColors from '../theme'
+import { GlobalContext } from '../pages/_app'
 const Aside = ({ categories }) => {
+  const {
+    global: { accounts },
+  } = useContext(GlobalContext)
+  console.log(accounts)
   const [logoHoverRef, isLogoHovered] = useHover(false)
   const touchHover =
     'transform hover:translate-x-px6 transition-all hover:text-white cursor-pointer'
@@ -67,31 +73,18 @@ const Aside = ({ categories }) => {
         <div className='absolute z-10 bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black pointer-events-none' />
       </div>
       <div className='subscribe w-full relative hidden lg:flex pt-px40 gap-y-px20 flex-col'>
-        <div className={classNames('flex items-center text-base dark:text-primary', touchHover)}>
-          <IconPark name='mail' color='#7BF0BE' size='28' />
-          <span className='mx-px10'>·</span>
-          <span>E-mail</span>
-        </div>
-        <div className={classNames('flex items-center text-base dark:text-primary', touchHover)}>
-          <IconPark name='dribbble' color='#7BF0BE' size='28' />
-          <span className='mx-px10'>·</span>
-          <span>Dribbble</span>
-        </div>
-        <div className={classNames('flex items-center text-base dark:text-primary', touchHover)}>
-          <IconPark name='github' color='#7BF0BE' size='28' />
-          <span className='mx-px10'>·</span>
-          <span>Github</span>
-        </div>
-        <div className={classNames('flex items-center text-base dark:text-primary', touchHover)}>
-          <IconPark name='sina' color='#7BF0BE' size='28' />
-          <span className='mx-px10'>·</span>
-          <span>Sina</span>
-        </div>
-        <div className={classNames('flex items-center text-base dark:text-primary', touchHover)}>
-          <IconPark name='twitter' color='#7BF0BE' size='28' />
-          <span className='mx-px10'>·</span>
-          <span>Twitter</span>
-        </div>
+        {accounts.map((account) => (
+          <div
+            key={account.id}
+            className={classNames('flex items-center text-base dark:text-primary', touchHover)}
+          >
+            <IconPark name={account.icon} color={themeColors.primary} size='28' />
+            <span className='mx-px10'>·</span>
+            <a href={account.link} target='_blank' rel='noreferrer'>
+              {account.title}
+            </a>
+          </div>
+        ))}
       </div>
     </aside>
   )

@@ -1,8 +1,9 @@
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 import { AnimateLongArrow } from './AnimateArrow'
 import { useHover } from '../hooks'
-import { useRouter } from 'next/router'
-
+import themeColor from '../theme'
+console.log(themeColor)
 const Pagination = ({ current, count, pageSize }) => {
   const [hoverRef, isHovered] = useHover(false)
   const router = useRouter()
@@ -23,7 +24,7 @@ const Pagination = ({ current, count, pageSize }) => {
         {haveNextPage && (
           <>
             下一页
-            <AnimateLongArrow isHover={isHovered} fromColor='#fff' toColor='#7BF0BE' />
+            <AnimateLongArrow isHover={isHovered} fromColor='#fff' toColor={themeColor.primary} />
           </>
         )}
       </span>
