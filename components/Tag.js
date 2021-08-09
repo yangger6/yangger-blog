@@ -1,10 +1,16 @@
 import classNames from 'classnames'
 import { useHover } from '../hooks'
 import { AnimateShortArrow } from './AnimateArrow'
+import { useRouter } from 'next/router'
 
-const Tag = ({ text = '', type = 'top' }) => {
+const Tag = ({ slug, text = '', type = 'top' }) => {
   // top | tag
+  const router = useRouter()
   const [hoverRef, isHovered] = useHover(false)
+  const jumpToTag = async () => {
+    await router.push(`/tag/${slug}`)
+  }
+
   const baseClassName =
     'flex items-center tag py-px2 px-px17 rounded-full text-sm transition-all h-px23'
   return (
@@ -31,6 +37,7 @@ const Tag = ({ text = '', type = 'top' }) => {
               'pr-px32': isHovered,
             },
           )}
+          onClick={jumpToTag}
         >
           <span className='relative'>
             #{text}

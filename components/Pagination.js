@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { AnimateLongArrow } from './AnimateArrow'
 import { useHover } from '../hooks'
 import themeColor from '../theme'
-console.log(themeColor)
 const Pagination = ({ current, count, pageSize }) => {
   const [hoverRef, isHovered] = useHover(false)
   const router = useRouter()

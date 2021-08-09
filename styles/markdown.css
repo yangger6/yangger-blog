@@ -6,8 +6,8 @@
 }
 
 article #markdown {
-    width: 100%;
-    overflow-x: auto;
+    width: calc(100vw - 55 * 5px - 8rem);
+    overflow-x: hidden;
 }
 
 article #markdown p {
@@ -58,6 +58,8 @@ html.dark article #markdown td {
 
 html.dark article #markdown pre,
 html.dark article #markdown code {
+    overflow-x: auto;
+    width: 100%;
     background-color: #222;
     color: rgba(255, 255, 255, .8);
 }

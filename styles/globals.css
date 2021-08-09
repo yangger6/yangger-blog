@@ -23,10 +23,9 @@ html.dark body {
     max-width: 100%;
 }
 .person {
-    width: 287px;
+    /*width: 287px;*/
     height: 387px;
 }
-
 .article {
     position: relative;
 }
@@ -35,5 +34,16 @@ html.dark body {
 .date {
     font-family: Orbitron;
 }
+/*标题*/
+.font-title {
+    font-family: Noto Sans SC;
+    font-style: normal;
+    font-weight: bold;
+}
 
 /*文章*/
+@media (min-width: 1280px) {
+    .more-articles article {
+        width: 50%;
+    }
+}

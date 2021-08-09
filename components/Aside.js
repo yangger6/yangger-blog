@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import Image from 'next/image'
 import darkLogo from '../public/dark-logo.svg'
 import darkPerson from '../public/dark-person.svg'
 import IconPark from './IconPark'
@@ -8,11 +7,13 @@ import { useHover } from '../hooks'
 import ImageWithBasePath from './ImageWithBasePath'
 import themeColors from '../theme'
 import { GlobalContext } from '../pages/_app'
+import { useRouter } from 'next/router'
+
 const Aside = ({ categories }) => {
+  const router = useRouter()
   const {
     global: { accounts },
   } = useContext(GlobalContext)
-  console.log(accounts)
   const [logoHoverRef, isLogoHovered] = useHover(false)
   const touchHover =
     'transform hover:translate-x-px6 transition-all hover:text-white cursor-pointer'
@@ -63,6 +64,9 @@ const Aside = ({ categories }) => {
                 className={classNames('text-base dark:text-primary', touchHover, {
                   'mt-px40': index === 0,
                 })}
+                onClick={async () => {
+                  await router.push(`/tag/${category.slug}`)
+                }}
               >
                 #{category.name} ({category.articles.length})
               </div>

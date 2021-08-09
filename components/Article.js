@@ -33,8 +33,8 @@ const Article = ({ type, article, className: propClassName }) => {
               'text-2xl leading-10/15 md:leading-10/15 font-bold dark:text-white mb-px24 cursor-pointer transition-all dark:hover:text-primary',
               type === 'banner' ? 'md:text-4xl' : 'md:text-2xl',
             )}
-            onClick={(e) => {
-              router.push(`/${article.slug}`)
+            onClick={async (e) => {
+              await router.push(`/${article.slug}`)
             }}
           >
             {article.title}
@@ -48,7 +48,9 @@ const Article = ({ type, article, className: propClassName }) => {
             <div className='tags flex flex-wrap gap-px14'>
               {article.top && <Tag type={'top'} />}
               {article.categories.map((category) => {
-                return <Tag key={category.id} type='tag' text={category.name} />
+                return (
+                  <Tag key={category.id} type='tag' slug={category.slug} text={category.name} />
+                )
               })}
             </div>
           </div>
