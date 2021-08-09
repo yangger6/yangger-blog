@@ -42,7 +42,7 @@ jobs:
     - name: compress
       run: yarn compress
     - name: Upload static html files to release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@59c3b4891632ff9a897f99a91d7bc557467a3a22
       with:
         tag_name: release-${{ steps.date.outputs.date }}
         name: release-${{ steps.date.outputs.date }}
