@@ -24,7 +24,7 @@ html.dark body {
 }
 .person {
     /*width: 287px;*/
-    height: 387px;
+    height: calc(77.4 * 5px);
 }
 .article {
     position: relative;
