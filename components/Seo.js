@@ -3,8 +3,10 @@ import { useContext } from 'react'
 import { GlobalContext } from '../pages/_app'
 import { getStrapiMedia } from '../lib/media'
 
-const Seo = ({ seo }) => {
-  const { defaultSeo, siteName, theme } = useContext(GlobalContext)
+const Seo = ({ seo, article }) => {
+  const {
+    global: { defaultSeo, siteName, theme },
+  } = useContext(GlobalContext)
   const seoWithDefaults = {
     ...defaultSeo,
     ...seo,
@@ -12,9 +14,11 @@ const Seo = ({ seo }) => {
   const fullSeo = {
     ...seoWithDefaults,
     // Add title suffix
-    metaTitle: `${seoWithDefaults.metaTitle} | ${siteName}`,
+    metaTitle: `${article ? `${article.title} • ` : ''}${seoWithDefaults.metaTitle} • ${siteName}`,
     // Get full image URL
-    shareImage: getStrapiMedia(seoWithDefaults.shareImage),
+    shareImage: article
+      ? getStrapiMedia(article.image)
+      : getStrapiMedia(seoWithDefaults.shareImage),
   }
 
   return (

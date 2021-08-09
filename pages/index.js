@@ -13,6 +13,7 @@ export async function getStaticProps() {
     fetchAPI('/categories'),
     fetchAPI('/homepage'),
   ])
+  console.log('homepage', homepage.seo)
   return {
     props: { articles, categories, homepage },
     revalidate: 1,

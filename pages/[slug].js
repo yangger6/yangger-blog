@@ -8,10 +8,10 @@ import Tag from '../components/Tag'
 import { AnimateLongArrow } from '../components/AnimateArrow'
 import Article from '../components/Article'
 
-const ArticlePage = ({ article, categories, homepage }) => {
+const ArticlePage = ({ article, categories, blog }) => {
   return (
     <Layout categories={categories}>
-      <Seo seo={homepage.seo} />
+      <Seo seo={blog.seo} article={article} />
       <article className='dark:text-white'>
         <header className='mb-2 mt-px60'>
           <div className='date text-xs leading-5 dark:text-grayGreen'>2021 / 02 / 05</div>
@@ -76,10 +76,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const [article, categories, homepage] = await Promise.all([
+  const [article, categories, blog] = await Promise.all([
     fetchAPI(`/articles/${params.slug}`),
     fetchAPI('/categories'),
-    fetchAPI('/homepage'),
+    fetchAPI('/blog'),
   ])
   if (!article) {
     return {
@@ -87,7 +87,7 @@ export async function getStaticProps({ params }) {
     }
   }
   return {
-    props: { article, categories, homepage },
+    props: { article, categories, blog },
     revalidate: 1,
   }
 }
