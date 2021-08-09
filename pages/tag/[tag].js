@@ -9,7 +9,7 @@ const TagPage = ({ categories, homepage, currentTag }) => {
     <Layout categories={categories}>
       <Seo seo={homepage.seo} />
       <div className='tag-list flex flex-col w-full'>
-        <div className='title text-2xl md:text-4xl leading-10/15 font-title flex dark:text-primary justify-between mt-px60 items-center'>
+        <div className='title text-2xl md:text-4xl leading-10/15 font-title flex dark:text-primary justify-between mt-px60 items-center pb-px60 border-b dark:border-primary'>
           <h2>#{currentTag.name}</h2>
           <div className='tag-line h-px dark:bg-primary flex-1 mx-px40' />
           <div>({currentTag.articles.length})</div>
