@@ -1,15 +1,11 @@
 import classNames from 'classnames'
 import { useHover } from '../hooks'
 import { AnimateShortArrow } from './AnimateArrow'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const Tag = ({ slug, text = '', type = 'top' }) => {
   // top | tag
-  const router = useRouter()
   const [hoverRef, isHovered] = useHover(false)
-  const jumpToTag = async () => {
-    await router.push(`/tag/${slug}`)
-  }
 
   const baseClassName =
     'flex items-center tag py-px2 px-px17 rounded-full text-sm transition-all h-px23'
@@ -27,23 +23,26 @@ const Tag = ({ slug, text = '', type = 'top' }) => {
         </div>
       )}
       {type === 'tag' && (
-        <div
-          ref={hoverRef}
-          className={classNames(
-            baseClassName,
-            'cursor-pointer',
-            'dark:text-primary border border-primary border-opacity-50 dark:bg-opacity-10 dark:bg-primary hover:pr-px32',
-            {
-              'pr-px32': isHovered,
-            },
-          )}
-          onClick={jumpToTag}
-        >
-          <span className='relative'>
-            #{text}
-            <AnimateShortArrow isHover={isHovered} fromColor='#7BF0BE' />
-          </span>
-        </div>
+        <Link href={`/tag/${slug}`}>
+          <a>
+            <div
+              ref={hoverRef}
+              className={classNames(
+                baseClassName,
+                'cursor-pointer',
+                'dark:text-primary border border-primary border-opacity-50 dark:bg-opacity-10 dark:bg-primary hover:pr-px32',
+                {
+                  'pr-px32': isHovered,
+                },
+              )}
+            >
+              <span className='relative'>
+                #{text}
+                <AnimateShortArrow isHover={isHovered} fromColor='#7BF0BE' />
+              </span>
+            </div>
+          </a>
+        </Link>
       )}
     </>
   )

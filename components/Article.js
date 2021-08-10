@@ -1,9 +1,9 @@
 import React from 'react'
-import Tag from './Tag'
+import Link from 'next/link'
 import classNames from 'classnames'
-import { useRouter } from 'next/router'
+import Tag from './Tag'
+
 const Article = ({ type, article, className: propClassName }) => {
-  const router = useRouter()
   let typeClassNames = 'w-full'
   let contextClassNames = 'w-full'
   let subContextClassNames = 'hidden'
@@ -28,17 +28,18 @@ const Article = ({ type, article, className: propClassName }) => {
           <div className='date text-xs leading-5 dark:text-grayGreen'>2021 / 02 / 05</div>
         </header>
         <main>
-          <h1
-            className={classNames(
-              'text-2xl leading-10/15 md:leading-10/15 font-bold dark:text-white mb-px24 cursor-pointer transition-all dark:hover:text-primary',
-              type === 'banner' ? 'md:text-4xl' : 'md:text-2xl',
-            )}
-            onClick={async (e) => {
-              await router.push(`/${article.slug}`)
-            }}
-          >
-            {article.title}
-          </h1>
+          <Link href={`/${article.slug}`}>
+            <a>
+              <h1
+                className={classNames(
+                  'text-2xl leading-10/15 md:leading-10/15 font-bold dark:text-white mb-px24 cursor-pointer transition-all dark:hover:text-primary',
+                  type === 'banner' ? 'md:text-4xl' : 'md:text-2xl',
+                )}
+              >
+                {article.title}
+              </h1>
+            </a>
+          </Link>
           <div className='text-base desc dark:text-white dark:text-opacity-80 leading-6 mb-6'>
             {article.description}
           </div>

@@ -7,10 +7,9 @@ import { useHover } from '../hooks'
 import ImageWithBasePath from './ImageWithBasePath'
 import themeColors from '../theme'
 import { GlobalContext } from '../pages/_app'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const Aside = ({ categories }) => {
-  const router = useRouter()
   const {
     global: { accounts },
   } = useContext(GlobalContext)
@@ -59,17 +58,18 @@ const Aside = ({ categories }) => {
         <div className='inner flex-col gap-y-px10 h-px300 flex w-full overflow-y-scroll overflow-x-hidden'>
           {categories.map((category, index) => {
             return (
-              <div
-                key={category.id}
-                className={classNames('text-base dark:text-primary', touchHover, {
-                  'mt-px40': index === 0,
-                })}
-                onClick={async () => {
-                  await router.push(`/tag/${category.slug}`)
-                }}
-              >
-                #{category.name} ({category.articles.length})
-              </div>
+              <Link key={category.id} href={`/tag/${category.slug}`}>
+                <a>
+                  <div
+                    key={category.id}
+                    className={classNames('text-base dark:text-primary', touchHover, {
+                      'mt-px40': index === 0,
+                    })}
+                  >
+                    #{category.name} ({category.articles.length})
+                  </div>
+                </a>
+              </Link>
             )
           })}
         </div>
