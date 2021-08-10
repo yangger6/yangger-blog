@@ -12,7 +12,7 @@ import { fetchAPI } from '../lib/api'
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
-export const PAGE_SIZE = 1
+export const PAGE_SIZE = 5
 function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState('light')
   useEffect(() => {

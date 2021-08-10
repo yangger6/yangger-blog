@@ -9,7 +9,11 @@ const Pagination = ({ current, count, pageSize }) => {
   const normal = 'text-2xl font-light leading-9 flex items-center transition-all cursor-pointer'
   const darkMode = 'dark:text-white dark:hover:text-primary'
   return (
-    <div className='py-px60 w-full border-b dark:border-primary flex items-center'>
+    <div
+      className={classNames('py-px60 w-full border-b dark:border-primary flex items-center', {
+        hidden: current === 1 && !haveNextPage,
+      })}
+    >
       {current > 1 && (
         <Link href={`/page/${Number(current) - 1}`}>
           <a className={classNames(normal, darkMode, 'mr-px60')}>上一页</a>
