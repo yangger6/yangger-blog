@@ -8,12 +8,12 @@ const Article = ({ type, article, className: propClassName }) => {
   let contextClassNames = 'w-full'
   let subContextClassNames = 'hidden'
   if (type === 'Banner') {
-    typeClassNames = 'lg:w-full'
+    typeClassNames = 'banner w-full'
     contextClassNames = 'w-full flex flex-col lg:w-7/10'
     subContextClassNames =
       'w-3/10 flex-col pl-px40 dark:text-white items-center h-full justify-center hidden lg:flex'
   } else {
-    typeClassNames = 'items lg:w-1/2 xl:w-1/3'
+    typeClassNames = 'items w-full lg:w-1/2 xl:w-1/3'
   }
   return (
     <article
