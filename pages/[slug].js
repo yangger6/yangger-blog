@@ -17,7 +17,7 @@ const ArticlePage = ({ article, categories, blog }) => {
           <div className='date text-xs leading-5 dark:text-grayGreen'>2021 / 02 / 05</div>
           <h1
             className={classNames(
-              'text-2xl leading-10/15 md:leading-10/15 font-bold dark:text-white cursor-pointer transition-all dark:hover:text-primary md:text-4xl',
+              'text-2xl leading-10/15 md:leading-10/15 font-bold cursor-default dark:text-white md:text-4xl',
             )}
           >
             {article.title}
@@ -34,7 +34,9 @@ const ArticlePage = ({ article, categories, blog }) => {
             <div className='tags flex flex-wrap gap-px14'>
               {article.top && <Tag type={'top'} />}
               {article.categories.map((category) => {
-                return <Tag key={category.id} type='tag' text={category.name} />
+                return (
+                  <Tag key={category.id} type='tag' text={category.name} slug={category.slug} />
+                )
               })}
             </div>
           </div>

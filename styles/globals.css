@@ -16,6 +16,10 @@ html * {
 html.dark body {
     background: #000;
 }
+html.dark *::selection{
+    background-color: var(--dark-theme-color);
+    color: #000;
+}
 
 .full-image{
     width: 100%;

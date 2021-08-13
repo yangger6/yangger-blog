@@ -33,9 +33,12 @@ const Aside = ({ categories }) => {
             )}
           />
           <p
-            className={classNames('text-primary w-full mt-px16 font-medium text-base hidden', {
-              'lg:flex': isLogoHovered,
-            })}
+            className={classNames(
+              'text-primary w-full mt-px16 font-medium text-base lg:opacity-0 cursor-default',
+              {
+                'lg:opacity-100': isLogoHovered,
+              },
+            )}
           >
             Personal profile
           </p>
@@ -43,10 +46,7 @@ const Aside = ({ categories }) => {
         {/*shadow*/}
         <div
           className={classNames(
-            'absolute transition-all z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100 lg:opacity-0',
-            {
-              'lg:opacity-100': isLogoHovered,
-            },
+            'absolute transition-all z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100',
           )}
         />
         {/*person*/}

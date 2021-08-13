@@ -3,22 +3,26 @@ import Link from 'next/link'
 import classNames from 'classnames'
 import Tag from './Tag'
 
-const Article = ({ type, article, className: propClassName }) => {
+const Article = ({ type, article, className: propClassName, index }) => {
   let typeClassNames = 'w-full'
   let contextClassNames = 'w-full'
   let subContextClassNames = 'hidden'
-  if (type === 'Banner') {
+  // banner
+  if (type === 'Banner' || article.top) {
     typeClassNames = 'banner w-full'
-    contextClassNames = 'w-full flex flex-col lg:w-7/10'
-    subContextClassNames =
-      'w-3/10 flex-col pl-px40 dark:text-white items-center h-full justify-center hidden lg:flex'
+    if (index === 0 || article.top) {
+      // banner是第一条 或者 置顶
+      contextClassNames = 'w-full flex flex-col lg:w-7/10'
+      subContextClassNames =
+        'w-3/10 flex-col pl-px40 dark:text-white items-center h-full justify-center hidden lg:flex'
+    }
   } else {
     typeClassNames = 'items w-full lg:w-1/2 xl:w-1/3'
   }
   return (
     <article
       className={classNames(
-        'article flex py-px60 border-b dark:border-primary lg:px-px20',
+        'article flex py-px60 border-b dark:border-primary lg:px-px20 dark:border-opacity-50',
         typeClassNames,
         propClassName,
       )}

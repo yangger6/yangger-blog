@@ -11,8 +11,15 @@ const BlogPage = ({ articles, categories, homepage, page = 1 }) => {
   return (
     <Layout categories={categories}>
       <Seo seo={homepage.seo} />
-      {articles.map((article) => {
-        return <Article key={article.id} type={article.articletype || 'items'} article={article} />
+      {articles.map((article, index) => {
+        return (
+          <Article
+            key={article.id}
+            type={article.articletype || 'items'}
+            article={article}
+            index={index}
+          />
+        )
       })}
       <Pagination current={page} pageSize={articleInfo.pageSize} count={articleInfo.count} />
     </Layout>
