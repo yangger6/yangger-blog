@@ -6,6 +6,7 @@ import { PAGE_SIZE } from './_app'
 const Home = ({ articles, categories, homepage }) => {
   return <BlogPage categories={categories} homepage={homepage} articles={articles} />
 }
+
 export async function getStaticProps() {
   // Run API calls in parallel
   const [articles, categories, homepage] = await Promise.all([

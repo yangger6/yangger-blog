@@ -6,4 +6,5 @@ module.exports = {
     loader: 'imgix',
     path: '',
   },
+  smoothScroll: true, // 滚动开关
 }
