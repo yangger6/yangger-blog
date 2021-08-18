@@ -7,6 +7,7 @@ import classNames from 'classnames'
 import Tag from '../components/Tag'
 import { AnimateLongArrow } from '../components/AnimateArrow'
 import Article from '../components/Article'
+import dayjs from 'dayjs'
 
 const ArticlePage = ({ article, categories, blog }) => {
   return (
@@ -14,7 +15,9 @@ const ArticlePage = ({ article, categories, blog }) => {
       <Seo seo={blog.seo} article={article} />
       <article className='dark:text-white'>
         <header className='mb-2 mt-px60'>
-          <div className='date text-xs leading-5 dark:text-grayGreen'>2021 / 02 / 05</div>
+          <div className='date text-xs leading-5 dark:text-grayGreen mb-px16'>
+            {dayjs(article.created_at).format('YYYY / MM / DD')}
+          </div>
           <h1
             className={classNames(
               'text-2xl leading-10/15 md:leading-10/15 font-bold cursor-default dark:text-white md:text-4xl',
