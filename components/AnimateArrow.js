@@ -5,7 +5,7 @@ export const AnimateLongArrow = ({ fromColor, toColor, isHover }) => {
   return (
     <div
       className={classNames(
-        'animate-arrow flex items-center ml-px20 w-px24 h-px12 relative transition-all',
+        'animate-arrow flex items-center ml-px20 w-px24 h-px12 relative transition-all duration-300',
         {
           'w-px32': isHover,
         },
@@ -35,7 +35,7 @@ export const AnimateShortArrow = ({ fromColor, toColor, isHover }) => {
   return (
     <div
       className={classNames(
-        'absolute left-full animate-short-arrow ml-px4 w-0 transition-all overflow-hidden top-0',
+        'absolute left-full animate-short-arrow ml-px4 w-0 transition-all duration-300 overflow-hidden top-0',
         {
           'w-px11': isHover,
         },

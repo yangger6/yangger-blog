@@ -8,7 +8,7 @@ const Tag = ({ slug, text = '', type = 'top' }) => {
   const [hoverRef, isHovered] = useHover(false)
 
   const baseClassName =
-    'flex items-center tag py-px2 px-px17 rounded-full text-sm transition-all h-px23'
+    'flex items-center tag py-px2 px-px17 rounded-full text-sm transition-all duration-300 h-px23'
   return (
     <>
       {type === 'top' && (

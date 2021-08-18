@@ -6,7 +6,8 @@ import themeColor from '../theme'
 const Pagination = ({ current, count, pageSize }) => {
   const [hoverRef, isHovered] = useHover(false)
   const haveNextPage = pageSize * current < count
-  const normal = 'text-2xl font-light leading-9 flex items-center transition-all cursor-pointer'
+  const normal =
+    'text-2xl font-light leading-9 flex items-center transition-all duration-300 cursor-pointer'
   const darkMode = 'dark:text-white dark:hover:text-primary'
   return (
     <div

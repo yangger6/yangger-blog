@@ -36,7 +36,7 @@ const Article = ({ type, article, className: propClassName, index }) => {
             <a>
               <h1
                 className={classNames(
-                  'text-2xl leading-10/15 md:leading-10/15 font-bold dark:text-white mb-px24 cursor-pointer transition-all dark:hover:text-primary',
+                  'text-2xl leading-10/15 md:leading-10/15 font-bold dark:text-white mb-px24 cursor-pointer transition-all duration-300 dark:hover:text-primary',
                   type === 'banner' ? 'md:text-4xl' : 'md:text-2xl',
                 )}
               >

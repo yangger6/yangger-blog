@@ -15,18 +15,18 @@ const Aside = ({ categories }) => {
   } = useContext(GlobalContext)
   const [logoHoverRef, isLogoHovered] = useHover(false)
   const touchHover =
-    'transform hover:translate-x-px6 transition-all hover:text-white cursor-pointer'
+    'transform hover:translate-x-px6 transition-all duration-300 hover:text-white cursor-pointer'
   return (
-    <aside className='flex flex-wrap flex-col w-full relative lg:w-275/16 lg:h-auto lg:border-r dark:border-primary lg:pl-px24'>
-      <div className='profile flex w-full relative lg:h-px250 lg:border-b dark:border-primary'>
-        <div
-          ref={logoHoverRef}
-          className='absolute top-px29 left-px17 flex flex-wrap items-center z-20 lg:top-px33 lg:left-0 lg:w-px230 lg:h-px33 xl:top-px40 xl:w-px278 xl:h-px40'
-        >
+    <aside className='flex flex-wrap flex-col w-full relative lg:w-275/16 lg:h-auto lg:border-r dark:border-primary lg:pl-px24 lg:fixed lg:h-full'>
+      <div
+        className='profile flex w-full relative lg:h-px250 lg:border-b dark:border-primary'
+        ref={logoHoverRef}
+      >
+        <div className='absolute top-px29 left-px17 flex flex-wrap items-center z-20 lg:top-px33 lg:left-0 lg:w-px230 lg:h-px33 xl:top-px40 xl:w-px278 xl:h-px40'>
           <ImageWithBasePath className='w-px203 h-px29' src={darkLogo} alt='logo' />
           <div
             className={classNames(
-              'rounded-full ml-px10 w-px10 h-px10 transition-all dark:bg-white',
+              'rounded-full ml-px10 w-px10 h-px10 transition-all duration-300 dark:bg-white',
               {
                 'dark:bg-primary': isLogoHovered,
               },
@@ -46,7 +46,7 @@ const Aside = ({ categories }) => {
         {/*shadow*/}
         <div
           className={classNames(
-            'absolute transition-all z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100',
+            'absolute transition-all duration-300 z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100',
           )}
         />
         {/*person*/}

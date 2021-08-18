@@ -11,6 +11,9 @@ const BlogPage = ({ articles, categories, homepage, page = 1 }) => {
   return (
     <Layout categories={categories}>
       <Seo seo={homepage.seo} />
+      <div className='w-full mt-px60 border-b dark:border-primary dark:border-opacity-50 lg:hidden'>
+        {/*手机模式下的线*/}
+      </div>
       {articles.map((article, index) => {
         return (
           <Article
