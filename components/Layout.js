@@ -7,7 +7,7 @@ import SmoothScroll from '../lib/smothScroll'
 const Layout = ({ children, categories }) => {
   useEffect(() => {
     if (config.smoothScroll) {
-      SmoothScroll(document, 120, 12)
+      SmoothScroll(document, 60, 12)
     }
   }, [])
   return (
