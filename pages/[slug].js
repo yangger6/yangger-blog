@@ -8,6 +8,7 @@ import Tag from '../components/Tag'
 import { AnimateLongArrow } from '../components/AnimateArrow'
 import Article from '../components/Article'
 import dayjs from 'dayjs'
+import { BeautyCode } from '../lib/beautyCode'
 
 const ArticlePage = ({ article, categories, blog }) => {
   return (
@@ -45,7 +46,16 @@ const ArticlePage = ({ article, categories, blog }) => {
           </div>
         </footer>
         <main className='mt-px40'>
-          <Markdown id='markdown'>{article.content}</Markdown>
+          <Markdown
+            id='markdown'
+            options={{
+              overrides: {
+                code: BeautyCode,
+              },
+            }}
+          >
+            {article.content}
+          </Markdown>
         </main>
       </article>
       <div className='line my-px60 w-full h-px dark:bg-primary' />

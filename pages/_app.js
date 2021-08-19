@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useMemo, useState } from 'react'
 import App from 'next/app'
 import Head from 'next/head'
 import Script from 'next/script'
@@ -9,21 +9,24 @@ import '../styles/globals.css'
 import '../styles/markdown.css'
 
 import { fetchAPI } from '../lib/api'
+import { highlightListenMode } from '../lib/beautyCode'
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
 export const PAGE_SIZE = 5
 function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState('light')
+  // 在主题切换的时候运行
+  const onModeChange = (currentMode) => {
+    document.getElementsByTagName('html')[0].className = currentMode
+    setTheme(currentMode)
+  }
   useEffect(() => {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      const newColorScheme = e.matches ? 'dark' : 'light'
-      document.getElementsByTagName('html')[0].className = newColorScheme
-      setTheme(newColorScheme)
+      onModeChange(e.matches ? 'dark' : 'light')
     })
     const nowTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    document.getElementsByTagName('html')[0].className = nowTheme
-    setTheme(nowTheme)
+    onModeChange(nowTheme)
   }, [])
   const { global, articleInfo } = pageProps
   const iconParkLink = `
@@ -32,7 +35,21 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Script src={iconParkLink} />
-      <Head></Head>
+      <Head>
+        <link
+          rel='stylesheet'
+          href='/theme/github.css'
+          title='github-light'
+          key='github-light'
+          {...(theme === 'dark' ? { disabled: 'disabled' } : {})}
+        />
+        <link
+          rel='stylesheet'
+          href='/theme/github-dark.css'
+          title='github-dark'
+          key='github-dark'
+        />
+      </Head>
       <GlobalContext.Provider value={{ global, theme, articleInfo }}>
         <Component {...pageProps} />
       </GlobalContext.Provider>
