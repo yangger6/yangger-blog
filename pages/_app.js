@@ -1,6 +1,5 @@
 import { createContext, useEffect, useMemo, useState } from 'react'
 import App from 'next/app'
-import Head from 'next/head'
 import Script from 'next/script'
 import 'tailwindcss/tailwind.css'
 
@@ -9,7 +8,6 @@ import '../styles/globals.css'
 import '../styles/markdown.css'
 
 import { fetchAPI } from '../lib/api'
-import { highlightListenMode } from '../lib/beautyCode'
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
@@ -18,8 +16,46 @@ function MyApp({ Component, pageProps }) {
   const [theme, setTheme] = useState('light')
   // 在主题切换的时候运行
   const onModeChange = (currentMode) => {
+    const CSS_PATH = ['github', 'github-dark']
     document.getElementsByTagName('html')[0].className = currentMode
     setTheme(currentMode)
+    const [light, dark] = CSS_PATH.map(
+      (path) => `<link rel="stylesheet" href="/theme/${path}.css" title="${path}" key="${path}">`,
+    )
+    const [lightDisabled, darkDisabled] = [light, dark].map(
+      (link) => `${link.slice(0, -1)} disabled>`,
+    )
+    const headEl = document.querySelector('head')
+    // 首次进入未加载link
+    // if (!headEl.innerHTML.includes('github-dark')) {
+    //   headEl.innerHTML += currentMode === 'dark' ? dark + lightDisabled : light + darkDisabled
+    // } else {
+    //   /**
+    //    * 原本这一块想抽出来 在上面if的逻辑里只添加css 然后再这一块不写else 直接根据theme添加disabled属性
+    //    * 但是并不能生效 使用setTimeout倒是可以有延迟执行的效果 感觉没有必要做为了这样的消耗
+    //    * 这样写目前的效果就是会在切换的时候失去样式短暂的时间 然后才读取到样式文件
+    //    */
+    //   const [lightEl, darkEl] = CSS_PATH.map((title) =>
+    //     document.querySelector(`link[title=${title}]`),
+    //   )
+    //   lightEl.disabled = currentMode === 'dark'
+    //   darkEl.disabled = currentMode === 'light'
+    // }
+    // 首次进入未加载link
+    if (!headEl.innerHTML.includes('github-dark')) {
+      headEl.innerHTML += currentMode === 'dark' ? dark + lightDisabled : light + darkDisabled
+    }
+    /**
+     * 这样写视觉效果不会有失去样式的那一段时间 会保留上个主题的样式然后进行切换
+     * 目前感觉这样写比较好 在切换的时候有点闪烁的感觉
+     */
+    setTimeout(() => {
+      const [lightEl, darkEl] = CSS_PATH.map((title) =>
+        document.querySelector(`link[title=${title}]`),
+      )
+      lightEl.disabled = currentMode === 'dark'
+      darkEl.disabled = currentMode === 'light'
+    }, 0)
   }
   useEffect(() => {
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
@@ -35,21 +71,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Script src={iconParkLink} />
-      <Head>
-        <link
-          rel='stylesheet'
-          href='/theme/github.css'
-          title='github-light'
-          key='github-light'
-          {...(theme === 'dark' ? { disabled: 'disabled' } : {})}
-        />
-        <link
-          rel='stylesheet'
-          href='/theme/github-dark.css'
-          title='github-dark'
-          key='github-dark'
-        />
-      </Head>
       <GlobalContext.Provider value={{ global, theme, articleInfo }}>
         <Component {...pageProps} />
       </GlobalContext.Provider>
