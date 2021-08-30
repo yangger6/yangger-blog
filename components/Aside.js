@@ -109,7 +109,7 @@ const Aside = ({ categories }) => {
         {/*tag*/}
         <div
           className={classNames(
-            'tag-list w-full relative lg:flex flex-col py-px30 border-t dark:border-primary dark:border-opacity-50',
+            'tag-list w-full relative flex lg:flex flex-col py-px30 border-t dark:border-primary dark:border-opacity-50',
             {
               hidden: !isShowPanel,
               'mt-px90': isShowPanel,
@@ -141,7 +141,7 @@ const Aside = ({ categories }) => {
         {/*subscribe*/}
         <div
           className={classNames(
-            'subscribe w-full relative flex gap-y-px20 flex-col py-px30 border-t dark:border-primary dark:border-opacity-50',
+            'subscribe w-full relative flex lg:flex gap-y-px20 flex-col py-px30 border-t dark:border-primary dark:border-opacity-50',
             {
               hidden: !isShowPanel,
             },
@@ -165,7 +165,7 @@ const Aside = ({ categories }) => {
         {openFriendLink && (
           <div
             className={classNames(
-              'friend-link w-full relative flex gap-y-px14 flex-col py-px30 border-t dark:border-primary dark:border-opacity-50',
+              'friend-link w-full relative flex lg:flex gap-y-px14 flex-col py-px30 border-t dark:border-primary dark:border-opacity-50',
               {
                 hidden: !isShowPanel,
               },
