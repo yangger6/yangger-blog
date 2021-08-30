@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import darkLogo from '../public/dark-logo.svg'
 import darkPerson from '../public/dark-person.svg'
 import IconPark from './IconPark'
@@ -13,11 +13,46 @@ const Aside = ({ categories }) => {
   const {
     global: { accounts },
   } = useContext(GlobalContext)
+  const [isShowPanel, setShowPanel] = useState(false)
   const [logoHoverRef, isLogoHovered] = useHover(false)
   const touchHover =
     'transform hover:translate-x-px6 transition-all duration-300 hover:text-white cursor-pointer'
   return (
-    <aside className='flex flex-wrap flex-col w-full relative lg:w-275/16 lg:h-auto lg:border-r dark:border-primary lg:pl-px24 lg:fixed lg:h-full'>
+    <aside className='flex flex-wrap flex-col w-full lg:w-275/16 lg:h-auto lg:border-r dark:border-primary lg:pl-px24 lg:fixed lg:h-full'>
+      {/*menu*/}
+      <div
+        onClick={(e) => setShowPanel(!isShowPanel)}
+        className='menu-icon lg:hidden absolute w-px24 h-px24 z-50 flex flex-col justify-center items-center right-px20 top-px32'
+      >
+        <div
+          className={classNames(
+            'menu-icon-bar menu-icon-bar-1 dark:bg-white h-px w-px16 rounded-full transform transition-all duration-300',
+            {
+              'rotate-45 translate-y-px5': isShowPanel,
+            },
+          )}
+        />
+        <div
+          style={{
+            transformOrigin: '0 50%',
+          }}
+          className={classNames(
+            'menu-icon-bar menu-icon-bar-2 dark:bg-white h-px w-px16 rounded-full mt-px4 transform transition-all duration-300',
+            {
+              'opacity-70 scale-x-0 translate-x-px16': isShowPanel,
+            },
+          )}
+        />
+        <div
+          className={classNames(
+            'menu-icon-bar menu-icon-bar-3 dark:bg-white h-px w-px16 rounded-full mt-px4 transform transition-all duration-300',
+            {
+              '-rotate-45 -translate-y-px5': isShowPanel,
+            },
+          )}
+        />
+      </div>
+      {/*person*/}
       <div
         className='profile flex w-full relative lg:h-px250 lg:border-b dark:border-primary'
         ref={logoHoverRef}
@@ -49,46 +84,49 @@ const Aside = ({ categories }) => {
             'absolute transition-all duration-300 z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100',
           )}
         />
-        {/*person*/}
         <div className='person flex mx-auto justify-center w-full'>
           <ImageWithBasePath src={darkPerson} alt={'person'} layout={'fill'} />
         </div>
       </div>
-      <div className='tag-list w-full relative border-b dark:border-primary hidden lg:flex'>
-        <div className='inner flex-col gap-y-px10 h-px300 flex w-full overflow-y-scroll overflow-x-hidden'>
-          {categories.map((category, index) => {
-            return (
-              <Link key={category.id} href={`/tag/${category.slug}`}>
-                <a>
-                  <div
-                    key={category.id}
-                    className={classNames('text-base dark:text-primary', touchHover, {
-                      'mt-px40': index === 0,
-                    })}
-                  >
-                    #{category.name} ({category.articles.length})
-                  </div>
-                </a>
-              </Link>
-            )
-          })}
-        </div>
-        {/*shadow*/}
-        <div className='absolute z-10 bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black pointer-events-none' />
-      </div>
-      <div className='subscribe w-full relative hidden lg:flex pt-px40 gap-y-px20 flex-col'>
-        {accounts.map((account) => (
-          <div
-            key={account.id}
-            className={classNames('flex items-center text-base dark:text-primary', touchHover)}
-          >
-            <IconPark name={account.icon} color={themeColors.primary} size='28' />
-            <span className='mx-px10'>·</span>
-            <a href={account.link} target='_blank' rel='noreferrer'>
-              {account.title}
-            </a>
+      <div>
+        {/*tag*/}
+        <div className='tag-list w-full relative border-b dark:border-primary hidden lg:flex'>
+          <div className='inner flex-col gap-y-px10 h-px300 flex w-full overflow-y-scroll overflow-x-hidden'>
+            {categories.map((category, index) => {
+              return (
+                <Link key={category.id} href={`/tag/${category.slug}`}>
+                  <a>
+                    <div
+                      key={category.id}
+                      className={classNames('text-base dark:text-primary', touchHover, {
+                        'mt-px40': index === 0,
+                      })}
+                    >
+                      #{category.name} ({category.articles.length})
+                    </div>
+                  </a>
+                </Link>
+              )
+            })}
           </div>
-        ))}
+          {/*shadow*/}
+          <div className='absolute z-10 bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black pointer-events-none' />
+        </div>
+        {/*subscribe*/}
+        <div className='subscribe w-full relative hidden lg:flex pt-px40 gap-y-px20 flex-col'>
+          {accounts.map((account) => (
+            <div
+              key={account.id}
+              className={classNames('flex items-center text-base dark:text-primary', touchHover)}
+            >
+              <IconPark name={account.icon} color={themeColors.primary} size='28' />
+              <span className='mx-px10'>·</span>
+              <a href={account.link} target='_blank' rel='noreferrer'>
+                {account.title}
+              </a>
+            </div>
+          ))}
+        </div>
       </div>
     </aside>
   )

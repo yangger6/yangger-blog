@@ -3,7 +3,9 @@ const staticPx = {
   '-px5': '-5px',
   '-px15': '-15px',
   '-px24': '-24px',
+  'px2/3': '1.5px',
   px2: '2px',
+  px3: '3px',
   px4: '4px',
   px5: '5px',
   px6: '6px',
@@ -66,6 +68,10 @@ module.exports = {
         ...staticPx,
       },
       spacing: {
+        ...staticPx,
+      },
+      borderWidth: {
+        DEFAULT: '1px',
         ...staticPx,
       },
       lineHeight: {
