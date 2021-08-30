@@ -11,9 +11,12 @@ const Pagination = ({ current, count, pageSize }) => {
   const darkMode = 'dark:text-white dark:hover:text-primary'
   return (
     <div
-      className={classNames('py-px60 w-full border-b dark:border-primary flex items-center', {
-        hidden: current === 1 && !haveNextPage,
-      })}
+      className={classNames(
+        'py-px60 w-full border-b dark:border-primary dark:border-opacity-50 flex items-center',
+        {
+          hidden: current === 1 && !haveNextPage,
+        },
+      )}
     >
       {current > 1 && (
         <Link href={`/page/${Number(current) - 1}`}>
