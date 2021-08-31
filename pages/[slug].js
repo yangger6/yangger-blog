@@ -9,6 +9,7 @@ import { AnimateLongArrow } from '../components/AnimateArrow'
 import Article from '../components/Article'
 import dayjs from 'dayjs'
 import { BeautyCode } from '../lib/beautyCode'
+import { BeautyImage } from '../lib/beautyImg'
 
 const ArticlePage = ({ article, categories, blog }) => {
   return (
@@ -51,6 +52,7 @@ const ArticlePage = ({ article, categories, blog }) => {
             options={{
               overrides: {
                 code: BeautyCode,
+                img: BeautyImage,
               },
             }}
           >

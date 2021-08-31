@@ -65,6 +65,9 @@ html.dark article #markdown code {
     color: rgba(255, 255, 255, .8);
 }
 
+html.dark article #markdown img{
+    background-color: #fff;
+}
 
 /*title */
 
@@ -138,8 +141,11 @@ article #markdown ul li:before{
     height: calc(3px * 2);
     border-radius: 50%;
     margin: calc(3px * 3);
-    float: left;
     background-color: #000;
+}
+article #markdown ul li {
+    display: flex;
+    align-items: center;
 }
 
 article #markdown ol {
@@ -175,3 +181,16 @@ article #markdown pre code {
 }
 
 /*normarl*/
+
+/*image*/
+
+article #markdown img {
+    margin: 0 auto;
+}
+article #markdown .image-alt{
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    font-size: .857rem;
+    line-height: 1.6;
+}

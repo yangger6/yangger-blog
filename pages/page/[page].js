@@ -4,7 +4,7 @@ import Layout from '../../components/Layout'
 import Seo from '../../components/Seo'
 import Article from '../../components/Article'
 import Pagination from '../../components/Pagination'
-import { GlobalContext } from '../_app'
+import { GlobalContext, PAGE_SIZE } from '../_app'
 
 const BlogPage = ({ articles, categories, homepage, page = 1 }) => {
   const { articleInfo } = useContext(GlobalContext)
@@ -29,9 +29,8 @@ const BlogPage = ({ articles, categories, homepage, page = 1 }) => {
   )
 }
 export async function getStaticPaths() {
-  const articles = await fetchAPI('/articles?status=published')
-  const pageSize = 1
-  const pageCurrents = Array.from(Array(Math.ceil(articles.length / pageSize)), (_, x) => x + 1)
+  const articles = await fetchAPI('/articles?status=published&_sort=top:desc,created_at:desc')
+  const pageCurrents = Array.from(Array(Math.ceil(articles.length / PAGE_SIZE)), (_, x) => x + 1)
   return {
     paths: pageCurrents.map((pageCurrent) => ({
       params: {
@@ -45,7 +44,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // Run API calls in parallel
   const [articles, categories, homepage] = await Promise.all([
-    fetchArticles(params.page, 1),
+    fetchArticles(params.page, PAGE_SIZE),
     fetchAPI('/categories'),
     fetchAPI('/homepage'),
   ])
