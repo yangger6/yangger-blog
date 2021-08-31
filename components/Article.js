@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import classNames from 'classnames'
 import Tag from './Tag'
+import dayjs from 'dayjs'
 
 const Article = ({ type, article, className: propClassName, index }) => {
   let typeClassNames = 'w-full'
@@ -29,7 +30,9 @@ const Article = ({ type, article, className: propClassName, index }) => {
     >
       <div className={contextClassNames}>
         <header className='mb-2'>
-          <div className='date text-xs leading-5 dark:text-grayGreen'>2021 / 02 / 05</div>
+          <div className='date text-xs leading-5 dark:text-grayGreen'>
+            {dayjs(article.created_at).format('YYYY / MM / DD')}
+          </div>
         </header>
         <main>
           <Link href={`/${article.slug}`}>
