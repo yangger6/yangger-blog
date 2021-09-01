@@ -17,7 +17,7 @@ article #markdown p {
     font-weight: normal;
     font-size: 1rem;
     line-height: 149%;
-    margin: calc(2px * 5) 0;
+    /*margin: 0.625rem;*/
 }
 /*dark mode*/
 
@@ -66,7 +66,10 @@ html.dark article #markdown code {
 }
 
 html.dark article #markdown img{
-    background-color: #fff;
+    background-color: #ffffff40;
+}
+html.dark article #markdown .image-alt{
+    color: #ffffff68;
 }
 
 /*title */
@@ -140,23 +143,27 @@ article #markdown ul li:before{
     width: calc(3px * 2);
     height: calc(3px * 2);
     border-radius: 50%;
-    margin: calc(3px * 3);
     background-color: #000;
+    position: relative;
+    top: -3px;
+    margin-right: 3px;
+    display: inline-block;
 }
 article #markdown ul li {
-    display: flex;
-    align-items: center;
+}
+article #markdown ul li > ul {
+    padding-left: calc(4px * 5);
 }
 
 article #markdown ol {
     list-style-type: decimal;
-    padding-left: calc(3px * 8);
+    padding-left: calc(4px * 9);
 }
 article #markdown ol li::marker{
     font-family: Inter;
     font-style: normal;
     font-weight: normal;
-    padding-left: calc(3px * 8);
+    padding-left: calc(4px * 9);
     text-align: left!important;
 }
 
@@ -193,4 +200,12 @@ article #markdown .image-alt{
     text-align: center;
     font-size: .857rem;
     line-height: 1.6;
+}
+
+/*margin*/
+
+article #markdown > blockquote,
+article #markdown > pre,
+article #markdown > p{
+    margin: 1em 0;
 }

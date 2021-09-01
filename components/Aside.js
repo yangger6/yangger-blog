@@ -64,13 +64,15 @@ const Aside = ({ categories }) => {
       <div className='profile flex w-full relative lg:h-px250' ref={logoHoverRef}>
         <div
           className={classNames(
-            'absolute top-px29 left-px17 flex flex-wrap items-center z-20 lg:top-px33 lg:left-0 lg:w-px230 lg:h-px33 xl:top-px40 xl:w-px278 xl:h-px40',
+            'absolute cursor-pointer top-px29 left-px17 flex flex-wrap items-center z-20 lg:top-px33 lg:left-0 lg:w-px230 lg:h-px33 xl:top-px40 xl:w-px278 xl:h-px40',
             {
               'z-30': isShowPanel,
             },
           )}
         >
-          <ImageWithBasePath className='w-px203 h-px29' src={darkLogo} alt='logo' />
+          <Link href='/'>
+            <ImageWithBasePath className='w-px203 h-px29' src={darkLogo} alt='logo' />
+          </Link>
           <div
             className={classNames(
               'rounded-full ml-px10 w-px10 h-px10 transition-all duration-300 dark:bg-white',
