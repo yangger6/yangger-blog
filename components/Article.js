@@ -23,7 +23,7 @@ const Article = ({ type, article, className: propClassName, index }) => {
   return (
     <article
       className={classNames(
-        'article flex py-px60 border-b dark:border-primary lg:px-px20 dark:border-opacity-50',
+        'article flex py-px60 border-b border-lightPrimary border-opacity-30 dark:border-primary lg:px-px20 dark:border-opacity-50',
         typeClassNames,
         propClassName,
       )}

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import darkLogo from '../public/dark-logo.svg'
+import lightLogo from '../public/light-logo.svg'
 import darkPerson from '../public/dark-person.svg'
 import IconPark from './IconPark'
 import classNames from 'classnames'
@@ -12,6 +13,7 @@ import Link from 'next/link'
 const Aside = ({ categories }) => {
   const {
     global: { accounts, openFriendLink },
+    theme,
   } = useContext(GlobalContext)
   const [friendLinks, socialAccounts] = [[], []]
   accounts.map((account) => {
@@ -26,7 +28,7 @@ const Aside = ({ categories }) => {
   const touchHover =
     'transform hover:translate-x-px6 transition-all duration-300 hover:text-white cursor-pointer'
   return (
-    <aside className='flex flex-wrap flex-col w-full lg:w-275/16 lg:h-auto lg:border-r dark:border-primary lg:pl-px24 lg:fixed lg:h-full'>
+    <aside className='flex flex-wrap flex-col w-full lg:w-275/16 lg:h-auto lg:border-r border-lightPrimary border-opacity-30 dark:border-primary lg:pl-px24 lg:fixed lg:h-full'>
       {/*menu*/}
       <div
         onClick={(e) => setShowPanel(!isShowPanel)}
@@ -71,7 +73,11 @@ const Aside = ({ categories }) => {
           )}
         >
           <Link href='/'>
-            <ImageWithBasePath className='w-px203 h-px29' src={darkLogo} alt='logo' />
+            <ImageWithBasePath
+              className='w-px203 h-px29'
+              src={theme === 'light' ? lightLogo : darkLogo}
+              alt='logo'
+            />
           </Link>
           <div
             className={classNames(
@@ -96,7 +102,7 @@ const Aside = ({ categories }) => {
         {/*shadow*/}
         <div
           className={classNames(
-            'absolute transition-all duration-300 z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100',
+            'absolute dark-mask transition-all duration-300 z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100',
           )}
         />
         <div className='person flex mx-auto justify-center w-full'>
@@ -111,14 +117,16 @@ const Aside = ({ categories }) => {
         {/*tag*/}
         <div
           className={classNames(
-            'tag-list w-full relative flex lg:flex flex-col py-px30 border-t dark:border-primary dark:border-opacity-50',
+            'tag-list w-full relative flex lg:flex flex-col py-px30 border-t border-lightPrimary border-opacity-30border-lightPrimary border-opacity-30 dark:border-primary dark:border-opacity-50',
             {
               hidden: !isShowPanel,
               'mt-px90': isShowPanel,
             },
           )}
         >
-          <div className='dark:text-primary text-lg leading-10/15 font-bold'>标签导航</div>
+          <div className='dark:text-primary text-lightPrimary text-lg leading-10/15 font-bold text-green'>
+            标签导航
+          </div>
           <div className='inner flex-col gap-y-px10 h-px215 flex w-full overflow-y-scroll overflow-x-hidden'>
             {categories.map((category, index) => {
               return (
@@ -126,9 +134,13 @@ const Aside = ({ categories }) => {
                   <a>
                     <div
                       key={category.id}
-                      className={classNames('text-base dark:text-primary', touchHover, {
-                        'mt-px20': index === 0,
-                      })}
+                      className={classNames(
+                        'text-base text-lightPrimary dark:text-primary text-lightPrimary',
+                        touchHover,
+                        {
+                          'mt-px20': index === 0,
+                        },
+                      )}
                     >
                       #{category.name} ({category.articles.length})
                     </div>
@@ -138,24 +150,33 @@ const Aside = ({ categories }) => {
             })}
           </div>
           {/*shadow*/}
-          <div className='absolute z-10 bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black pointer-events-none' />
+          <div className='absolute dark-mask z-10 bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black pointer-events-none' />
         </div>
         {/*subscribe*/}
         <div
           className={classNames(
-            'subscribe w-full relative flex lg:flex gap-y-px20 flex-col py-px30 border-t dark:border-primary dark:border-opacity-50',
+            'subscribe w-full relative flex lg:flex gap-y-px20 flex-col py-px30 border-t border-lightPrimary border-opacity-30 dark:border-primary dark:border-opacity-50',
             {
               hidden: !isShowPanel,
             },
           )}
         >
-          <div className='dark:text-primary text-lg leading-10/15 font-bold'>其他主页</div>
+          <div className='dark:text-primary text-lightPrimary text-green text-lg leading-10/15 font-bold'>
+            其他主页
+          </div>
           {socialAccounts.map((account) => (
             <div
               key={account.id}
-              className={classNames('flex items-center text-base dark:text-primary', touchHover)}
+              className={classNames(
+                'flex items-center text-base dark:text-primary text-lightPrimary',
+                touchHover,
+              )}
             >
-              <IconPark name={account.icon} color={themeColors.primary} size='28' />
+              <IconPark
+                name={account.icon}
+                color={theme === 'light' ? themeColors.lightPrimary : themeColors.primary}
+                size='28'
+              />
               <span className='mx-px10'>·</span>
               <a href={account.link} target='_blank' rel='noreferrer'>
                 {account.title}
@@ -167,20 +188,25 @@ const Aside = ({ categories }) => {
         {openFriendLink && (
           <div
             className={classNames(
-              'friend-link w-full relative flex lg:flex gap-y-px14 flex-col py-px30 border-t dark:border-primary dark:border-opacity-50',
+              'friend-link w-full relative flex lg:flex gap-y-px14 flex-col py-px30 border-t border-lightPrimary border-opacity-30 dark:border-primary dark:border-opacity-50',
               {
                 hidden: !isShowPanel,
               },
             )}
           >
-            <div className='dark:text-primary text-lg leading-10/15 font-bold'>友链</div>
+            <div className='dark:text-primary text-lightPrimary text-green text-lg leading-10/15 font-bold'>
+              友链
+            </div>
             {friendLinks.map((friend) => (
               <a
                 href={friend.link}
                 target='_blank'
                 rel='noreferrer'
                 key={friend.id}
-                className={classNames('flex items-center text-base dark:text-primary', touchHover)}
+                className={classNames(
+                  'flex items-center text-base dark:text-primary text-lightPrimary',
+                  touchHover,
+                )}
               >
                 <span>{friend.author}</span>
                 <span className='mx-px10'>·</span>

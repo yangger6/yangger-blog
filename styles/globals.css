@@ -13,12 +13,18 @@ html * {
     width: 0;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
 }
+html body {
+    background: #FBF9F0;
+}
 html.dark body {
     background: #000;
 }
 html.dark *::selection{
     background-color: var(--dark-theme-color);
     color: #000;
+}
+html .dark-mask {
+    background: linear-gradient(0deg, #F6F5F0 0%, rgba(246, 245, 240, 0) 100%);
 }
 
 .full-image{

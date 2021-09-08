@@ -30,7 +30,7 @@ const Tag = ({ slug, text = '', type = 'top' }) => {
               className={classNames(
                 baseClassName,
                 'cursor-pointer',
-                'dark:text-primary border border-primary border-opacity-50 dark:bg-opacity-10 dark:bg-primary hover:pr-px32',
+                'dark:text-primary text-lightPrimary border border-primary border-opacity-50 dark:bg-opacity-10 dark:bg-primary hover:pr-px32',
                 {
                   'pr-px32': isHovered,
                 },
