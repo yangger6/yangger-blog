@@ -1,12 +1,15 @@
+import { useContext } from 'react'
 import classNames from 'classnames'
 import { useHover } from '../hooks'
 import { AnimateShortArrow } from './AnimateArrow'
 import Link from 'next/link'
+import { GlobalContext } from '../pages/_app'
+import themeColors from '../theme'
 
 const Tag = ({ slug, text = '', type = 'top' }) => {
   // top | tag
   const [hoverRef, isHovered] = useHover(false)
-
+  const { theme } = useContext(GlobalContext)
   const baseClassName =
     'flex items-center tag py-px2 px-px17 rounded-full text-sm transition-all duration-300 h-px23'
   return (
@@ -16,7 +19,7 @@ const Tag = ({ slug, text = '', type = 'top' }) => {
           className={classNames(
             baseClassName,
             'top cursor-default',
-            'dark:text-black dark:bg-primary',
+            'dark:text-black dark:bg-primary bg-green text-white',
           )}
         >
           置顶
@@ -30,7 +33,8 @@ const Tag = ({ slug, text = '', type = 'top' }) => {
               className={classNames(
                 baseClassName,
                 'cursor-pointer',
-                'dark:text-primary text-lightPrimary border border-primary border-opacity-50 dark:bg-opacity-10 dark:bg-primary hover:pr-px32',
+                'text-lightPrimary border border-lightGray border-primary bg-greenGray bg-opacity-20 border-opacity-20 hover:pr-px32',
+                'dark:text-primary dark:border-opacity-50 dark:bg-opacity-10 dark:bg-primary',
                 {
                   'pr-px32': isHovered,
                 },
@@ -38,7 +42,10 @@ const Tag = ({ slug, text = '', type = 'top' }) => {
             >
               <span className='relative'>
                 #{text}
-                <AnimateShortArrow isHover={isHovered} fromColor='#7BF0BE' />
+                <AnimateShortArrow
+                  isHover={isHovered}
+                  fromColor={theme === 'light' ? themeColors.lightPrimary : themeColors.primary}
+                />
               </span>
             </div>
           </a>

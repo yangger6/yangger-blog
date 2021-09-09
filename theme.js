@@ -5,5 +5,7 @@ const themeColors = {
   black: '#000',
   lightPrimary: '#262626',
   green: '#3D8955',
+  lightGray: '#bdbfc2',
+  greenGray: '#bcc2bc',
 }
 module.exports = themeColors

@@ -30,7 +30,7 @@ const Article = ({ type, article, className: propClassName, index }) => {
     >
       <div className={contextClassNames}>
         <header className='mb-2'>
-          <div className='date text-xs leading-5 dark:text-grayGreen'>
+          <div className='date text-green text-xs leading-5 dark:text-grayGreen'>
             {dayjs(article.created_at).format('YYYY / MM / DD')}
           </div>
         </header>
@@ -47,7 +47,7 @@ const Article = ({ type, article, className: propClassName, index }) => {
               </h1>
             </a>
           </Link>
-          <div className='text-base desc dark:text-white dark:text-opacity-80 leading-6 mb-6'>
+          <div className='text-base text-lightPrimary desc dark:text-white text-opacity-80 leading-6 mb-6'>
             {article.description}
           </div>
         </main>

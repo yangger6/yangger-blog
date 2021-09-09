@@ -1,9 +1,13 @@
+import { useContext } from 'react'
 import classNames from 'classnames'
 import Link from 'next/link'
 import { AnimateLongArrow } from './AnimateArrow'
 import { useHover } from '../hooks'
 import themeColor from '../theme'
+import { GlobalContext } from '../pages/_app'
+
 const Pagination = ({ current, count, pageSize }) => {
+  const { theme } = useContext(GlobalContext)
   const [hoverRef, isHovered] = useHover(false)
   const haveNextPage = pageSize * current < count
   const normal =
@@ -28,7 +32,11 @@ const Pagination = ({ current, count, pageSize }) => {
           {haveNextPage && (
             <>
               下一页
-              <AnimateLongArrow isHover={isHovered} fromColor='#fff' toColor={themeColor.primary} />
+              <AnimateLongArrow
+                isHover={isHovered}
+                fromColor='#fff'
+                toColor={theme === 'light' ? themeColor.lightPrimary : themeColor.primary}
+              />
             </>
           )}
         </a>

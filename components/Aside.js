@@ -26,7 +26,7 @@ const Aside = ({ categories }) => {
   const [isShowPanel, setShowPanel] = useState(false)
   const [logoHoverRef, isLogoHovered] = useHover(false)
   const touchHover =
-    'transform hover:translate-x-px6 transition-all duration-300 hover:text-white cursor-pointer'
+    'transform hover:translate-x-px6 transition-all duration-300 hover:text-green dark:hover:text-white cursor-pointer'
   return (
     <aside className='flex flex-wrap flex-col w-full lg:w-275/16 lg:h-auto lg:border-r border-lightPrimary border-opacity-30 dark:border-primary lg:pl-px24 lg:fixed lg:h-full'>
       {/*menu*/}
@@ -124,7 +124,7 @@ const Aside = ({ categories }) => {
             },
           )}
         >
-          <div className='dark:text-primary text-lightPrimary text-lg leading-10/15 font-bold text-green'>
+          <div className='dark:text-primary text-lg leading-10/15 font-bold text-green'>
             标签导航
           </div>
           <div className='inner flex-col gap-y-px10 h-px215 flex w-full overflow-y-scroll overflow-x-hidden'>
@@ -161,7 +161,7 @@ const Aside = ({ categories }) => {
             },
           )}
         >
-          <div className='dark:text-primary text-lightPrimary text-green text-lg leading-10/15 font-bold'>
+          <div className='dark:text-primary text-green text-lg leading-10/15 font-bold'>
             其他主页
           </div>
           {socialAccounts.map((account) => (
@@ -194,9 +194,7 @@ const Aside = ({ categories }) => {
               },
             )}
           >
-            <div className='dark:text-primary text-lightPrimary text-green text-lg leading-10/15 font-bold'>
-              友链
-            </div>
+            <div className='dark:text-primary text-green text-lg leading-10/15 font-bold'>友链</div>
             {friendLinks.map((friend) => (
               <a
                 href={friend.link}
