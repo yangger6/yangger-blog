@@ -16,7 +16,7 @@ const Pagination = ({ current, count, pageSize }) => {
   return (
     <div
       className={classNames(
-        'py-px60 w-full border-b border-lightPrimary border-opacity-30border-lightPrimary border-opacity-30 dark:border-primary dark:border-opacity-50 flex items-center',
+        'py-px60 w-full border-b border-lightPrimary border-lightPrimary border-opacity-30 dark:border-primary dark:border-opacity-50 flex items-center',
         {
           hidden: current === 1 && !haveNextPage,
         },

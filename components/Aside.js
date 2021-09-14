@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import darkLogo from '../public/dark-logo.svg'
 import lightLogo from '../public/light-logo.svg'
 import darkPerson from '../public/dark-person.svg'
@@ -9,12 +9,16 @@ import ImageWithBasePath from './ImageWithBasePath'
 import themeColors from '../theme'
 import { GlobalContext } from '../pages/_app'
 import Link from 'next/link'
+import { getStrapiMedia } from '../lib/media'
 
 const Aside = ({ categories }) => {
   const {
-    global: { accounts, openFriendLink },
+    global: { accounts, openFriendLink, personImageDark, personImage },
     theme,
   } = useContext(GlobalContext)
+  const currentPersonImage = useMemo(() => {
+    return getStrapiMedia(theme === 'light' ? personImage : personImageDark)
+  }, [theme])
   const [friendLinks, socialAccounts] = [[], []]
   accounts.map((account) => {
     if (account.accountType === 'sociality') {
@@ -36,7 +40,7 @@ const Aside = ({ categories }) => {
       >
         <div
           className={classNames(
-            'menu-icon-bar menu-icon-bar-1 dark:bg-white h-px w-px16 rounded-full transform transition-all duration-300',
+            'menu-icon-bar menu-icon-bar-1 bg-primary dark:bg-white h-px w-px16 rounded-full transform transition-all duration-300',
             {
               'rotate-45 translate-y-px5': isShowPanel,
             },
@@ -47,7 +51,7 @@ const Aside = ({ categories }) => {
             transformOrigin: '0 50%',
           }}
           className={classNames(
-            'menu-icon-bar menu-icon-bar-2 dark:bg-white h-px w-px16 rounded-full mt-px4 transform transition-all duration-300',
+            'menu-icon-bar menu-icon-bar-2 bg-primary dark:bg-white h-px w-px16 rounded-full mt-px4 transform transition-all duration-300',
             {
               'opacity-70 scale-x-0 -translate-x-px16': isShowPanel,
             },
@@ -55,7 +59,7 @@ const Aside = ({ categories }) => {
         />
         <div
           className={classNames(
-            'menu-icon-bar menu-icon-bar-3 dark:bg-white h-px w-px16 rounded-full mt-px4 transform transition-all duration-300',
+            'menu-icon-bar menu-icon-bar-3 bg-primary dark:bg-white h-px w-px16 rounded-full mt-px4 transform transition-all duration-300',
             {
               '-rotate-45 -translate-y-px5': isShowPanel,
             },
@@ -63,10 +67,10 @@ const Aside = ({ categories }) => {
         />
       </div>
       {/*person*/}
-      <div className='profile flex w-full relative lg:h-px250' ref={logoHoverRef}>
+      <div className='profile flex w-full relative lg:h-px300' ref={logoHoverRef}>
         <div
           className={classNames(
-            'absolute cursor-pointer top-px29 left-px17 flex flex-wrap items-center z-20 lg:top-px33 lg:left-0 lg:w-px230 lg:h-px33 xl:top-px40 xl:w-px278 xl:h-px40',
+            'absolute cursor-pointer top-px29 left-px17 flex flex-wrap items-center z-20 lg:top-px33 lg:left-0 lg:w-px280 lg:h-px33 xl:top-px40 xl:w-px278 xl:h-px40',
             {
               'z-30': isShowPanel,
             },
@@ -100,13 +104,13 @@ const Aside = ({ categories }) => {
           </p>
         </div>
         {/*shadow*/}
-        <div
-          className={classNames(
-            'absolute dark-mask transition-all duration-300 z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100',
-          )}
-        />
-        <div className='person flex mx-auto justify-center w-full'>
-          <ImageWithBasePath src={darkPerson} alt={'person'} layout={'fill'} />
+        {/*<div*/}
+        {/*  className={classNames(*/}
+        {/*    'absolute dark-mask transition-all duration-300 z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100',*/}
+        {/*  )}*/}
+        {/*/>*/}
+        <div className='person flex mx-auto justify-center w-full h-full'>
+          <ImageWithBasePath src={currentPersonImage} alt={'person'} layout='fill' />
         </div>
       </div>
       <div
@@ -117,7 +121,7 @@ const Aside = ({ categories }) => {
         {/*tag*/}
         <div
           className={classNames(
-            'tag-list w-full relative flex lg:flex flex-col py-px30 border-t border-lightPrimary border-opacity-30border-lightPrimary border-opacity-30 dark:border-primary dark:border-opacity-50',
+            'tag-list w-full relative flex lg:flex flex-col py-px30 border-t border-lightPrimary border-opacity-30 border-lightPrimary border-opacity-30 dark:border-primary dark:border-opacity-50',
             {
               hidden: !isShowPanel,
               'mt-px90': isShowPanel,

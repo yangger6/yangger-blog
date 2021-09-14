@@ -34,7 +34,10 @@ html .dark-mask {
 }
 .person {
     /*width: 287px;*/
-    height: calc(77.4 * 5px);
+    height: calc(80 * 5px);
+}
+.person > div {
+    height: 100%;
 }
 .article {
     position: relative;
@@ -67,7 +70,7 @@ html .dark-mask {
         transition: all .3s ease-in-out;
         opacity: 0;
         transform: translateX(35%) scale(.8);
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
