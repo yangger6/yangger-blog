@@ -104,11 +104,11 @@ const Aside = ({ categories }) => {
           </p>
         </div>
         {/*shadow*/}
-        {/*<div*/}
-        {/*  className={classNames(*/}
-        {/*    'absolute dark-mask transition-all duration-300 z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100',*/}
-        {/*  )}*/}
-        {/*/>*/}
+        <div
+          className={classNames(
+            'absolute dark-mask transition-all duration-300 z-10 top-0 left-0 lg:-ml-px24 lg:pl-px24 w-full h-1/2 bg-gradient-to-b from-black to-transparent opacity-100',
+          )}
+        />
         <div className='person flex mx-auto justify-center w-full h-full'>
           <ImageWithBasePath src={currentPersonImage} alt={'person'} layout='fill' />
         </div>
@@ -154,7 +154,7 @@ const Aside = ({ categories }) => {
             })}
           </div>
           {/*shadow*/}
-          <div className='absolute dark-mask z-10 bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-black pointer-events-none' />
+          <div className='absolute dark-mask z-10 bottom-0 left-0 w-full h-1/2 bg-gradient-to-b from-transparent to-white dark:to-black pointer-events-none' />
         </div>
         {/*subscribe*/}
         <div
