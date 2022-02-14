@@ -5,6 +5,7 @@ const fs = require('fs')
 const request = require('request')
 const progress = require('request-progress')
 const extract = require('extract-zip')
+const { execSync } = require('child_process')
 const config = require('./config')
 
 const options = {
@@ -22,6 +23,7 @@ const startTimer = async (prevTagName = '') => {
     console.log(`==================== task-${taskId} start ====================`)
     console.log('start git pull latest...')
     await git.pull()
+    execSync('git fetch --tags --all ')
     console.log('done')
     let originRemoteUrl = config.originRemoteUrl
     if (!originRemoteUrl) {
@@ -32,6 +34,7 @@ const startTimer = async (prevTagName = '') => {
     console.log('origin remote url: \t', originRemoteUrl)
     console.log('start get latest git tag...')
     const latestTag = await getLatestTag({})
+    console.log(latestTag)
     console.log('done')
     console.log('latest tag: \t', latestTag)
     if (latestTag === prevTagName) {
